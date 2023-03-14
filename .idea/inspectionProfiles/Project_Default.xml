@@ -1,0 +1,44 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E402" />
+          <option value="W292" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="tkinter.Grid.columnconfigure" />
+          <option value="tkinter.Grid.rowconfigure" />
+          <option value="django.db.models.fields.related.ManyToManyField.all" />
+          <option value="it_library.books.views.cart" />
+          <option value="it_library.books.models.TestModel.objects" />
+          <option value="project.fetch_cities.CitiesFetcher._CitiesFetcher" />
+          <option value="project.fetch_cities.CitiesFetcher._CitiesFetcher__create_file" />
+          <option value="tests.test_cities_fetcher.test_create_file.tmp_path" />
+          <option value="project.fetch_weather.FetchWeather._FetchWeather" />
+          <option value="worksite.jobseeker.apps.jobseeker" />
+          <option value="worksite.jobseeker.models.Code.objects" />
+          <option value="worksite.codes.models.Code.objects" />
+          <option value="worksite.codes.apps.codes" />
+          <option value="worksite.codes.models.*" />
+          <option value="worksite.codes.signals.jobseeker" />
+          <option value="worksite.codes.views.jobseeker" />
+          <option value="worksite.personal_profile.models.jobseeker" />
+          <option value="worksite.personal_profile.views.jobseeker" />
+          <option value="worksite.personal_profile.models.JobseekerProfileInfo.objects" />
+          <option value="worksite.worksite.settings.personal_profile" />
+          <option value="worksite.password.forms.jobseeker" />
+          <option value="worksite.password.forms.global_services" />
+          <option value="worksite.password.services.jobseeker" />
+          <option value="testTask.testTask.settings.faker" />
+          <option value="testTask.data.models.FakeCVSSchema.objects" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
