@@ -1,0 +1,52 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'index/css/index_page.css' %}">
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="site-logo">URLShort</h1>
+    <a class="help-button">?</a>
+    <header class="d-flex justify-content-center py-3 main-header">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">My URLs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Plans</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Sign Up</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
+      </ul>
+    </header>
+    <form class="URLShortenForm" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="top-column">
+            <a href="#" class="share-button"><img src="https://cdn-icons-png.flaticon.com/512/2958/2958791.png " width="30" height="30" alt="" title="" class="img-small"></a>
+            <a href="#" class="email-button"><img src="https://cdn-icons-png.flaticon.com/512/542/542689.png " width="30" height="30" alt="" title="" class="img-small"></a>
+            <a href="#" class="qrcode-button"><img src="   https://cdn-icons-png.flaticon.com/512/714/714390.png " width="30" height="30" alt="" title="" class="img-small"></a>
+            <a href="#" class="star-button"><img src="   https://cdn-icons-png.flaticon.com/512/2658/2658473.png " width="32" height="32" alt="" title="" class="img-small"></a>
+            <a href="#" class="copy-button">
+                <img src="   https://cdn-icons-png.flaticon.com/512/126/126498.png " width="30" height="30" alt="" title="" class="img-small">
+                Copy
+            </a>
+        </div>
+        <div class="bottom-column">
+            <a href="#" class="my-urls">My URLS</a>
+            <a href="#" class="shorten-another">Shorten another</a>
+        </div>
+    </form>
+    <div class="welcome-title">
+        <h3>Welcome to </h3><h4>URLShort</h4>
+        <h3>Create a free account to enjoy:</h3>
+        <div class="first-point">
+            <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small first-img">
+            <p>Easy Link Shortening</p>
+        </div>
+        <br>
+        <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small second-img">
+        <br>
+        <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small third-img">
+
+    </div>
+{% endblock %}
