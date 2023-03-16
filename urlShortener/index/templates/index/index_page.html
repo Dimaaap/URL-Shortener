@@ -20,33 +20,39 @@
     </header>
     <form class="URLShortenForm" method="post">
         {% csrf_token %}
-        {{ form|crispy }}
-        <div class="top-column">
-            <a href="#" class="share-button"><img src="https://cdn-icons-png.flaticon.com/512/2958/2958791.png " width="30" height="30" alt="" title="" class="img-small"></a>
-            <a href="#" class="email-button"><img src="https://cdn-icons-png.flaticon.com/512/542/542689.png " width="30" height="30" alt="" title="" class="img-small"></a>
-            <a href="#" class="qrcode-button"><img src="   https://cdn-icons-png.flaticon.com/512/714/714390.png " width="30" height="30" alt="" title="" class="img-small"></a>
-            <a href="#" class="star-button"><img src="   https://cdn-icons-png.flaticon.com/512/2658/2658473.png " width="32" height="32" alt="" title="" class="img-small"></a>
-            <a href="#" class="copy-button">
-                <img src="   https://cdn-icons-png.flaticon.com/512/126/126498.png " width="30" height="30" alt="" title="" class="img-small">
-                Copy
-            </a>
-        </div>
-        <div class="bottom-column">
-            <a href="#" class="my-urls">My URLS</a>
-            <a href="#" class="shorten-another">Shorten another</a>
-        </div>
+        {% for field in form %}
+            {% if not field.label == 'Alias' %}
+                <label class="customize-label">{{ field.label }}</label>
+            {% endif %}
+            {% if field.label == 'Alias' or field.label == 'Customize your link' %}
+                <div class="one-line">
+                    {{ field }}
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Make TinyURL!</button>
     </form>
     <div class="welcome-title">
         <h3>Welcome to </h3><h4>URLShort</h4>
         <h3>Create a free account to enjoy:</h3>
-        <div class="first-point">
+        <div class="point">
             <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small first-img">
             <p>Easy Link Shortening</p>
         </div>
         <br>
-        <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small second-img">
+        <div class="point">
+            <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small second-img">
+            <p>Full Link History</p>
+        </div>
         <br>
-        <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small third-img">
-
+        <div class='point'>
+            <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small third-img">
+            <p>Customized URLs</p>
+        </div>
+        <div class="point-button">
+            <a href="#" class="btn btn-primary btn-lg">Create a Free account</a>
+        </div>
     </div>
 {% endblock %}

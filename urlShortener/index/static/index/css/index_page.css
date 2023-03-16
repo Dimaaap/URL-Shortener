@@ -49,7 +49,7 @@ body {
     background: white;
     border-radius: 30px;
     padding: 20px;
-    height: 320px;
+    height: 300px;
 }
 
 label {
@@ -150,6 +150,62 @@ h3 {
     font-weight: 500;
 }
 
+.point {
+    font-family: 'Rubik';
+    margin-bottom: -30px;
+    margin-left: 20px;
+}
+
+.point-button {
+    font-family: 'Rubik';
+    margin-top: 40px;
+}
+
+.btn-primary {
+    background: #6C85DC;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+p {
+    margin-top: -23px;
+    margin-left: 20px;
+
+}
+
+label {
+    margin-bottom: 5px;
+    font-family: 'Rubik';
+    font-weight: 400;
+}
+
+.customize-label {
+    margin-top: 10px;
+}
+
+.left-field {
+    float: left;
+    max-width: 263px;
+}
+
+.right-field {
+    float: right;
+    max-width: 100px;
+    margin-right: 5px;
+}
+
+.form-control {
+    font-family: 'Rubik';
+    padding: 5px;
+}
+
 .bottom-column {
     margin-top: 25px;
+}
+
+.btn-success {
+    font-family: 'Rubik';
+    margin-top: 20px;
+    width: 365px;
+    height: 50px;
 }
