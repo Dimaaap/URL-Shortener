@@ -22,6 +22,11 @@
         {% csrf_token %}
         {% for field in form %}
             {% if not field.label == 'Alias' %}
+                {% if field.label == 'Enter a URL to make a ShortURL' %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/4008/4008585.png" width="20" height="20" alt="" title="" class="img-small">
+                {% else %}
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25301.png" width="20" height="20" alt="" title="" class="img-small">
+                {% endif %}
                 <label class="customize-label">{{ field.label }}</label>
             {% endif %}
             {% if field.label == 'Alias' or field.label == 'Customize your link' %}
