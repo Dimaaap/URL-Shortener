@@ -14,7 +14,7 @@
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="#" class="nav-link" aria-current="page">My URLs</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Plans</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Sign Up</a></li>
+        <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
       </ul>
     </header>
@@ -57,7 +57,7 @@
             <p>Customized URLs</p>
         </div>
         <div class="point-button">
-            <a href="#" class="btn btn-primary btn-lg">Create a Free account</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Create a Free account</a>
         </div>
     </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 body {
     padding-left: 20px;
     background: #F5F5F5;
-    background-image: url('../images/main-page3.jpg')
+    background-image: url('../images/main-page5.jpg')
 }
 
 /* HEADER */
@@ -47,4 +47,106 @@ body {
     text-align: center;
     font-size: 20px;
     font-family: 'Rubik';
+}
+
+/* SIGNIN FORM */
+.signIn-form {
+    background: white;
+    max-width: 500px;
+    height: 630px;
+    border-radius: 15px;
+    font-family: 'Rubik';
+    margin-left: 420px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+/* SIGNIN FORM INPUT FIELDS */
+.group {
+    margin-top: -10px;
+}
+
+/* THE FORM TITLE */
+.signIn-form h1 {
+    font-family: 'Recursive';
+    font-size: 50px;
+    margin-left: 150px;
+}
+
+/* THE FORM WELCOME TEXT */
+.signIn-form p {
+    margin-left: 170px;
+    margin-top: -10px;
+}
+
+/* LOGIN FROM ANOTHER SOURCE BUTTONS */
+.signIn-form button {
+    background: #6C85DC;
+    margin-left: 150px;
+}
+
+.form-control {
+    max-width: 400px;
+    margin-left: 50px;
+    border-radius: 10px;
+}
+
+/* FORM FIELD LABEL */
+label {
+    margin-left: 50px;
+    margin-top: -20px;
+}
+
+/* IMAGE IN BUTTONS */
+.img-small {
+    margin-bottom: 3px;
+}
+
+.register {
+    background: #6C85DC;
+    width: 30px;
+    min-height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*margin-left: 50px;*/
+    border-radius: 5px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+/* LOGIN VIA TITLE */
+#login-via {
+    margin-top: 0px;
+    margin-left: 210px;
+}
+
+.signup-with-buttons {
+    margin-left: 180px;
+    margin-bottom: 10px;
+}
+
+.log-in {
+    margin-left: 160px;
+    color: grey;
+    font-weight: 200px;
+    margin-top: 10px;
+}
+
+.log-in a{
+    text-decoration: none;
+}
+
+/* ERROR MESSAGES */
+#error_1_id_password {
+    display: inline-block;
+    margin-left: 50px;
+    margin-bottom: -20px;
+}
+
+#error_1_id_password_repeat {
+    display: inline-block;
+    margin-left: 50px;
+    margin-bottom: -20px;
 }
