@@ -1,0 +1,33 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'users/css/signin.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% include '_includes/header.html' %}
+    <form method="post" class="signin-form">
+        {% csrf_token %}
+        <h1>UrlShort</h1>
+        <p>Welcome to URLShort</p>
+        <div class="group">
+            {{ form|crispy }}
+        </div>
+        <div class="forgot-password-line">
+            <a href="#"><p>Forgot Password?</p></a>
+        </div>
+        <div class="sign-in button">
+            <button type="submit" id="login-btn" class="btn btn-primary">
+                <img src="https://cdn-icons-png.flaticon.com/512/8944/8944312.png" width="20" height="20" alt="" title="" class="img-small">
+                Sign In
+            </button>
+        </div>
+        <div class="signup-link">
+            <p>Don`t have an account?<a href="{% url 'signup' %}">Sign Up</a></p>
+        </div>
+        <p id="login-via">Or Login via: </p>
+        {% include '_includes/login-with-buttons.html' %}
+    </form>
+{% endblock %}

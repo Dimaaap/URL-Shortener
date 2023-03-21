@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 user_model = get_user_model()
 
 
-class SignInForm(forms.ModelForm):
+class SignUpForm(forms.ModelForm):
     class Meta:
         model = user_model
         fields = ('username', 'email', 'password')
@@ -34,3 +34,14 @@ class SignInForm(forms.ModelForm):
         if password != password_repeat:
             raise forms.ValidationError("Passwords must be equal")
         return password_repeat
+
+
+class LogInForm(forms.Form):
+
+    email = forms.EmailField(label='Email:', required=True,
+                             widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='Password:', required=True,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    remember_me = forms.BooleanField(label='Remember me', required=False)
+
