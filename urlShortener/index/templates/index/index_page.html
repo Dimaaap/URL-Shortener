@@ -10,14 +10,29 @@
 {% block body %}
     <h1 class="site-logo">URLShort</h1>
     <a class="help-button">?</a>
-    <header class="d-flex justify-content-center py-3 main-header">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link" aria-current="page">My URLs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Plans</a></li>
-        <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
-      </ul>
-    </header>
+    {% if not user.is_authenticated %}
+        <header class="d-flex justify-content-center py-3 main-header">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link" aria-current="page">My URLs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Plans</a></li>
+            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+            <li class="nav-item"><a href="{% url 'signin' %}" class="nav-link">Sign In</a></li>
+          </ul>
+        </header>
+    {% else %}
+        <header class="d-flex justify-content-center py-3 main-header">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link" aria-current="page">My URLs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Plans</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="{% url 'account' %}" class="nav-link">
+                Account
+                <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" width="20" height="20" alt="" title="" class="img-small"
+                style="margin-top: -7px;">
+            </a></li>
+          </ul>
+        </header>
+    {% endif %}
     <form class="URLShortenForm" method="post">
         {% csrf_token %}
         {% for field in form %}
@@ -39,25 +54,25 @@
         {% endfor %}
         <button type="submit" class="btn btn-success">Make TinyURL!</button>
     </form>
-    <div class="welcome-title">
-        <h3>Welcome to </h3><h4>URLShort</h4>
-        <h3>Create a free account to enjoy:</h3>
-        <div class="point">
-            <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small first-img">
-            <p>Easy Link Shortening</p>
-        </div>
-        <br>
-        <div class="point">
-            <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small second-img">
-            <p>Full Link History</p>
-        </div>
-        <br>
-        <div class='point'>
-            <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small third-img">
-            <p>Customized URLs</p>
-        </div>
-        <div class="point-button">
-            <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Create a Free account</a>
-        </div>
+        <div class="welcome-title">
+            <h3>Welcome to </h3><h4>URLShort</h4>
+            <h3>Create a free account to enjoy:</h3>
+            <div class="point">
+                <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small first-img">
+                <p>Easy Link Shortening</p>
+            </div>
+            <br>
+            <div class="point">
+                <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small second-img">
+                <p>Full Link History</p>
+            </div>
+            <br>
+            <div class='point'>
+                <img src="https://cdn-icons-png.flaticon.com/512/447/447147.png " width="10" height="10" alt="" title="" class="img-small third-img">
+                <p>Customized URLs</p>
+            </div>
+            <div class="point-button">
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Create a Free account</a>
+            </div>
     </div>
 {% endblock %}

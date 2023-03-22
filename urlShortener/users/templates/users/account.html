@@ -1,0 +1,17 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'users/css/account.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% include '_includes/login_user_header.html' %}
+    <nav>
+        <ul>
+            <li>
+                <a href=""></a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

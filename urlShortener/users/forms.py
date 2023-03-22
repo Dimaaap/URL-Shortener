@@ -37,7 +37,6 @@ class SignUpForm(forms.ModelForm):
 
 
 class LogInForm(forms.Form):
-
     email = forms.EmailField(label='Email:', required=True,
                              widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Password:', required=True,
@@ -45,3 +44,10 @@ class LogInForm(forms.Form):
 
     remember_me = forms.BooleanField(label='Remember me', required=False)
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try:
+            user_model.objects.get(email=email)
+        except Exception:
+            raise forms.ValidationError("Неправильний email")
+        return email

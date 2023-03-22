@@ -3,8 +3,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
 from .forms import *
+from .decorators import redirect_login_users
 
 
+@redirect_login_users
 def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -18,6 +20,7 @@ def signup_view(request):
     return render(request, template_name='users/signup.html', context={'form': form})
 
 
+@redirect_login_users
 def signin_view(request):
     if request.method == 'POST':
         form = LogInForm(request.POST)
@@ -34,3 +37,7 @@ def signin_view(request):
     else:
         form = LogInForm()
     return render(request, template_name='users/signin.html', context={'form': form})
+
+
+def account_view(request):
+    return render(request, template_name='users/account.html')
