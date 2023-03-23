@@ -1,3 +1,9 @@
+/* OVERALL STYLES */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     padding-left: 20px;
     background: white;
@@ -53,4 +59,98 @@ body {
     height: 100%;
     margin-left: -20px;
     background-image: url('../images/main-page5.jpg');
+}
+
+.column {
+    float: left;
+}
+
+.left {
+    width: 20%;
+}
+
+.right {
+    width: 80%;
+    margin-left: -30px;
+}
+/* SIDEBAR */
+
+nav {
+    background: #F3F3F3;
+    /*max-width: 250px;*/
+    width: 100%;
+    margin-left: -20px;
+    height: 808px;
+    max-height: calc(105vh - 7rem);
+    overflow-y: auto;
+}
+
+nav ul {
+    margin-left: -20px;
+}
+
+nav ul h4 {
+    font-family: 'Rubik';
+    font-size: 30px;
+    font-weight: 400;
+    margin-left: -10px;
+}
+
+nav ul li {
+    list-style-type: none;
+    margin-left: -10px;
+    padding: 5px;
+
+}
+
+nav ul li img {
+    margin-right: 10px;
+}
+
+nav ul li p {
+    font-family: 'Rubik';
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: -23px;
+    margin-left: 40px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav ul li:hover {
+    background: white;
+}
+
+.settings-element:hover
+{
+    cursor: pointer;
+    background: #FFFFF;
+}
+
+#nav-logout-btn {
+    background: #6C85DC;
+    width: 200px;
+    margin-bottom: 10px;
+    font-family: 'Rubik';
+    font-size: 18px;
+}
+
+.profile-information {
+    padding: 20px;
+}
+
+.update-info {
+    margin-left: 20px;
+    font-family: 'Rubik';
+
+}
+
+.profile-information h5 {
+    color: #5E5B5B;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-family: 'Rubik';
 }

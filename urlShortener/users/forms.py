@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from .models import UserPersonalInfo
+
 user_model = get_user_model()
 
 
@@ -51,3 +53,12 @@ class LogInForm(forms.Form):
         except Exception:
             raise forms.ValidationError("Неправильний email")
         return email
+
+
+class UploadAvatarForm(forms.Form):
+    class Meta:
+        model = UserPersonalInfo
+        fields = ('avatar', )
+
+    avatar = forms.ImageField(label=None, widget=forms.FileInput())
+

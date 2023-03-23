@@ -40,4 +40,8 @@ def signin_view(request):
 
 
 def account_view(request):
-    return render(request, template_name='users/account.html')
+    if request.method == 'POST':
+        form = UploadAvatarForm(request.POST)
+    else:
+        form = UploadAvatarForm()
+    return render(request, template_name='users/account.html', context={'form': form})

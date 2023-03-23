@@ -7,11 +7,92 @@
 
 {% block body %}
     {% include '_includes/login_user_header.html' %}
-    <nav>
-        <ul>
-            <li>
-                <a href=""></a>
-            </li>
-        </ul>
-    </nav>
+    <div class="row">
+        <div class="column left">
+            <nav>
+                <ul>
+                    <ul>
+                        <h4>Settings</h4>
+                        <li class="settings-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/1144/1144760.png "
+                                 width="25" height="25" alt="" title="" class="img-small">
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="settings-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/2889/2889676.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>Security</p>
+                            </a>
+                        </li>
+                        <li class="settings-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/2435/2435281.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>Orders</p>
+                            </a>
+                        </li>
+                        <li class="settings-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/263/263069.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>API</p>
+                            </a>
+                        </li>
+                        <li class="settings-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/117/117965.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>Branded Domains</p>
+                            </a>
+                        </li>
+                        <li class="settings-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/9971/9971235.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>Account Usage</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <h4>Billing</h4>
+                        <li class="billing-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/1250/1250694.png "
+                                 width="25" height="25" alt="" title="" class="img-small">
+                                <p>Subscription</p>
+                            </a>
+                        </li>
+                        <li class="billing-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/482/482541.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>Payment Method</p>
+                            </a>
+                        </li>
+                        <li class="billing-element">
+                            <a href="#">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/3496/3496155.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                                <p>Invoices</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" id="nav-logout-btn">Log Out</a>
+                </ul>
+            </nav>
+        </div>
+        <div class="column right">
+            <div class="profile-information">
+                <h5>Profile Managment</h5>
+                <h2 class="update-info">Update Information</h2>
+                <form method="post" class="upload-avatar">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
