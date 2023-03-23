@@ -41,7 +41,20 @@ def signin_view(request):
 
 def account_view(request):
     if request.method == 'POST':
+        form = UserInformationForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = UserInformationForm()
+    context = {'form': form, 'second_form': UploadAvatarForm(request.POST or None)}
+    return render(request, template_name='users/account.html', context=context)
+
+
+def upload_avatar_form(request):
+    if request.method == 'POST':
         form = UploadAvatarForm(request.POST)
+        if form.is_valid():
+            pass
     else:
         form = UploadAvatarForm()
-    return render(request, template_name='users/account.html', context={'form': form})
+    return redirect('account')

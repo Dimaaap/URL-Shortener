@@ -88,10 +88,18 @@
             <div class="profile-information">
                 <h5>Profile Managment</h5>
                 <h2 class="update-info">Update Information</h2>
-                <form method="post" class="upload-avatar">
+                <form method="post" id="update-avatar" enctype="multipart/form-data"
+                action="{% url 'avatar-form' %}" class="user-form">
+                    {% csrf_token %}
+                    {{ second_form.as_p }}
+                </form>
+                <h4 class="contact-information">Contact Information</h4>
+                <form method="post" class="user-form" id="info-form">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
+                <a href="#" class="btn delete-btn">Delete Account</a>
             </div>
         </div>
     </div>

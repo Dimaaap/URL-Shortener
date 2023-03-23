@@ -62,3 +62,12 @@ class UploadAvatarForm(forms.Form):
 
     avatar = forms.ImageField(label=None, widget=forms.FileInput())
 
+
+class UserInformationForm(forms.ModelForm):
+
+    class Meta:
+        model = user_model
+        fields = ('username', 'email')
+
+    username = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Email', required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))

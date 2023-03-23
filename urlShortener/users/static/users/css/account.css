@@ -154,3 +154,62 @@ nav ul li:hover {
     margin-left: 20px;
     font-family: 'Rubik';
 }
+
+/* USER INFORMATION FORM */
+/*.user-form {
+    max-width: 500px;
+    margin-left: 100px;
+}
+
+.user-form label {
+    float: left;
+}*/
+
+#info-form {
+    max-width: 500px;
+    margin-left: 100px;
+}
+
+.form-control {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 50px;
+}
+
+#info-form label {
+    display: inline-block;
+    float: left;
+    padding-top: 5px;
+    text-align: right;
+    width: 140px;
+}
+
+
+user-form input {
+    float: right
+}
+
+/* CONTACT INFORMATION TITLE */
+.contact-information {
+    font-family: 'Rubik';
+    font-weight: 400;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+/* DELETE ACCOUNT BUTTON */
+.delete-btn {
+    border: 1px solid red;
+    color: red;
+    margin-left: 900px;
+    margin-top: 70px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: 'Rubik';
+}
+
+.delete-btn:hover {
+    border: 1px solid red;
+    background: red;
+    color: white;
+}
