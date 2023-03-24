@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from .models import UserPersonalInfo
-
 user_model = get_user_model()
 
 
@@ -56,15 +54,10 @@ class LogInForm(forms.Form):
 
 
 class UploadAvatarForm(forms.Form):
-    class Meta:
-        model = UserPersonalInfo
-        fields = ('avatar', )
-
-    avatar = forms.ImageField(label=None, widget=forms.FileInput())
+    avatar = forms.ImageField(label='', widget=forms.FileInput())
 
 
 class UserInformationForm(forms.ModelForm):
-
     class Meta:
         model = user_model
         fields = ('username', 'email')

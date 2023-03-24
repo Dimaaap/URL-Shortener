@@ -13,6 +13,7 @@ class User(AbstractUser):
     )
     url_username = models.CharField(max_length=150, null=True, default=None)
     email = models.EmailField(unique=True, max_length=255)
+    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d', max_length=250, null=True, default=None)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
@@ -24,13 +25,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-
-
-class UserPersonalInfo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='avatars/', max_length=250, null=True, default=None)
-
-    def __str__(self):
-        return self.user
-
-

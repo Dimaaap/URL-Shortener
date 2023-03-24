@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
 from .forms import *
 from .decorators import redirect_login_users
+from .models import User
 
 
 @redirect_login_users
@@ -29,7 +30,6 @@ def signin_view(request):
             password = form.cleaned_data['password']
             user = authenticate(email=email, password=password)
             if user:
-                print('dsadsadas')
                 login(request, user)
                 messages.success(request, "Авторизація пройшла успішно")
             else:
@@ -39,18 +39,20 @@ def signin_view(request):
     return render(request, template_name='users/signin.html', context={'form': form})
 
 
-def account_view(request):
+def account_view(request, url_username):
+    current_user = get_object_or_404(User, url_username=url_username)
     if request.method == 'POST':
         form = UserInformationForm(request.POST)
         if form.is_valid():
             pass
     else:
         form = UserInformationForm()
-    context = {'form': form, 'second_form': UploadAvatarForm(request.POST or None)}
+    context = {'form': form, 'second_form': UploadAvatarForm(request.POST or None),
+               'user_avatar': current_user.avatar}
     return render(request, template_name='users/account.html', context=context)
 
 
-def upload_avatar_form(request):
+def upload_avatar_form(request, url_username):
     if request.method == 'POST':
         form = UploadAvatarForm(request.POST)
         if form.is_valid():
