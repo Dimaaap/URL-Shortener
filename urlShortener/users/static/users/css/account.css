@@ -168,7 +168,35 @@ nav ul li:hover {
 
 #update-avatar input{
     margin-top: -150px;
+    float: right;
+    margin-top: -50px;
+    margin-left: -40px;
 }
+
+#upload-button {
+    padding: 10px;
+    width: 200px;
+    margin-left: 80px;
+    font-family: 'Rubik';
+    font-weight: 500;
+}
+
+#upload-button:hover {
+
+}
+
+/* CUSTOMIZING FILE-UPLOAD BUTTON */
+::-webkit-file-upload-button {
+    background: #088F46;
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 5px;
+    width: 250px;
+    color: white;
+    font-family: 'Rubik';
+    font-size: 16px;
+}
+
 
 #info-form {
     max-width: 500px;
@@ -179,6 +207,13 @@ nav ul li:hover {
     display: inline-block;
     vertical-align: middle;
     margin-left: 50px;
+}
+
+#uploaded-user-avatar {
+    border-radius: 50px 50px;
+    margin-left: -40px;
+    height: 80px;
+    width: 80px;
 }
 
 /* CONTACT INFORMATION TITLE */
@@ -223,6 +258,11 @@ nav ul li:hover {
     margin-left: 0px;
     font-size: 16px;
     margin-top: 5px;
+}
+
+#info-form input {
+    font-family: 'Rubik';
+    color: #919191;
 }
 
 #update-profile {

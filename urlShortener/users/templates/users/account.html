@@ -90,19 +90,22 @@
                 <h2 class="update-info">Update Information</h2>
                 <form method="post" id="update-avatar" enctype="multipart/form-data"
                       action="{% url 'avatar-form' request.user.url_username %}" class="user-form">
-                    {% if request_user.user_avatar %}
-                        <img src="{{ user_avatar.url }}" class="user-avatar">
+                    {% if user_avatar %}
+                        <img src="{{ user_avatar.url }}" class="user-avatar" id="uploaded-user-avatar">
                     {% else %}
                         <img src="https://img.freepik.com/free-icon/user_318-159711.jpg?t=st=1679650947~exp=1679651547~hmac=5c6bdaffbb489191864df335c1d525ad3fa220dddb887ad1497e6419e0517620"
                              class="user-avatar">
                     {% endif %}
                     {% csrf_token %}
                     {{ second_form.as_p }}
+                    <button class="btn btn-primary" id="upload-button" type="submit">
+                        Upload Photo
+                    </button>
                     </form>
                 <h4 class="contact-information">Contact Information</h4>
                 <form method="post" class="user-form" id="info-form">
-                    <!--{% csrf_token %}
-                    {{ form.as_p }}-->
+                    {% csrf_token %}
+                    <!--{{ form.as_p }}-->
                     {% for field in form %}
                         <div class="grid-container">
                             <label class="field-label">{{ field.label }}</label>

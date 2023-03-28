@@ -20,7 +20,8 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         split_email = str(self.email).split("@")[0]
-        self.url_username = split_email + str(randint(1, 100))
+        if not self.url_username:
+            self.url_username = split_email + str(randint(1, 100))
         super(User, self).save(*args, **kwargs)
 
     def __str__(self):

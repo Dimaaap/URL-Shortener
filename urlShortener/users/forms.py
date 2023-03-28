@@ -54,7 +54,7 @@ class LogInForm(forms.Form):
 
 
 class UploadAvatarForm(forms.Form):
-    avatar = forms.ImageField(label='', widget=forms.FileInput())
+    avatar = forms.ImageField(label='', widget=forms.FileInput(), required=False)
 
 
 class UserInformationForm(forms.ModelForm):
