@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -79,3 +79,15 @@ def upload_avatar_form(request, url_username):
         else:
             print(form.errors)
     return redirect('account', url_username)
+
+
+@login_required
+def logout_users(request):
+    logout(request)
+    return redirect('signin')
+
+
+@login_required(login_url='signin')
+# TODO:ЗРОБИТИ МОЖЛИВІСТЬ КОРИСТУВАЧАМ ВИДАЛЯТИ СВОЇ ОБЛІКОВІ ЗАПИСИ
+def delete_account(request, url_username):
+    pass
