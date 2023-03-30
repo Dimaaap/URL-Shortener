@@ -19,7 +19,6 @@ class ResetPasswordForm(forms.Form):
 
 
 class ChangePasswordForm(forms.Form):
-
     password = forms.CharField(required=True, label="Your Password",
                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
@@ -33,6 +32,8 @@ class ChangePasswordForm(forms.Form):
         return password
 
     def clean_password_repeat(self):
+        if not self.clean_password():
+            return
         password = self.cleaned_data['password']
         password_repeat = self.cleaned_data['password_repeat']
         if password != password_repeat:

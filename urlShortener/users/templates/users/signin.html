@@ -17,7 +17,7 @@
             {{ form|crispy }}
         </div>
         <div class="forgot-password-line">
-            <a href="#"><p>Forgot Password?</p></a>
+            <a href="{% url 'forgot-password'%}"><p>Forgot Password?</p></a>
         </div>
         <div class="sign-in button">
             <button type="submit" id="login-btn" class="btn btn-primary">
