@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'index',
     'users',
     'passwords',
+    'account',
 
     'crispy_forms',
     'crispy_bootstrap5',

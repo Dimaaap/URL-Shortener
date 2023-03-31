@@ -57,3 +57,4 @@ def reset_password_view(request, token: str):
     else:
         form = ChangePasswordForm()
     return render(request, 'passwords/reset-password-page.html', {"form": form})
+
