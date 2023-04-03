@@ -28,3 +28,8 @@ def update_password_view(request, url_username):
     else:
         form = UpdatePasswordForm()
     return render(request, 'account/update-password.html', {'form': form})
+
+
+@login_required(login_url='signin')
+def tfa_enable_view(request, url_username):
+    return render(request, "account/tfa-enable.html")
