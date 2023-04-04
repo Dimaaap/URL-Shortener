@@ -2,22 +2,15 @@
 
 {% load static %}
 
+{% block js_additional %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'account/js/modal.js' %}"></script>
+{% endblock %}
 
 {% block css_additional %}
     <link rel="stylesheet" href="{% static 'account/css/tfa-enable.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div id="my-modal" class="modal" role="dialog">
-        <div class="modal-content">
-            <h1>ВІФВІФВЛІФВОФДЛІОВДЛІФОВДЛІФОВІФОВДЛІФОВДЛФІОВДЛФІДЛВ</h1>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-{% endblock %}
-{% block js_additional %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'account/js/modal.js' %}"></script>
+    {% include '_includes/popup.html' %}
 {% endblock %}
