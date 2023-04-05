@@ -16,3 +16,9 @@ function openPopup(){
 function closePopup(){
     popup.classList.remove("open-popup");
 }
+
+var form = document.getElementById("code-form");
+var button = document.getElementById("verify-button");
+button.addEventListener('click', function(){
+    form.submit();
+})

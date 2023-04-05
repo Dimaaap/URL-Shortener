@@ -10,5 +10,3 @@ class UpdatePasswordForm(ChangePasswordForm):
 class InputTokenForm(forms.Form):
     code = forms.CharField(max_length=6, required=False,
                            widget=forms.TextInput(attrs={'class': 'form-control'}))
-
-

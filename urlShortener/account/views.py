@@ -28,21 +28,39 @@ def update_password_view(request, url_username):
             print(form.errors)
     else:
         form = UpdatePasswordForm(prefix='first')
-
     if request.method == 'POST' and not form.is_valid():
         second_form = InputTokenForm(request.POST, prefix='second')
         if second_form.is_valid():
-            pass
+            print("Second form is valid")
+            print(second_form.cleaned_data['code'])
         else:
             print(second_form.errors)
     else:
         second_form = InputTokenForm(prefix='second')
-
     img_base64, totp_secret = form_qrcode_service(current_user)
     return render(request, 'account/update-password.html', {'form': form,
                                                             'second_form': second_form,
                                                             'qr_code': img_base64,
                                                             'totp_secret': totp_secret})
+
+
+# def input_code_form_view(request, url_username):
+#     try:
+#         current_user = user_model.objects.get(url_username=url_username)
+#     except ObjectDoesNotExist:
+#         print("Incorrect user data")
+#         return redirect('index_page')
+#     print("DSSDADAS")
+#     if request.method == 'POST':
+#         form = InputTokenForm(request.POST)
+#         if form.is_valid():
+#             print(form.cleaned_data['code'])
+#         else:
+#             print(form.errors)
+#             print('dsadsadsadsadas')
+#     else:
+#         form = InputTokenForm()
+#     return redirect('update-password-view', url_username=url_username)
 
 
 
