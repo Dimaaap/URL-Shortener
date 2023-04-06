@@ -29,7 +29,10 @@ class SignUpForm(forms.ModelForm):
         return password
 
     def clean_password_repeat(self):
-        password = self.cleaned_data['password']
+        try:
+            password = self.cleaned_data['password']
+        except KeyError:
+            return
         password_repeat = self.cleaned_data['password_repeat']
         if password != password_repeat:
             raise forms.ValidationError("Passwords must be equal")

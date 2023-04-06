@@ -2,6 +2,7 @@ from io import BytesIO
 import base64
 
 import qrcode
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import UserCodes
 from passwords.services import get_data_from_model
@@ -15,8 +16,19 @@ def form_qrcode_service(current_user):
     return img_base64, totp_secret
 
 
+def create_user_code(current_user):
+    try:
+        user_code = get_data_from_model(UserCodes, 'user', current_user)
+        return user_code
+    except ObjectDoesNotExist:
+        new_user_code = UserCodes(user=current_user)
+        new_user_code.enable_totp()
+        new_user_code.save()
+        return new_user_code
+
+
 def create_qr_code_service(current_user):
-    user_code = get_data_from_model(UserCodes, 'user', current_user)
+    user_code = create_user_code(current_user)
     totp_secret = user_code.secret_key
     totp_uri = user_code.get_totp_uri()
     qr = qrcode.QRCode(version=1, box_size=10, border=5)

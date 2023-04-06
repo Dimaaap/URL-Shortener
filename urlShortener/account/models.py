@@ -18,7 +18,6 @@ class UserCodes(models.Model):
     def enable_totp(self):
         if not self.secret_key:
             self.secret_key = pyotp.random_base32()
-        self.totp_active = True
         self.save()
 
     def disable_totp(self):

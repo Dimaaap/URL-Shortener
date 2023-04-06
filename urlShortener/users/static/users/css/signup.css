@@ -145,8 +145,29 @@ label {
     margin-bottom: -20px;
 }
 
+#error_1_id_email {
+    display: inline-block;
+    margin-left: 50px;
+    margin-bottom: -20px;
+}
+
 #error_1_id_password_repeat {
     display: inline-block;
     margin-left: 50px;
     margin-bottom: -20px;
+}
+
+.alert-block {
+    border: none;
+    font-family: 'Rubik';
+    background: white;
+    color: red;
+    padding: 0px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.alert-block ul {
+    list-style-type: none;
 }

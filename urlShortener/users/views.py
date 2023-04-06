@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 from .decorators import redirect_login_users
 from .models import User
+from account.models import UserCodes
 
 
 @redirect_login_users
@@ -15,9 +16,12 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            print('dsadasd')
             user.set_password(form.cleaned_data['password'])
             user.save()
             return redirect('index_page')
+        else:
+            print(form.errors)
     else:
         form = SignUpForm()
     return render(request, template_name='users/signup.html', context={'form': form})
