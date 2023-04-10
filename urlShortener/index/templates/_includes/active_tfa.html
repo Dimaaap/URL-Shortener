@@ -1,0 +1,25 @@
+<div class="qrcode">
+    <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" id="qrcode">
+</div>
+<div class="active-body">
+    <p>
+        In the even that you lost your device, you may click on Change Phone or Device to relink
+        your account to the authenticator
+    </p>
+    <div class="button-group">
+        <a href="#" class="btn btn-info">Change Phone or Device</a>
+        <a href="#" class="btn btn-danger">Disable Authenticator</a>
+    </div>
+</div>
+<hr>
+<div class="backup-codes">
+    <p>
+        Get single-use backup codes so you can log into your account if
+        you don`t have access to your authentication app
+    </p>
+    <small>Generated on {{ generated_data }}</small>
+    <div class="button-group">
+        <a href="#" class="btn btn-info">Generate New Codes</a>
+        <a href="#" class="btn btn-danger">Delete Codes</a>
+    </div>
+</div>

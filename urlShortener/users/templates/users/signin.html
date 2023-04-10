@@ -13,6 +13,7 @@
         {% csrf_token %}
         <h1>UrlShort</h1>
         <p>Welcome to URLShort</p>
+        {% include '_includes/messages.html' %}
         <div class="group">
             {{ form|crispy }}
         </div>

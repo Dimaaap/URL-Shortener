@@ -7,7 +7,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 from .decorators import redirect_login_users
 from .models import User
+from passwords.services import get_data_from_model
 from account.models import UserCodes
+
+
+def is_user_tfa_active(user):
+    user_code = get_data_from_model(UserCodes, 'user', user)
+    return True if user_code.totp_active else False
 
 
 @redirect_login_users
@@ -36,13 +42,27 @@ def signin_view(request):
             password = form.cleaned_data['password']
             user = authenticate(email=email, password=password)
             if user:
-                login(request, user)
-                messages.success(request, "Авторизація пройшла успішно")
+                if is_user_tfa_active(user):
+                    return redirect("tfa-input")
+                else:
+                    login(request, user)
+                    messages.success(request, "Авторизація пройшла успішно")
             else:
-                print('12321321321312')
+                messages.error(request, "Invalid email or password")
     else:
         form = LogInForm()
     return render(request, template_name='users/signin.html', context={'form': form})
+
+
+@redirect_login_users
+def tfa_input_view(request):
+    if request.method == 'POST':
+        form = TFATokenForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = TFATokenForm()
+    return render(request, template_name='users/tfa-input.html', context={'form': form})
 
 
 @login_required(login_url='signin')

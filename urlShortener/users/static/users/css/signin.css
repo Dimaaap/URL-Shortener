@@ -178,3 +178,12 @@ label {
     margin-left: 50px;
     margin-bottom: -20px;
 }
+
+.messages {
+    list-style-type: none;
+    font-weight: 500;
+    color: red;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}

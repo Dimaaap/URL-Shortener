@@ -15,6 +15,10 @@ class UserCodes(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.secret_key} - {self.totp_active}"
 
+    def active_totp(self):
+        self.totp_active = True
+        self.save()
+
     def enable_totp(self):
         if not self.secret_key:
             self.secret_key = pyotp.random_base32()

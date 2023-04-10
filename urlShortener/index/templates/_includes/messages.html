@@ -1,0 +1,7 @@
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="message-text">{{ message|truncatewords:4 }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

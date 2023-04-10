@@ -56,6 +56,12 @@ class LogInForm(forms.Form):
         return email
 
 
+class TFATokenForm(forms.Form):
+    token = forms.CharField(label="Authentication Token", min_length=6, max_length=6,
+                            required=True,
+                            widget=forms.TextInput(attrs={"class": "form-control"}))
+
+
 class UploadAvatarForm(forms.Form):
     avatar = forms.ImageField(label='', widget=forms.FileInput(), required=False)
 
@@ -67,3 +73,5 @@ class UserInformationForm(forms.ModelForm):
 
     username = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(label='Email', required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+
