@@ -22,7 +22,6 @@ class UserCodes(models.Model):
     def enable_totp(self):
         if not self.secret_key:
             self.secret_key = pyotp.random_base32()
-        self.save()
 
     def disable_totp(self):
         self.totp_active = False
@@ -33,4 +32,3 @@ class UserCodes(models.Model):
             self.enable_totp()
         totp = pyotp.TOTP(self.secret_key)
         return totp.provisioning_uri(name=self.user.username, issuer_name="URLShort")
-

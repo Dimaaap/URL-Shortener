@@ -2,11 +2,17 @@ import pyotp
 
 from .filters import EqualFilter
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
 
 
 def get_data_from_model(model: callable, field: str, value):
     eq_filter = EqualFilter()
-    return model.objects.get(**eq_filter(field, value))
+    try:
+        result = model.objects.get(**eq_filter(field, value))
+    except ObjectDoesNotExist:
+        return False
+    return result
 
 
 class TokenGenerator:

@@ -1,19 +1,16 @@
+import logging
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import *
 from .decorators import redirect_login_users
 from .models import User
-from passwords.services import get_data_from_model
-from account.models import UserCodes
+from .services import FormsHandler
 
-
-def is_user_tfa_active(user):
-    user_code = get_data_from_model(UserCodes, 'user', user)
-    return True if user_code.totp_active else False
+logger = logging.getLogger(__name__)
 
 
 @redirect_login_users
@@ -21,13 +18,10 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            print('dsadasd')
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            return redirect('index_page')
+            FormsHandler.signup_form_handle(form)
+            return redirect('signin')
         else:
-            print(form.errors)
+            logger.error(f"Sing Up Form is invalid - {form.errors}")
     else:
         form = SignUpForm()
     return render(request, template_name='users/signup.html', context={'form': form})
@@ -38,17 +32,9 @@ def signin_view(request):
     if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            user = authenticate(email=email, password=password)
-            if user:
-                if is_user_tfa_active(user):
-                    return redirect("tfa-input")
-                else:
-                    login(request, user)
-                    messages.success(request, "Авторизація пройшла успішно")
-            else:
-                messages.error(request, "Invalid email or password")
+            FormsHandler.signin_form_handle(request, form)
+        else:
+            logger.error(f"Login form`s error - {form.errors}")
     else:
         form = LogInForm()
     return render(request, template_name='users/signin.html', context={'form': form})
@@ -71,14 +57,10 @@ def account_view(request, url_username):
     if request.method == 'POST':
         form = UserInformationForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['password']
-            current_user.username = username
-            current_user.email = email
-            current_user.save()
-            print("Users`s information has been saved successful")
+            FormsHandler.account_form_handle(form, current_user)
+            logger.info("Users`s information has been saved successful")
         else:
-            print("User information form error")
+            logger.error("User information form error")
     else:
         form = UserInformationForm(initial={'username': current_user.username,
                                             'email': current_user.email})

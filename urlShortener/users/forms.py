@@ -17,9 +17,11 @@ class SignUpForm(forms.ModelForm):
                              widget=forms.EmailInput(attrs={"class": 'form-control'}))
     password = forms.CharField(label="Your password: ",
                                required=True,
+                               min_length=6,
                                widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password_repeat = forms.CharField(label='Repeat the password: ',
                                       required=True,
+                                      min_length=6,
                                       widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def clean_password(self):
