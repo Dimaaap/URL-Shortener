@@ -1,4 +1,4 @@
-<div class="qrcode">
+<div class="qrcode qrcode-active">
     <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" id="qrcode">
 </div>
 <div class="active-body">
@@ -7,19 +7,20 @@
         your account to the authenticator
     </p>
     <div class="button-group">
-        <a href="#" class="btn btn-info">Change Phone or Device</a>
-        <a href="#" class="btn btn-danger">Disable Authenticator</a>
+        <a href="#" class="btn btn-outline-secondary" id="change-phone">Change Phone or Device</a>
+        <a href="#" class="btn btn-outline-danger" id="disable-auth">Disable Authenticator</a>
     </div>
 </div>
 <hr>
 <div class="backup-codes">
+    <h3 class="backup-codes-title">Backup Codes</h3>
+    <h2 class="code-lists-title">Backup Codes List</h2>
     <p>
         Get single-use backup codes so you can log into your account if
         you don`t have access to your authentication app
     </p>
-    <small>Generated on {{ generated_data }}</small>
-    <div class="button-group">
-        <a href="#" class="btn btn-info">Generate New Codes</a>
-        <a href="#" class="btn btn-danger">Delete Codes</a>
+    <!--<small>Generated on {{ generated_data }}</small>-->
+    <div class="button-group-second">
+        <a href="#" class="btn btn-info">Generate New Backup Codes</a>
     </div>
 </div>

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from passwords.services import get_data_from_model
+
 user_model = get_user_model()
 
 
@@ -52,7 +54,7 @@ class LogInForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data['email']
         try:
-            user_model.objects.get(email=email)
+            get_data_from_model(user_model, 'email', email)
         except Exception:
             raise forms.ValidationError("Неправильний email")
         return email

@@ -74,16 +74,14 @@ def upload_avatar_form(request, url_username):
     try:
         current_user = User.objects.get(url_username=url_username)
     except ObjectDoesNotExist:
-        print("Запис не знайдено")
+        logger.warning("The user doesn`t find")
         return redirect('account', url_username)
     if request.method == 'POST':
         form = UploadAvatarForm(request.POST)
         if form.is_valid():
-            user_avatar = request.FILES['avatar']
-            current_user.avatar = user_avatar
-            current_user.save()
+            FormsHandler.upload_avatar_form_handler(request, current_user)
         else:
-            print(form.errors)
+            logger.warning(form.errors)
     return redirect('account', url_username)
 
 

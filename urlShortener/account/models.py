@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from users.models import User
+from .generate_backup_codes import generate_user_backup_codes
 
 user_model = get_user_model()
 
@@ -32,3 +33,20 @@ class UserCodes(models.Model):
             self.enable_totp()
         totp = pyotp.TOTP(self.secret_key)
         return totp.provisioning_uri(name=self.user.username, issuer_name="URLShort")
+
+
+class UsersBackupCodes(models.Model):
+    user = models.ForeignKey(user_model, on_delete=models.CASCADE)
+    codes = models.JSONField(default=list)
+    codes_activate = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.codes_activate
+
+    def generate_codes(self):
+        if self.codes_activate:
+            generated_codes = generate_user_backup_codes()
+            self.codes = generated_codes
+            self.save()
+
+

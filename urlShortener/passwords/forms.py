@@ -30,12 +30,3 @@ class ChangePasswordForm(forms.Form):
         if all([i.isdigit() for i in password]) or all([i.isalpha() for i in password]):
             raise forms.ValidationError('The password must contain letters and numbers')
         return password
-
-    # def clean_password_repeat(self):
-    #     if not self.clean_password():
-    #         return
-    #     password = self.cleaned_data['password']
-    #     password_repeat = self.cleaned_data['password_repeat']
-    #     if password != password_repeat:
-    #         raise forms.ValidationError("Passwords must be equal")
-    #     return password_repeat

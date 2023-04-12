@@ -52,3 +52,9 @@ class FormsHandler:
         current_user.username = username
         current_user = email
         current_user.save()
+
+    @staticmethod
+    def upload_avatar_form_handler(request, current_user):
+        user_avatar = request.FILES['avatar']
+        current_user.avatar = user_avatar
+        current_user.save()

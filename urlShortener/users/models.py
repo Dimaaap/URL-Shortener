@@ -21,14 +21,14 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
 
+    def __str__(self):
+        return self.email
+
     def save(self, *args, **kwargs):
         split_email = str(self.email).split("@")[0]
         if not self.url_username:
             self.url_username = split_email + str(randint(1, 100))
         super(User, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.email
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode({

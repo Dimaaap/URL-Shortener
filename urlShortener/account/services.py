@@ -2,6 +2,7 @@ from io import BytesIO
 import base64
 
 import qrcode
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import UserCodes
@@ -36,3 +37,13 @@ def create_qr_code_service(current_user):
     qr.make(fit=True)
     img = qr.make_image(fill_color='black', back_color="white")
     return img, totp_secret
+
+
+class AccountFormsHandler:
+
+    @staticmethod
+    def update_password_form_handle(request, update_password_form, current_user):
+        user_password = update_password_form.cleaned_data['password']
+        current_user.set_password(user_password)
+        current_user.save()
+        messages.success(request, "Your password has been changed successfully")
