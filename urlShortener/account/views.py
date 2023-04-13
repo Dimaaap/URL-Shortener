@@ -3,6 +3,7 @@ import logging
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from pyotp import TOTP
 
 from .forms import UpdatePasswordForm, InputTokenForm
@@ -61,3 +62,26 @@ def handle_tfw_form_service(request, url_username):
             messages.error(request, "Invalid token")
     else:
         logger.warning(second_form.errors)
+
+
+def disable_tfa_view(request, url_username):
+    try:
+        current_user = get_data_from_model(user_model, 'url_username', url_username)
+    except ObjectDoesNotExist:
+        logger.warning("Incorrect user data")
+        return redirect("index_page")
+    user_code = get_data_from_model(UserCodes, 'user', current_user)
+    user_code.disable_totp()
+    return redirect('update-password', url_username)
+
+
+def change_device_view(request, url_username):
+    try:
+        current_user = get_data_from_model(user_model, 'url_username', url_username)
+    except ObjectDoesNotExist:
+        logger.warning("Incorrect user data")
+        return redirect("index_page")
+    user_code = get_data_from_model(UserCodes, 'user', current_user)
+    user_code.disable_totp()
+    return 
+

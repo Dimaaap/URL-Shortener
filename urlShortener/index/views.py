@@ -11,3 +11,6 @@ def index_page_view(request):
         # form = URLShortenForm()
         form = URLReadyForm()
     return render(request, template_name='index/index_page.html', context={'form': form})
+
+
+

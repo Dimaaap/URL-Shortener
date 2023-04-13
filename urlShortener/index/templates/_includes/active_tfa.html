@@ -2,13 +2,15 @@
     <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" id="qrcode">
 </div>
 <div class="active-body">
+    {% include '_includes/popup.html' %}
     <p>
         In the even that you lost your device, you may click on Change Phone or Device to relink
         your account to the authenticator
     </p>
     <div class="button-group">
-        <a href="#" class="btn btn-outline-secondary" id="change-phone">Change Phone or Device</a>
-        <a href="#" class="btn btn-outline-danger" id="disable-auth">Disable Authenticator</a>
+        <a href="{% url 'change-device' request.user.url_username %}" class="btn btn-outline-secondary" id="change-phone"
+        onclick="changeDevice()">Change Phone or Device</a>
+        <a href="{% url 'disable' request.user.url_username %}" class="btn btn-outline-danger" id="disable-auth">Disable Authenticator</a>
     </div>
 </div>
 <hr>
