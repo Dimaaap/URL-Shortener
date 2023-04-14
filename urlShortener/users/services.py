@@ -34,9 +34,6 @@ class FormsHandler:
         user = signup_form.save(commit=False)
         user.set_password(signup_form.cleaned_data['password'])
         user.save()
-        new_user_code = UserCodes(user=user)
-        new_user_code.enable_totp()
-        new_user_code.save()
 
     @staticmethod
     def signin_form_handle(request, signin_form):

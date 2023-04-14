@@ -4,12 +4,10 @@
 <div class="active-body">
     {% include '_includes/popup.html' %}
     <p>
-        In the even that you lost your device, you may click on Change Phone or Device to relink
-        your account to the authenticator
+        If you don`t want to activate two-factor authentication yet, click the Disable
+        Authenticator button
     </p>
     <div class="button-group">
-        <a href="{% url 'change-device' request.user.url_username %}" class="btn btn-outline-secondary" id="change-phone"
-        onclick="changeDevice()">Change Phone or Device</a>
         <a href="{% url 'disable' request.user.url_username %}" class="btn btn-outline-danger" id="disable-auth">Disable Authenticator</a>
     </div>
 </div>
@@ -18,11 +16,22 @@
     <h3 class="backup-codes-title">Backup Codes</h3>
     <h2 class="code-lists-title">Backup Codes List</h2>
     <p>
-        Get single-use backup codes so you can log into your account if
+        Get single-use backup codes,so you can log into your account if
         you don`t have access to your authentication app
     </p>
     <!--<small>Generated on {{ generated_data }}</small>-->
     <div class="button-group-second">
-        <a href="#" class="btn btn-info">Generate New Backup Codes</a>
+        <!--<a href="#" class="btn btn-info" onclick="openCodes()" id="codes-button">
+            Generate New Backup Codes
+        </a>-->
+        <button type="submit" class="btn btn-info" onclick="openCodes()" id="codes-button">Generate New Backup Codes</button>
+        <div class="popup-codes" id="popup-codes">
+            <div class="popup-header">
+                <h6>dsadsadasa</h6>
+            </div>
+            <div class="popup-header">
+                <button type="button" onclick="closeCodes()">X</button>
+            </div>
+        </div>
     </div>
 </div>

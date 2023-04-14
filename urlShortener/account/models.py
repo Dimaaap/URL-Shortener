@@ -37,7 +37,7 @@ class UserCodes(models.Model):
 
 class UsersBackupCodes(models.Model):
     user = models.ForeignKey(user_model, on_delete=models.CASCADE)
-    codes = models.JSONField(default=list)
+    codes = models.JSONField(default=list, blank=True, null=True)
     codes_activate = models.BooleanField(default=False)
 
     def __str__(self):

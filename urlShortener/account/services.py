@@ -1,12 +1,17 @@
 from io import BytesIO
 import base64
+import logging
 
 import qrcode
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import UserCodes
 from passwords.services import get_data_from_model
+
+logger = logging.getLogger(__name__)
+user_model = get_user_model()
 
 
 def form_qrcode_service(current_user):
@@ -15,6 +20,15 @@ def form_qrcode_service(current_user):
     img_qrcode.save(buffer, format="PNG")
     img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
     return img_base64, totp_secret
+
+
+def try_get_current_user(url_username, logger_object=logger):
+    try:
+        current_user = get_data_from_model(user_model, 'url_username', url_username)
+        return current_user
+    except ObjectDoesNotExist:
+        logger_object.warning("Incorrect user data")
+        return redirect("index_page")
 
 
 def create_user_code(current_user):

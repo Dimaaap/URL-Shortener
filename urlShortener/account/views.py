@@ -1,26 +1,20 @@
 import logging
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from pyotp import TOTP
 
 from .forms import UpdatePasswordForm, InputTokenForm
 from .services import *
+from .models import UsersBackupCodes
 from passwords.services import get_data_from_model
 
-user_model = get_user_model()
 logger = logging.getLogger(__name__)
 
 
 @login_required(login_url='signin')
 def update_password_view(request, url_username):
-    try:
-        current_user = user_model.objects.get(url_username=url_username)
-    except ObjectDoesNotExist:
-        logger.warning("Incorrect user data")
-        return redirect('index_page')
+    current_user = try_get_current_user(url_username)
     if request.method == 'POST' and "first-form" in request.POST:
         form = UpdatePasswordForm(request.POST)
         if form.is_valid():
@@ -42,11 +36,7 @@ def update_password_view(request, url_username):
 
 
 def handle_tfw_form_service(request, url_username):
-    try:
-        current_user = user_model.objects.get(url_username=url_username)
-    except ObjectDoesNotExist:
-        logger.warning("Incorrect user data")
-        return redirect('index_page')
+    current_user = try_get_current_user(url_username)
     user_secret_key = get_data_from_model(UserCodes, "user", current_user)
     if not user_secret_key.secret_key:
         user_secret_key.secret_key = user_secret_key.enable_totp()
@@ -65,23 +55,16 @@ def handle_tfw_form_service(request, url_username):
 
 
 def disable_tfa_view(request, url_username):
-    try:
-        current_user = get_data_from_model(user_model, 'url_username', url_username)
-    except ObjectDoesNotExist:
-        logger.warning("Incorrect user data")
-        return redirect("index_page")
+    current_user = try_get_current_user(url_username)
     user_code = get_data_from_model(UserCodes, 'user', current_user)
     user_code.disable_totp()
     return redirect('update-password', url_username)
 
 
-def change_device_view(request, url_username):
-    try:
-        current_user = get_data_from_model(user_model, 'url_username', url_username)
-    except ObjectDoesNotExist:
-        logger.warning("Incorrect user data")
-        return redirect("index_page")
-    user_code = get_data_from_model(UserCodes, 'user', current_user)
-    user_code.disable_totp()
-    return 
+def generate_backup_codes(request, url_username):
+    current_user = try_get_current_user(url_username)
+
+
+
+
 
