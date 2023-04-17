@@ -1,4 +1,4 @@
-<div class="qrcode qrcode-active">
+<div class="qrcode qrcode-active" xmlns:lorem="http://www.w3.org/1999/xhtml">
     <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" id="qrcode">
 </div>
 <div class="active-body">
@@ -19,18 +19,44 @@
         Get single-use backup codes,so you can log into your account if
         you don`t have access to your authentication app
     </p>
-    <!--<small>Generated on {{ generated_data }}</small>-->
     <div class="button-group-second">
-        <!--<a href="#" class="btn btn-info" onclick="openCodes()" id="codes-button">
-            Generate New Backup Codes
-        </a>-->
-        <button type="submit" class="btn btn-info" onclick="openCodes()" id="codes-button">Generate New Backup Codes</button>
-        <div class="popup-codes" id="popup-codes">
-            <div class="popup-header">
-                <h6>dsadsadasa</h6>
+        <button id="openCodesButton" class="btn btn-info">Generate New Codes</button>
+        <div class="modal__codes" id="codesModal">
+            <div class="modal__box">
+                <div class="modal__header">
+                    <p>Two-Factor Authentication Backup Codes</p>
+                </div>
+                <div class="modal__body">
+                    <div class="alert-table">
+                        <p>If you lost access to you authentication app, you may
+                        use these codes as an alternative to log in into your account.
+                            <strong>
+                                Please note:
+                            </strong>
+                        </p>
+                        <ul class="noteble">
+                            <li class="noteblePoint">Keep these codes somewhere safe but accessible</li>
+                            <li class="noteblePoint">You can only use each code once</li>
+                        </ul>
+                    </div>
+                    <small>Generated on: Apr 17, 2023 3:45 PM</small>
+                    <div class="codes-table">
+                        <p class="code">Lorem</p>
+                        <p class="code">Ipsum</p>
+                        <p class="code">Aliquid</p>
+                        <p class="code">Alias</p>
+                    </div>
+                </div>
+                <div class="modal__footer">
+                    <div class="button-row">
+                        <a href="#" class="btn btn-info">Copy</a>
+                        <a href="#" class="btn btn-info">Download</a>
+                        <button class="btn btn-warning" id="closeCodesButton">Close</button>
+                    </div>
+                </div>
             </div>
-            <div class="popup-header">
-                <button type="button" onclick="closeCodes()">X</button>
+            <div class="modal__footer">
+
             </div>
         </div>
     </div>

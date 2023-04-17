@@ -7,12 +7,18 @@ function closePopup(){
     popup.classList.remove("open-popup");
 }
 
-let codesPopup = document.getElementById("popup-codes");
+document.getElementById("openCodesButton").addEventListener("click", function(){
+    document.getElementById("codesModal").classList.add("open")
+})
 
-function openCodes(){
-    codesPopup.classList.add("open-popup-codes");
-}
+//Закриття модального вікна
+document.getElementById("closeCodesButton").addEventListener("click", function(){
+    document.getElementById("codesModal").classList.remove("open")
+});
 
-function closeCodes(){
-    codesPopup.classList.remove("open-popup-codes");
-}
+//Закриття модального вікна при натисканні Esc
+window.addEventListener("keydown", (e) => {
+    if(e.key == "Escape"){
+        document.getElementById("codesModal").classList.remove("open")
+    }
+});
