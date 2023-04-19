@@ -1,5 +1,3 @@
-import logging
-
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from pyotp import TOTP
@@ -63,7 +61,6 @@ def disable_tfa_view(request, url_username):
 
 def generate_backup_codes(request, url_username):
     current_user = try_get_current_user(url_username)
-
 
 
 

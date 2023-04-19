@@ -38,13 +38,14 @@ class UserCodes(models.Model):
 class UsersBackupCodes(models.Model):
     user = models.ForeignKey(user_model, on_delete=models.CASCADE)
     codes = models.JSONField(default=list, blank=True, null=True)
-    codes_activate = models.BooleanField(default=False)
+    codes_active = models.BooleanField(default=False)
+    generate_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.codes_activate
+        return self.codes_active
 
     def generate_codes(self):
-        if self.codes_activate:
+        if self.codes_active:
             generated_codes = generate_user_backup_codes()
             self.codes = generated_codes
             self.save()

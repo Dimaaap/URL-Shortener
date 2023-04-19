@@ -22,3 +22,5 @@ window.addEventListener("keydown", (e) => {
         document.getElementById("codesModal").classList.remove("open")
     }
 });
+
+
