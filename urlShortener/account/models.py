@@ -2,7 +2,6 @@ import pyotp
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from users.models import User
 from .generate_backup_codes import generate_user_backup_codes
 
 user_model = get_user_model()
@@ -10,7 +9,7 @@ user_model = get_user_model()
 
 class UserCodes(models.Model):
     secret_key = models.CharField(max_length=255, blank=True, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(user_model, on_delete=models.CASCADE)
     totp_active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -31,8 +30,8 @@ class UserCodes(models.Model):
     def get_totp_uri(self):
         if not self.secret_key:
             self.enable_totp()
-        totp = pyotp.TOTP(self.secret_key)
-        return totp.provisioning_uri(name=self.user.username, issuer_name="URLShort")
+        totp = pyotp.TOTP(self.secret_key, issuer=self.user.email)
+        return totp.provisioning_uri(name=self.user.email, issuer_name="URLShort")
 
 
 class UsersBackupCodes(models.Model):
@@ -42,7 +41,7 @@ class UsersBackupCodes(models.Model):
     generate_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.codes_active
+        return f'{self.user} - {self.codes_active}'
 
     def generate_codes(self):
         if self.codes_active:

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from pyotp import TOTP
 
 from .forms import UpdatePasswordForm, InputTokenForm
 from .services import *
-from .models import UsersBackupCodes
 from passwords.services import get_data_from_model
 
 logger = logging.getLogger(__name__)
@@ -30,7 +30,8 @@ def update_password_view(request, url_username):
                    'second_form': second_form,
                    'qr_code': img_base64,
                    'totp_secret': totp_secret,
-                   'tfa_enabled': user_totp_enabled.totp_active})
+                   'tfa_enabled': user_totp_enabled.totp_active,
+                   'generate_codes_service': generate_codes_service(url_username)})
 
 
 def handle_tfw_form_service(request, url_username):
@@ -39,7 +40,7 @@ def handle_tfw_form_service(request, url_username):
     if not user_secret_key.secret_key:
         user_secret_key.secret_key = user_secret_key.enable_totp()
         user_secret_key.save()
-    totp = TOTP(user_secret_key.secret_key)
+    totp = TOTP(user_secret_key.secret_key, issuer=current_user.email)
     second_form = InputTokenForm(request.POST)
     if second_form.is_valid():
         code = second_form.cleaned_data['code']
@@ -61,6 +62,11 @@ def disable_tfa_view(request, url_username):
 
 def generate_backup_codes(request, url_username):
     current_user = try_get_current_user(url_username)
+    return JsonResponse({"current user": current_user})
+
+
+
+
 
 
 

@@ -41,10 +41,18 @@
                     </div>
                     <small>Generated on: Apr 17, 2023 3:45 PM</small>
                     <div class="codes-table">
-                        <p class="code">Lorem</p>
-                        <p class="code">Ipsum</p>
-                        <p class="code">Aliquid</p>
-                        <p class="code">Alias</p>
+                        <table id="codes-table">
+                            {% for code in generate_codes_service %}
+                                {% if forloop.counter0|divisibleby:3 %}
+                                    <tr>
+                                        {% endif %}
+                                        <td>{{ code }}</td>
+                                        {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+                                    </tr>
+                                        {% endif %}
+                           {% endfor %}
+                        </table>
+
                     </div>
                 </div>
                 <div class="modal__footer">
@@ -58,4 +66,3 @@
         </div>
     </div>
 </div>
-<div id="url-username" data-username="{{ request.user.url_username }}"></div>

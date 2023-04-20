@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import UserCodes
+from .models import UserCodes, UsersBackupCodes
 from passwords.services import get_data_from_model
 
 logger = logging.getLogger(__name__)
@@ -61,3 +61,14 @@ class AccountFormsHandler:
         current_user.set_password(user_password)
         current_user.save()
         messages.success(request, "Your password has been changed successfully")
+
+
+def generate_codes_service(url_username: str):
+    current_user = try_get_current_user(url_username)
+    if not UsersBackupCodes.objects.filter(user=current_user):
+        user_backup_codes = UsersBackupCodes.objects.create(user=current_user)
+    else:
+        user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
+    user_backup_codes.codes_active = True
+    user_backup_codes.generate_codes()
+    return user_backup_codes.codes
