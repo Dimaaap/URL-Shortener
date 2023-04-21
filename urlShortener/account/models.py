@@ -44,9 +44,14 @@ class UsersBackupCodes(models.Model):
         return f'{self.user} - {self.codes_active}'
 
     def generate_codes(self):
-        if self.codes_active:
+        if self.codes_active and not self.codes:
             generated_codes = generate_user_backup_codes()
             self.codes = generated_codes
             self.save()
 
+    def delete_codes(self):
+        if self.codes:
+            self.codes = {}
+            self.codes_active = False
+            self.save()
 

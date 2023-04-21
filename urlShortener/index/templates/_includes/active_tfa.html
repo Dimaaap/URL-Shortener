@@ -19,9 +19,14 @@
         Get single-use backup codes,so you can log into your account if
         you don`t have access to your authentication app
     </p>
-    <div class="button-group-second">
-        <button id="openCodesButton" class="btn btn-info">Generate New Codes</button>
-        <div class="modal__codes" id="codesModal">
+    {% if not codes_active %}
+            <div class="button-group-second">
+                <button id="openCodesButton" class="btn btn-info">Generate New Codes</button>
+            </div>
+    {% else %}
+        {% include '_includes/codes_active.html' %}
+    {% endif %}
+            <div class="modal__codes" id="codesModal">
             <div class="modal__box">
                 <div class="modal__header">
                     <p>Two-Factor Authentication Backup Codes</p>
@@ -39,7 +44,7 @@
                             <li class="noteblePoint">You can only use each code once</li>
                         </ul>
                     </div>
-                    <small>Generated on: Apr 17, 2023 3:45 PM</small>
+                    <small>Generated on: {{ generate_date }}</small>
                     <div class="codes-table">
                         <table id="codes-table">
                             {% for code in generate_codes_service %}

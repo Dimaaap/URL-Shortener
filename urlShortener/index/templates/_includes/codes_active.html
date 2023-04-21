@@ -1,0 +1,18 @@
+<small id="codes-active-small">Generated on: {{ generate_date }}</small>
+<div class="codes-table">
+    <table id="codes-place">
+        {% for code in generate_codes_service %}
+        {% if forloop.counter0|divisibleby:3 %}
+        <tr>
+            {% endif %}
+            <td>{{ code }}</td>
+            {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+<div class="buttons-row">
+    <button class="btn btn-outline-secondary">Generate New Codes</button>
+    <a href="{% url 'delete-codes' request.user.url_username %}" class="btn btn-outline-danger">Delete Codes</a>
+</div>

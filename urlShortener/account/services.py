@@ -70,5 +70,6 @@ def generate_codes_service(url_username: str):
     else:
         user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
     user_backup_codes.codes_active = True
+    print(user_backup_codes.codes)
     user_backup_codes.generate_codes()
     return user_backup_codes.codes
