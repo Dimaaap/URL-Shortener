@@ -12,8 +12,8 @@
     </div>
 </div>
 <hr>
-<div class="backup-codes">
-    <h3 class="backup-codes-title">Backup Codes</h3>
+    <div class="backup-codes">
+        <h3 class="backup-codes-title">Backup Codes</h3>
     <h2 class="code-lists-title">Backup Codes List</h2>
     <p>
         Get single-use backup codes,so you can log into your account if
@@ -21,53 +21,11 @@
     </p>
     {% if not codes_active %}
             <div class="button-group-second">
-                <button id="openCodesButton" class="btn btn-info">Generate New Codes</button>
+                <a href="{% url 'generate-codes' request.user.url_username %}" type="button" id="openCodes" class="btn btn-info">Generate New Codes</a>
             </div>
     {% else %}
         {% include '_includes/codes_active.html' %}
     {% endif %}
-            <div class="modal__codes" id="codesModal">
-            <div class="modal__box">
-                <div class="modal__header">
-                    <p>Two-Factor Authentication Backup Codes</p>
-                </div>
-                <div class="modal__body">
-                    <div class="alert-table">
-                        <p>If you lost access to you authentication app, you may
-                        use these codes as an alternative to log in into your account.
-                            <strong>
-                                Please note:
-                            </strong>
-                        </p>
-                        <ul class="noteble">
-                            <li class="noteblePoint">Keep these codes somewhere safe but accessible</li>
-                            <li class="noteblePoint">You can only use each code once</li>
-                        </ul>
-                    </div>
-                    <small>Generated on: {{ generate_date }}</small>
-                    <div class="codes-table">
-                        <table id="codes-table">
-                            {% for code in generate_codes_service %}
-                                {% if forloop.counter0|divisibleby:3 %}
-                                    <tr>
-                                        {% endif %}
-                                        <td>{{ code }}</td>
-                                        {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
-                                    </tr>
-                                        {% endif %}
-                           {% endfor %}
-                        </table>
-
-                    </div>
-                </div>
-                <div class="modal__footer">
-                    <div class="button-row">
-                        <a href="#" class="btn btn-outline-secondary">Copy</a>
-                        <a href="#" class="btn btn-outline-primary">Download</a>
-                        <button class="btn btn-outline-secondary" id="closeCodesButton">Close</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

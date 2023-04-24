@@ -39,6 +39,7 @@ class UsersBackupCodes(models.Model):
     codes = models.JSONField(default=list, blank=True, null=True)
     codes_active = models.BooleanField(default=False)
     generate_date = models.DateTimeField(auto_now=True)
+    codes_file = models.FileField(upload_to='codes/%Y-%m-d/', null=True, default=None)
 
     def __str__(self):
         return f'{self.user} - {self.codes_active}'
@@ -51,7 +52,7 @@ class UsersBackupCodes(models.Model):
 
     def delete_codes(self):
         if self.codes:
-            self.codes = {}
+            self.codes = None
             self.codes_active = False
             self.save()
 

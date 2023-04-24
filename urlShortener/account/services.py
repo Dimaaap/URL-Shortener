@@ -63,13 +63,32 @@ class AccountFormsHandler:
         messages.success(request, "Your password has been changed successfully")
 
 
-def generate_codes_service(url_username: str):
+def generate_codes_service(url_username: str, save_flag=True):
     current_user = try_get_current_user(url_username)
     if not UsersBackupCodes.objects.filter(user=current_user):
         user_backup_codes = UsersBackupCodes.objects.create(user=current_user)
     else:
         user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
-    user_backup_codes.codes_active = True
+    user_backup_codes.codes_active = save_flag
     print(user_backup_codes.codes)
     user_backup_codes.generate_codes()
     return user_backup_codes.codes
+
+
+def handle_tfw_form_service(request, url_username):
+    current_user = try_get_current_user(url_username)
+    user_secret_key = get_data_from_model(UserCodes, "user", current_user)
+    if not user_secret_key.secret_key:
+        user_secret_key.secret_key = user_secret_key.enable_totp()
+        user_secret_key.save()
+    totp = TOTP(user_secret_key.secret_key, issuer=current_user.email)
+    second_form = InputTokenForm(request.POST)
+    if second_form.is_valid():
+        code = second_form.cleaned_data['code']
+        is_valid = totp.verify(code)
+        if is_valid:
+            user_secret_key.active_totp()
+        else:
+            messages.error(request, "Invalid token")
+    else:
+        logger.warning(second_form.errors)
