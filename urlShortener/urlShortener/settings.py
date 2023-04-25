@@ -14,7 +14,6 @@ DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -43,7 +42,6 @@ LOGGING = {
         }
     }
 }
-
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -94,7 +92,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'urlShortener.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -105,7 +102,6 @@ DATABASES = {
         'PORT': config('DB_PORT')
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -122,7 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -137,10 +132,8 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -152,3 +145,11 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = int(config("EMAIL_PORT"))
 EMAIL_USE_TLS = bool(config("EMAIL_USE_TLS"))
+
+# BACKUP CODES PRE TEXT
+PRE_TEXT = "SAVE YOUR BACKUP CODES\nKeep these backup codes somewhere save but accessible" \
+           "\n\nLIST OF CODES:\n\n"
+
+POST_TEXT = "\n\n*You can only use each backup code once.\n" \
+            "*Need more? Visit https://url_short.com\n" \
+            "*These codes were generated on"

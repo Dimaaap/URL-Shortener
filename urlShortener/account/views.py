@@ -1,5 +1,9 @@
+import pyperclip
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import FileResponse
+from django.contrib import messages
 
 from .forms import UpdatePasswordForm, InputTokenForm
 from .services import *
@@ -49,7 +53,28 @@ def disable_tfa_view(request, url_username):
 
 
 def save_code_view(request, url_username):
-    pass
+    current_user = try_get_current_user(url_username)
+    user_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
+    user_codes.write_codes_into_file()
+    codes_file = user_codes.codes_file
+    return FileResponse(codes_file, as_attachment=True)
+
+
+def copy_codes_to_clipboard_view(request, url_username):
+    current_user = try_get_current_user(url_username)
+    backup_user_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
+    user_codes = backup_user_codes.codes
+    codes_string = form_code_string_service(user_codes)
+    pyperclip.copy(codes_string)
+    messages.success(request, "Your codes have been successfully copied to clipboard")
+    return redirect('update-password', url_username)
+
+
+def form_code_string_service(codes: list):
+    final_string = ""
+    for code in codes:
+        final_string += str(code) + "\n"
+    return final_string
 
 
 def generate_backup_codes_view(request, url_username):
@@ -68,5 +93,3 @@ def delete_codes_view(request, url_username):
     request.session['gen_codes'] = False
     print(user_backup_codes.codes)
     return redirect(update_password_view, url_username)
-
-

@@ -1,6 +1,10 @@
+from pathlib import Path
+
 import pyotp
 from django.db import models
+from django.core.files import File
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 from .generate_backup_codes import generate_user_backup_codes
 
@@ -56,3 +60,12 @@ class UsersBackupCodes(models.Model):
             self.codes_active = False
             self.save()
 
+    def write_codes_into_file(self):
+        path = Path(self.codes_file.path)
+        with path.open(mode='a+') as file:
+            codes_file = File(file)
+            codes_file.truncate(0)
+            codes_file.write(settings.PRE_TEXT)
+            for code in self.codes:
+                codes_file.write(code + "\n")
+            codes_file.write(settings.POST_TEXT + ' ' + str(self.generate_date)[:19])
