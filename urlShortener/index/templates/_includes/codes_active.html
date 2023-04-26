@@ -1,3 +1,4 @@
+
 <small id="codes-active-small">Generated on: {{ generate_date }}</small>
 <div class="codes-table">
     <table id="codes-place">
@@ -13,17 +14,8 @@
     </table>
 </div>
 <div class="buttons-row">
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                    {{ message }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <button class="btn btn-outline-secondary">Generate New Codes</button>
+    <!--<button class="btn btn-outline-secondary">Generate New Codes</button>-->
+    <a href="{% url 'generate-codes' request.user.url_username %}" class="btn btn-outline-primary">Generate New Codes</a>
     <a href="{% url 'copy-codes' request.user.url_username %}" class="btn btn-outline-secondary">Copy</a>
     <a href="{% url 'save-codes' request.user.url_username %}" class="btn btn-outline-secondary">Save</a>
     <a href="{% url 'delete-codes' request.user.url_username %}" class="btn btn-outline-danger">Delete Codes</a>

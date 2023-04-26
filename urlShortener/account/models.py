@@ -69,3 +69,8 @@ class UsersBackupCodes(models.Model):
             for code in self.codes:
                 codes_file.write(code + "\n")
             codes_file.write(settings.POST_TEXT + ' ' + str(self.generate_date)[:19])
+
+    def inactive_code(self, code: str):
+        if code in self.codes:
+            self.codes.remove(code)
+            self.save()

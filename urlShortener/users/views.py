@@ -1,5 +1,6 @@
 import logging
 
+import pyotp
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -8,9 +9,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 from .decorators import redirect_login_users
 from .models import User
+from account.models import UserCodes, UsersBackupCodes
 from .services import FormsHandler
+from account.services import try_get_current_user, get_data_from_model
 
 logger = logging.getLogger(__name__)
+user_model = get_user_model()
 
 
 @redirect_login_users
@@ -32,7 +36,9 @@ def signin_view(request):
     if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
-            FormsHandler.signin_form_handle(request, form)
+            tfa_state = FormsHandler.signin_form_handle(request, form)
+            if tfa_state:
+                return redirect('tfa-input')
         else:
             logger.error(f"Login form`s error - {form.errors}")
     else:
@@ -42,10 +48,16 @@ def signin_view(request):
 
 @redirect_login_users
 def tfa_input_view(request):
+    current_user = get_data_from_model(user_model, 'email', request.session.get('email'))
+    user_secret_key = get_data_from_model(UserCodes, 'user', current_user)
+    user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
+    totp = pyotp.TOTP(user_secret_key.secret_key, issuer=current_user.email)
     if request.method == 'POST':
         form = TFATokenForm(request.POST)
         if form.is_valid():
-            pass
+            FormsHandler.input_tfa_token_form_handler(request, form, totp, user_backup_codes)
+        else:
+            logger.error(f'Form {form} error')
     else:
         form = TFATokenForm()
     return render(request, template_name='users/tfa-input.html', context={'form': form})

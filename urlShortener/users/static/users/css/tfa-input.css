@@ -81,6 +81,12 @@ body {
     border: none;
     width: 400px;
     text-align: center;
+    cursor: pointer;
+}
+
+.tfa-input button:hover {
+    background: #4209FF;
+    color: white;
 }
 
 .tfa-input a{
@@ -101,4 +107,23 @@ body {
     max-width: 400px;
     margin-left: 50px;
     border-radius: 10px;
+}
+
+.tfa-verify p {
+    margin-left: 50px;
+}
+
+.messages {
+    list-style-type: none;
+    color: red;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.success {
+    color: green;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left; 20px;
 }

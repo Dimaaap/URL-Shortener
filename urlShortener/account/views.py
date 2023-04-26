@@ -1,11 +1,10 @@
 import pyperclip
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
-from django.contrib import messages
 
-from .forms import UpdatePasswordForm, InputTokenForm
+from .forms import UpdatePasswordForm
 from .services import *
 from passwords.services import get_data_from_model
 
@@ -70,13 +69,6 @@ def copy_codes_to_clipboard_view(request, url_username):
     return redirect('update-password', url_username)
 
 
-def form_code_string_service(codes: list):
-    final_string = ""
-    for code in codes:
-        final_string += str(code) + "\n"
-    return final_string
-
-
 def generate_backup_codes_view(request, url_username):
     current_user = try_get_current_user(url_username)
     backup_user_codes = get_data_from_model(UsersBackupCodes, "user", current_user)
@@ -88,8 +80,6 @@ def generate_backup_codes_view(request, url_username):
 def delete_codes_view(request, url_username):
     current_user = try_get_current_user(url_username)
     user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
-    print(user_backup_codes.codes)
     user_backup_codes.delete_codes()
     request.session['gen_codes'] = False
-    print(user_backup_codes.codes)
     return redirect(update_password_view, url_username)

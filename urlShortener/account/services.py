@@ -1,13 +1,16 @@
 from io import BytesIO
 import base64
 import logging
+from pyotp import TOTP
 
 import qrcode
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
 
 from .models import UserCodes, UsersBackupCodes
+from .forms import InputTokenForm
 from passwords.services import get_data_from_model
 
 logger = logging.getLogger(__name__)
@@ -92,3 +95,10 @@ def handle_tfw_form_service(request, url_username):
             messages.error(request, "Invalid token")
     else:
         logger.warning(second_form.errors)
+
+
+def form_code_string_service(codes: list):
+    final_string = ""
+    for code in codes:
+        final_string += str(code) + "\n"
+    return final_string

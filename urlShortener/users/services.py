@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
@@ -18,11 +17,13 @@ def user_handle(request, user):
         user_active = is_user_tfa_active(user)
         if user_active is None:
             messages.error(request, "Invalid credentials")
+            return False
         elif user_active:
-            return redirect("tfa-input")
+            return True
         else:
             login(request, user)
             messages.success(request, "You have successfully logged in")
+            return False
     else:
         messages.error(request, "Invalid email or token")
 
@@ -38,9 +39,12 @@ class FormsHandler:
     @staticmethod
     def signin_form_handle(request, signin_form):
         email = signin_form.cleaned_data['email']
+        request.session['email'] = email
         password = signin_form.cleaned_data['password']
+        request.session['password'] = password
         user = authenticate(email=email, password=password)
-        user_handle(request, user)
+        tfa_state = user_handle(request, user)
+        return tfa_state
 
     @staticmethod
     def account_form_handle(account_form, current_user):
@@ -55,3 +59,23 @@ class FormsHandler:
         user_avatar = request.FILES['avatar']
         current_user.avatar = user_avatar
         current_user.save()
+
+    @staticmethod
+    def input_tfa_token_form_handler(request, tfa_form, totp, user_codes):
+        token = tfa_form.cleaned_data['token']
+        user_email = request.session.get('email')
+        user_password = request.session.get('password')
+        user = authenticate(email=user_email, password=user_password)
+        is_valid_token = totp.verify(token)
+        if user:
+            if is_valid_token:
+                login(request, user)
+                messages.success(request, "You have been successfully logged in")
+            elif token in user_codes.codes:
+                login(request, user)
+                user_codes.inactive_code(token)
+                messages.success(request, 'You have been successfully logged in')
+            else:
+                messages.error(request, 'Incorrect token')
+        else:
+            messages.error(request, "Don`t match credentials")
