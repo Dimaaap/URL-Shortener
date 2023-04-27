@@ -13,7 +13,10 @@ class URLShortenForm(forms.Form):
 
 class URLReadyForm(forms.Form):
     domains = URLDomains.objects.all()
-    tinuyrl_com = URLDomains.objects.get(pk=1)
+    try:
+        tinuyrl_com = URLDomains.objects.get(pk=1)
+    except Exception:
+        tinuyrl_com = None
 
     def __init__(self, *args, **kwargs):
         super(URLReadyForm, self).__init__(*args, **kwargs)

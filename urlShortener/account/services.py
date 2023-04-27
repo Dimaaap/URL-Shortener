@@ -36,7 +36,8 @@ def try_get_current_user(url_username, logger_object=logger):
 
 def create_user_code(current_user):
     try:
-        user_code = get_data_from_model(UserCodes, 'user', current_user)
+        # user_code = get_data_from_model(UserCodes, 'user', current_user)
+        user_code = UserCodes.objects.select_related('user').get(user=current_user)
         return user_code
     except ObjectDoesNotExist:
         new_user_code = UserCodes(user=current_user)
@@ -73,7 +74,6 @@ def generate_codes_service(url_username: str, save_flag=True):
     else:
         user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
     user_backup_codes.codes_active = save_flag
-    print(user_backup_codes.codes)
     user_backup_codes.generate_codes()
     return user_backup_codes.codes
 
