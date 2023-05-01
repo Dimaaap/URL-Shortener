@@ -79,6 +79,14 @@ def generate_backup_codes_view(request, url_username):
     return redirect(update_password_view, url_username)
 
 
+def generate_new_codes_view(request, url_username):
+    current_user = try_get_current_user(url_username)
+    backup_user_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)
+    backup_user_codes.codes = []
+    backup_user_codes.generate_codes()
+    return redirect(update_password_view, url_username)
+
+
 def delete_codes_view(request, url_username):
     current_user = try_get_current_user(url_username)
     user_backup_codes = get_data_from_model(UsersBackupCodes, 'user', current_user)

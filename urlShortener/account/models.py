@@ -1,8 +1,10 @@
 from pathlib import Path
+from datetime import datetime
 
 import pyotp
 from django.db import models
 from django.core.files import File
+from django.core.files.base import ContentFile
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
@@ -43,7 +45,7 @@ class UsersBackupCodes(models.Model):
     codes = models.JSONField(default=list, blank=True, null=True)
     codes_active = models.BooleanField(default=False)
     generate_date = models.DateTimeField(auto_now=True)
-    codes_file = models.FileField(upload_to='codes/%Y-%m-d/', null=True, default=None)
+    codes_file = models.FileField(upload_to='codes/%Y-%m-%d/', null=True, default=None)
 
     def __str__(self):
         return f'{self.user} - {self.codes_active}'
@@ -60,8 +62,16 @@ class UsersBackupCodes(models.Model):
             self.codes_active = False
             self.save()
 
+    def create_file(self):
+        content = 'Hello World'.encode('utf-8')
+        file = ContentFile(content)
+        self.codes_file.save(f'{self.user.url_username}_codes.txt', file)
+
     def write_codes_into_file(self):
+        if not self.codes_file.path:
+            self.create_file()
         path = Path(self.codes_file.path)
+        print(path)
         with path.open(mode='a+') as file:
             codes_file = File(file)
             codes_file.truncate(0)

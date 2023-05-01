@@ -59,7 +59,28 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'bootstrap_modal_forms',
     'debug_toolbar',
+    'allauth',
+    'allauth_account',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth.backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'APP': {
+            'client-id': config('FACEBOOK_APP_ID'),
+            'secret': config('FACEBOOK_APP_SECRET'),
+            'key': ''
+        },
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'METHOD': 'oauth2',
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': False,
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,6 +92,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
+
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -122,7 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kyiv'
 
 USE_I18N = True
 

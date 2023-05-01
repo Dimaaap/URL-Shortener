@@ -21,7 +21,7 @@
         you don`t have access to your authentication app
     </p>
     {% if not codes_active %}
-            <div class="button-group-second">
+            <div class="button-group-second" id="generate-codes-button">
                 <a href="{% url 'generate-codes' request.user.url_username %}" type="button" id="openCodes" class="btn btn-info">Generate New Codes</a>
             </div>
     {% else %}

@@ -18,8 +18,13 @@
                 <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
                 <li class="nav-item"><a href="{% url 'account' request.user.url_username %}" class="nav-link">
                     Account
-                    <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" width="20" height="20" alt="" title="" class="img-small"
-                    style="margin-top: -7px;">
+                    {% if not request.user.avatar %}
+                        <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" width="20" height="20" alt="" title="" class="img-small"
+                        style="margin-top: -7px;">
+                    {% else %}
+                        <img src="{{request.user.avatar.url}}" width="25" height="25" alt="" title="" class="img-small"
+                        style="margin-top: -3px; border-radius: 50px 50px;">
+                    {% endif %}
                 </a></li>
               </ul>
             </header>

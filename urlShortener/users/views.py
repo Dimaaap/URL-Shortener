@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 
+
 from .forms import *
 from .decorators import redirect_login_users
 from .models import User
@@ -95,6 +96,10 @@ def upload_avatar_form(request, url_username):
         else:
             logger.warning(form.errors)
     return redirect('account', url_username)
+
+
+def facebook_login_view(request):
+    pass
 
 
 @login_required

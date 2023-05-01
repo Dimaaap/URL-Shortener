@@ -9,7 +9,8 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('passwords/', include('passwords.urls')),
     path('account/', include('account.urls')),
-    path('__debug__/', include('debug_toolbar.urls'))
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('accounts/', include('allauth.urls'))
 ]
 
 if settings.DEBUG:
