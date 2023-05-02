@@ -10,9 +10,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 from .decorators import redirect_login_users
 from .models import User
-from account.models import UserCodes, UsersBackupCodes
+from account_settings.models import UserCodes, UsersBackupCodes
 from .services import FormsHandler
-from account.services import try_get_current_user, get_data_from_model
+from account_settings.services import try_get_current_user, get_data_from_model
 
 logger = logging.getLogger(__name__)
 user_model = get_user_model()
@@ -88,14 +88,14 @@ def upload_avatar_form(request, url_username):
         current_user = User.objects.get(url_username=url_username)
     except ObjectDoesNotExist:
         logger.warning("The user doesn`t find")
-        return redirect('account', url_username)
+        return redirect('account_settings', url_username)
     if request.method == 'POST':
         form = UploadAvatarForm(request.POST)
         if form.is_valid():
             FormsHandler.upload_avatar_form_handler(request, current_user)
         else:
             logger.warning(form.errors)
-    return redirect('account', url_username)
+    return redirect('account_settings', url_username)
 
 
 def facebook_login_view(request):

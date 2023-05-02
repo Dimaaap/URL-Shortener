@@ -53,32 +53,25 @@ INSTALLED_APPS = [
     'index',
     'users',
     'passwords',
-    'account',
+    'account_settings.apps.AccountSettingsConfig',
 
     'crispy_forms',
     'crispy_bootstrap5',
     'bootstrap_modal_forms',
     'debug_toolbar',
     'allauth',
-    'allauth_account',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'allauth.account.auth.backends.AuthenticationBackend'
-]
 
 SOCIALACCOUNT_PROVIDERS = {
-    'facebook': {
-        'APP': {
-            'client-id': config('FACEBOOK_APP_ID'),
-            'secret': config('FACEBOOK_APP_SECRET'),
-            'key': ''
-        },
-        'SCOPE': ['email'],
-        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-        'METHOD': 'oauth2',
-        'LOCALE_FUNC': lambda request: 'en_US',
-        'VERIFIED_EMAIL': False,
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {
+            'access_type': 'online'
+        }
     }
 }
 
@@ -112,6 +105,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKEND = [
+    'allauth.account_settings.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'urlShortener.wsgi.application'
@@ -181,3 +178,11 @@ PRE_TEXT = "SAVE YOUR BACKUP CODES\nKeep these backup codes somewhere save but a
 POST_TEXT = "\n\n*You can only use each backup code once.\n" \
             "*Need more? Visit https://url_short.com\n" \
             "*These codes were generated on"
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_REQUIRED = True

@@ -35,7 +35,7 @@ def update_password_view(request, url_username):
     else:
         codes_active = True
         generated_codes = backup_user_codes.codes
-    return render(request, 'account/update-password.html',
+    return render(request, 'account_settings/update-password.html',
                   {'form': form,
                    'second_form': second_form,
                    'qr_code': img_base64,

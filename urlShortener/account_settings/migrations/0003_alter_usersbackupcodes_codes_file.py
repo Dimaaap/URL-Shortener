@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0002_usersbackupcodes_codes_file'),
+        ('account_settings', '0002_usersbackupcodes_codes_file'),
     ]
 
     operations = [

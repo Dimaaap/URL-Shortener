@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
 from passwords.services import get_data_from_model
-from account.models import UserCodes
+from account_settings.models import UserCodes
 
 
 def is_user_tfa_active(user):
