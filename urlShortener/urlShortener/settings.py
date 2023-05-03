@@ -65,13 +65,18 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {
-            'access_type': 'online'
+        "SCOPE": ['email'],
+        "AUTH_PARAMS": {
+            "access_type": 'online'
+        },
+        "APP": {
+            'client_id': config('GOOGLE_CLIENT_ID'),
+            'secret': config('GOOGLE_CLIENT_SECRET_KEY'),
+            'key': ''
         }
+
     }
 }
 
@@ -85,7 +90,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
-
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -183,6 +187,10 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignUpForm'
+ACCOUNT_SIGNUP_URL = '/users/'
+SOCIALACCOUNT_ADAPTER = 'urlShortener.adapters.CustomSocialAccountAdapter'
