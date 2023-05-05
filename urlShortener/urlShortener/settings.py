@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter'
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -76,7 +77,10 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': config('GOOGLE_CLIENT_SECRET_KEY'),
             'key': ''
         }
-
+    },
+    'twitter': {
+        "API_KEY": config("TWITTER_API_KEY"),
+        "API_SECRET": config("TWITTER_KEY_SECRET")
     }
 }
 
@@ -113,6 +117,7 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKEND = [
     'allauth.account_settings.auth_backends.AuthenticationBackend',
+    'allauth.socialaccount.backends.twitter.TwitterOAuth',
 ]
 
 WSGI_APPLICATION = 'urlShortener.wsgi.application'
@@ -194,3 +199,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignUpForm'
 ACCOUNT_SIGNUP_URL = '/users/'
 SOCIALACCOUNT_ADAPTER = 'urlShortener.adapters.CustomSocialAccountAdapter'
+SOCIAL_ACCOUNT_AUTO_SIGNUP = False
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
