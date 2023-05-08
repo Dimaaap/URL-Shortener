@@ -62,9 +62,17 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter'
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.github'
 ]
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -77,10 +85,6 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': config('GOOGLE_CLIENT_SECRET_KEY'),
             'key': ''
         }
-    },
-    'twitter': {
-        "API_KEY": config("TWITTER_API_KEY"),
-        "API_SECRET": config("TWITTER_KEY_SECRET")
     }
 }
 
@@ -92,10 +96,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 AUTH_USER_MODEL = 'users.User'
+
+SOCIAL_AUTH_GITHUB_KEY = config('GITHUB_CLIENT_ID')
+SOCIAL_AUTH_GITHUB_SECRET = config('GITHUB_CLIENT_SECRET')
 
 ROOT_URLCONF = 'urlShortener.urls'
 
@@ -115,7 +121,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKEND = [
+AUTHENTICATION_BACKENDS = [
     'allauth.account_settings.auth_backends.AuthenticationBackend',
     'allauth.socialaccount.backends.twitter.TwitterOAuth',
 ]
@@ -189,8 +195,6 @@ POST_TEXT = "\n\n*You can only use each backup code once.\n" \
             "*These codes were generated on"
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
@@ -198,8 +202,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignUpForm'
 ACCOUNT_SIGNUP_URL = '/users/'
-SOCIALACCOUNT_ADAPTER = 'urlShortener.adapters.CustomSocialAccountAdapter'
 SOCIAL_ACCOUNT_AUTO_SIGNUP = False
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-

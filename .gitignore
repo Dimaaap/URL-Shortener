@@ -8,6 +8,7 @@ media
 *.jpg
 *.jpeg
 *.json
+*.yml
 
 # Backup files #
 *.bak
