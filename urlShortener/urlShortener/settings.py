@@ -68,9 +68,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github'
 ]
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
@@ -84,6 +84,13 @@ SOCIALACCOUNT_PROVIDERS = {
             'client_id': config('GOOGLE_CLIENT_ID'),
             'secret': config('GOOGLE_CLIENT_SECRET_KEY'),
             'key': ''
+        },
+        'github': {
+            'SCOPE': ['user'],
+            'CLIENT_ID': config('GITHUB_CLIENT_ID'),
+            'SECRET': config('GITHUB_CLIENT_SECRET'),
+            'USER_FIELDS': ['email', 'username'],
+            'AUTH_PARAMS': {'access_type': 'online'}
         }
     }
 }
@@ -96,6 +103,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -122,8 +130,9 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'allauth.account_settings.auth_backends.AuthenticationBackend',
-    'allauth.socialaccount.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    #'allauth.socialaccount.backends.twitter.TwitterOAuth',
 ]
 
 WSGI_APPLICATION = 'urlShortener.wsgi.application'
