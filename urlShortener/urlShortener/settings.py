@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 
+from django.core.management.commands.runserver import Command as runserver
 from decouple import config
 from pythonjsonlogger.jsonlogger import JsonFormatter
 
@@ -11,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
+runserver.default_port = '8080'
 
 ALLOWED_HOSTS = []
 
@@ -65,7 +67,8 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
-    'allauth.socialaccount.providers.github'
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
 ]
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
@@ -90,6 +93,12 @@ SOCIALACCOUNT_PROVIDERS = {
             'CLIENT_ID': config('GITHUB_CLIENT_ID'),
             'SECRET': config('GITHUB_CLIENT_SECRET'),
             'USER_FIELDS': ['email', 'username'],
+            'AUTH_PARAMS': {'access_type': 'online'}
+        },
+        'facebook': {
+            'SCOPE': ['user'],
+            'CLIENT_ID': config('FACEBOOK_APP_ID'),
+            'SECRET': config('FACEBOOK_APP_SECRET'),
             'AUTH_PARAMS': {'access_type': 'online'}
         }
     }
@@ -163,6 +172,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Kyiv'
@@ -214,3 +225,4 @@ ACCOUNT_SIGNUP_URL = '/users/'
 SOCIAL_ACCOUNT_AUTO_SIGNUP = False
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+SECURE_SLL_REDIRECT = True
