@@ -1,0 +1,23 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% block css_additional %}
+  <link rel="stylesheet" href="{% static 'account_settings/css/api_key.css' %}">
+{% endblock %}
+
+{% block body %}
+  {% include '_includes/login_user_header.html' %}
+  <div class="row">
+    <div class="column left">
+      {% include '_includes/navbar.html' %}
+    </div>
+    <div class="column middle">
+      <h3 class="title sub-title">Tokens Management</h3>
+      <h1 class="title main-title">Your Tokens</h1>
+      <form method="post" id="create-token-form">
+        {% csrf_token %}
+        {{ form.as_div }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

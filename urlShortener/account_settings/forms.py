@@ -16,3 +16,14 @@ class InputTokenForm(forms.Form):
         if len(code) < 6:
             raise forms.ValidationError("The code must contain exactly 6 symbols")
         return code
+
+
+class CreateTokenForm(forms.Form):
+    OPPORTUNITIES = (('Create ShortenURL', '1 '),
+                     ('Update ShortenURL', '2'),
+                     ('Archive ShortenURL', '3'))
+
+    token_name = forms.CharField(max_length=40, min_length=2, required=False,
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    token_opportunity = forms.CharField(widget=forms.Select(choices=OPPORTUNITIES))
+

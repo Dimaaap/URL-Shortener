@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import datetime
+import uuid
 
 import pyotp
 from django.db import models
@@ -84,3 +85,23 @@ class UsersBackupCodes(models.Model):
         if code in self.codes:
             self.codes.remove(code)
             self.save()
+
+
+class UserAPITokens(models.Model):
+    TOKEN_OPPORTUNITIES = (
+        ('1', 'Create TinyURL'),
+        ('2', 'UpdateTinyURL'),
+        ('3', 'Archive TinyURL')
+    )
+
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False)
+    user = models.ForeignKey(user_model, on_delete=models.CASCADE)
+    token_name = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now=True)
+    last_used = models.DateTimeField()
+    token_opportunity = models.CharField(max_length=1, choices=TOKEN_OPPORTUNITIES)
+
+    def __str__(self):
+        return self.token_name

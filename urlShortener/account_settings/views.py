@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
 
-from .forms import UpdatePasswordForm
+from .forms import UpdatePasswordForm, CreateTokenForm
 from .services import *
 from passwords.services import get_data_from_model
 
@@ -93,3 +93,17 @@ def delete_codes_view(request, url_username):
     user_backup_codes.delete_codes()
     request.session['gen_codes'] = False
     return redirect(update_password_view, url_username)
+
+
+def account_usage_view(request, url_username):
+    return render(request, 'account_settings/account_usage.html')
+
+
+def generate_api_key_view(request, url_username):
+    if request.method == 'POST':
+        form = CreateTokenForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = CreateTokenForm()
+    return render(request, 'account_settings/api_key.html', {'form': form})

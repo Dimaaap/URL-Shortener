@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li class="settings-element">
-                <a href="#">
+                <a href="{% url 'api-page' request.user.url_username %}">
                     <img src="   https://cdn-icons-png.flaticon.com/512/263/263069.png "
                          width="25" height="25" alt="" title="" class="img-small">
                     <p>API</p>
@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="settings-element">
-                <a href="#">
+                <a href="{% url 'account_usage' request.user.url_username %}">
                     <img src="   https://cdn-icons-png.flaticon.com/512/9971/9971235.png "
                          width="25" height="25" alt="" title="" class="img-small">
                     <p>Account Usage</p>
