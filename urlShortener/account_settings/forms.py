@@ -19,11 +19,12 @@ class InputTokenForm(forms.Form):
 
 
 class CreateTokenForm(forms.Form):
-    OPPORTUNITIES = (('Create ShortenURL', '1 '),
-                     ('Update ShortenURL', '2'),
-                     ('Archive ShortenURL', '3'))
-
-    token_name = forms.CharField(max_length=40, min_length=2, required=False,
+    token_name = forms.CharField(max_length=40, min_length=2, required=True,
                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
-    token_opportunity = forms.CharField(widget=forms.Select(choices=OPPORTUNITIES))
+    can_create = forms.BooleanField(label="Create ShortURL", initial=True,
+                                    widget=forms.CheckboxInput(attrs={'class': 'field-checkbox'}))
+    can_update = forms.BooleanField(label="Update ShortURL",
+                                    widget=forms.CheckboxInput(attrs={'class': 'field-checkbox'}))
+    can_archive = forms.BooleanField(label="Archive ShortURL",
+                                     widget=forms.CheckboxInput(attrs={'class': 'field-checkbox'}))
 

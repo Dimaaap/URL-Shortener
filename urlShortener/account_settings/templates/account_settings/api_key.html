@@ -16,8 +16,46 @@
       <h1 class="title main-title">Your Tokens</h1>
       <form method="post" id="create-token-form">
         {% csrf_token %}
-        {{ form.as_div }}
+        {% for field in form %}
+          {% if field.label == 'Create ShortURL' or field.label == 'Update ShortURL' or field.label == 'Archive ShortURL' %}
+            <div class="logical-select">
+              <label class="widget-label">{{ field.label }}</label>
+              <div class="logical-choice">{{ field }}</div>
+            </div>
+          {% else %}
+            <label id="token-name">{{ field.label }}<small>*</small></label>
+            {{ field }}
+            <div class="help-titles">
+              <p>Permission<a href="#" class="select-all-link"><small>(Select All)</small></a></p>
+              <p>Allow</p>
+            </div>
+            <hr>
+          {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-secondary">Create Token</button>
       </form>
+    </div>
+    <div class="column right">
+      <table class="user-tokens">
+        <tr class="table-header">
+          <th>Name</th>
+          <th>Created</th>
+          <th>Last Used</th>
+          <th>Action</th>
+        </tr>
+        <tr class="table-body">
+          <td>Token</td>
+          <td>May 12, 2023 9:28 AM</td>
+          <td>Never</td>
+          <td><a href="#" class="action-button">
+            <img src="   https://cdn-icons-png.flaticon.com/512/2040/2040504.png " width="25" height="25" alt="" title="" class="img-small">
+          </a></td>
+        </tr>
+      </table>
+      <div class="under-table-block">
+        <p class="count-tokens">1 token</p>
+        <a href="#" class="btn btn-success">Developer Documentation</a>
+      </div>
     </div>
   </div>
 {% endblock %}

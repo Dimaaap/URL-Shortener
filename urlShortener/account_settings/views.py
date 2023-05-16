@@ -6,6 +6,7 @@ from django.http import FileResponse
 
 from .forms import UpdatePasswordForm, CreateTokenForm
 from .services import *
+from .models import UserAPITokens
 from passwords.services import get_data_from_model
 
 logger = logging.getLogger(__name__)
@@ -103,7 +104,19 @@ def generate_api_key_view(request, url_username):
     if request.method == 'POST':
         form = CreateTokenForm(request.POST)
         if form.is_valid():
-            pass
+            token_name = form.cleaned_data.get('token_name')
+            can_create = form.cleaned_data.get('can_create')
+            can_update = form.cleaned_data.get('can_update')
+            can_archive = form.cleaned_data.get('can_archive')
+            user = try_get_current_user(url_username)
+            new_token = UserAPITokens.objects.create(user=user)
+            new_token.token_name = token_name
+            new_token.can_create = can_create
+            new_token.can_update = can_update
+            new_token.can_archive = can_archive
+            new_token.save()
+        else:
+            print('dasdsad')
     else:
         form = CreateTokenForm()
     return render(request, 'account_settings/api_key.html', {'form': form})

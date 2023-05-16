@@ -88,20 +88,16 @@ class UsersBackupCodes(models.Model):
 
 
 class UserAPITokens(models.Model):
-    TOKEN_OPPORTUNITIES = (
-        ('1', 'Create TinyURL'),
-        ('2', 'UpdateTinyURL'),
-        ('3', 'Archive TinyURL')
-    )
-
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
                           editable=False)
     user = models.ForeignKey(user_model, on_delete=models.CASCADE)
     token_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now=True)
-    last_used = models.DateTimeField()
-    token_opportunity = models.CharField(max_length=1, choices=TOKEN_OPPORTUNITIES)
+    last_used = models.DateTimeField(null=None, blank=True)
+    can_create = models.BooleanField(default=True)
+    can_update = models.BooleanField(default=False)
+    can_archive = models.BooleanField(default=False)
 
     def __str__(self):
         return self.token_name

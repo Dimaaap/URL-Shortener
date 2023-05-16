@@ -59,7 +59,7 @@ body {
     background-image: url('../images/main-page5.jpg');
 }
 
-.column {
+..column {
     float: left;
     flex-grow: 1;
 }
@@ -73,9 +73,15 @@ body {
 }
 
 .middle {
-    width: 80%;
+    width: 41%;
     background: #FCF9F9;
     margin-left: -35px;
+}
+
+.right {
+    width: 41%;
+    margin-left: -90px;
+    background: #FCF9F9;
 }
 
 
@@ -160,4 +166,126 @@ nav ul li:hover {
 
 .main-title {
     font-weight: 400;
+}
+
+#create-token-form {
+    max-width: 350px;
+    font-family: 'Rubik';
+    background: #F7F7F7;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 52px;
+}
+
+#create-token-form label {
+   margin-top: 6px;
+}
+
+.form-control {
+    width: 300px;
+    padding: 5px;
+}
+
+#token-name {
+    margin-bottom: 7px;
+}
+
+.help-text-container {
+    display: flex;
+}
+
+.help-titles {
+    display: inline-flex;
+    gap: 105px;
+    margin-bottom: -40px;
+    margin-top: 5px;
+}
+
+#allow-title {
+    margin-right: 20px;
+}
+
+.select-box {
+    background: red;
+}
+
+.select-all-link {
+    color: blue;
+}
+
+.btn-secondary {
+    background: #6C85DC;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background: #699ABA;
+}
+
+.logical-select {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logical-select label {
+    width: 270px;
+}
+
+hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.field-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid red;
+}
+
+.user-tokens {
+    margin-top: 120px;
+    font-family: 'Rubik';
+}
+
+.user-tokens .table-header {
+    background: #00395F;
+    border: 1px solid #003A61;
+    border-radius: 10px;
+}
+
+.user-tokens .table-header th {
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-body {
+    border: 0.5px solid #D5D5D5;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 25px;
+}
+
+td {
+    background: #F3F3F3;
+}
+
+.under-table-block {
+    font-family: 'Rubik';
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    width: 500px;
+}
+
+.count-tokens {
+    flex: 1;
+}
+
+.under-table-block a {
+    margin-left: 0px;
 }
