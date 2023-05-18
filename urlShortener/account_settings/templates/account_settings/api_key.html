@@ -49,7 +49,11 @@
           <tr class="table-body">
             <td>{{ token.token_name }}</td>
             <td>{{ token.created_at|date:_("SHORT_DATETIME_FORMAT") }}</td>
-            <td>{{ token.last_used|date:_("SHORT_DATETIME_FORMAT") }}</td>
+            {% if token.compare_created_and_used_time %}
+              <td>None</td>
+            {% else %}
+              <td>{{ token.last_used|date:_("SHORT_DATETIME_FORMAT") }}</td>
+            {% endif %}
             <td><a href="#" class="action-button">
             <img src="   https://cdn-icons-png.flaticon.com/512/2040/2040504.png " width="25" height="25" alt="" title="" class="img-small">
             </a></td>

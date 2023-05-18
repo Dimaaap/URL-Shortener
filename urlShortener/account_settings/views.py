@@ -116,3 +116,8 @@ def generate_api_key_view(request, url_username):
         form = CreateTokenForm(user)
     all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user)
     return render(request, 'account_settings/api_key.html', {'form': form, 'user_tokens': all_user_tokens})
+
+
+def edit_token_page_view(request, token_id):
+    token = get_data_from_model(UserAPITokens, 'id', token_id)
+    return render(request, 'account_settings/edit_token.html')

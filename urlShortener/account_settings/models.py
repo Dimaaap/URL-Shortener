@@ -94,8 +94,8 @@ class UserAPITokens(models.Model):
                           editable=False)
     user = models.ForeignKey(user_model, on_delete=models.CASCADE)
     token_name = models.CharField(max_length=50)
-    created_at = models.DateTimeField(auto_now=True)
-    last_used = models.DateTimeField(default=datetime.now())
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_used = models.DateTimeField(auto_now=True)
     can_create = models.BooleanField(default=True)
     can_update = models.BooleanField(default=False)
     can_archive = models.BooleanField(default=False)
@@ -107,9 +107,7 @@ class UserAPITokens(models.Model):
         localize_created = timezone.localtime(self.created_at)
         localize_used = timezone.localtime(self.last_used)
         formatted_created = localize_created.strftime("%Y-%m-%d %H:%M:%S")
-        print(formatted_created)
         formatted_used = localize_used.strftime("%Y-%m-%d %H:%M:%S")
-        print(formatted_used)
         if formatted_used == formatted_created:
             return True
         return False

@@ -1,0 +1,18 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'account_settings/css/edit_token.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% include '_includes/login_user_header.html' %}
+    <div class="page-header">
+        <h5>Edit API Token</h5>
+        <h3>Token Name</h3>
+    </div>
+    <div class="token-dates">
+        <p id="created_date">Created May 18, 2023 8:14AM</p>
+        <p id="last_used_date">Last User:Never</p>
+    </div>
+{% endblock %}
