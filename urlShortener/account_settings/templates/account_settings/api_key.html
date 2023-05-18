@@ -14,6 +14,7 @@
     <div class="column middle">
       <h3 class="title sub-title">Tokens Management</h3>
       <h1 class="title main-title">Your Tokens</h1>
+      {% include '_includes/messages.html' %}
       <form method="post" id="create-token-form">
         {% csrf_token %}
         {% for field in form %}
@@ -23,6 +24,7 @@
               <div class="logical-choice">{{ field }}</div>
             </div>
           {% else %}
+            {{ field.errors }}
             <label id="token-name">{{ field.label }}<small>*</small></label>
             {{ field }}
             <div class="help-titles">
@@ -43,17 +45,19 @@
           <th>Last Used</th>
           <th>Action</th>
         </tr>
-        <tr class="table-body">
-          <td>Token</td>
-          <td>May 12, 2023 9:28 AM</td>
-          <td>Never</td>
-          <td><a href="#" class="action-button">
+        {% for token in user_tokens %}
+          <tr class="table-body">
+            <td>{{ token.token_name }}</td>
+            <td>{{ token.created_at|date:_("SHORT_DATETIME_FORMAT") }}</td>
+            <td>{{ token.last_used|date:_("SHORT_DATETIME_FORMAT") }}</td>
+            <td><a href="#" class="action-button">
             <img src="   https://cdn-icons-png.flaticon.com/512/2040/2040504.png " width="25" height="25" alt="" title="" class="img-small">
-          </a></td>
-        </tr>
+            </a></td>
+          </tr>
+        {% endfor %}
       </table>
       <div class="under-table-block">
-        <p class="count-tokens">1 token</p>
+        <p class="count-tokens">{{ user_tokens|length }} token</p>
         <a href="#" class="btn btn-success">Developer Documentation</a>
       </div>
     </div>

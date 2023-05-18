@@ -8,6 +8,7 @@ from django.core.files import File
 from django.core.files.base import ContentFile
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.utils import timezone
 
 from .generate_backup_codes import generate_user_backup_codes
 
@@ -94,10 +95,22 @@ class UserAPITokens(models.Model):
     user = models.ForeignKey(user_model, on_delete=models.CASCADE)
     token_name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now=True)
-    last_used = models.DateTimeField(null=None, blank=True)
+    last_used = models.DateTimeField(default=datetime.now())
     can_create = models.BooleanField(default=True)
     can_update = models.BooleanField(default=False)
     can_archive = models.BooleanField(default=False)
 
     def __str__(self):
         return self.token_name
+
+    def compare_created_and_used_time(self):
+        localize_created = timezone.localtime(self.created_at)
+        localize_used = timezone.localtime(self.last_used)
+        formatted_created = localize_created.strftime("%Y-%m-%d %H:%M:%S")
+        print(formatted_created)
+        formatted_used = localize_used.strftime("%Y-%m-%d %H:%M:%S")
+        print(formatted_used)
+        if formatted_used == formatted_created:
+            return True
+        return False
+

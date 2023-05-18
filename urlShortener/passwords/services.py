@@ -20,6 +20,12 @@ def get_data_from_model(model: callable, field: str, value):
     return result
 
 
+def filter_data_from_model(model: callable, field: str, value):
+    eq_filter = EqualFilter()
+    result = model.objects.filter(**eq_filter(field, value))
+    return result
+
+
 def get_current_user(user_email):
     try:
         current_user = get_data_from_model(get_user_model(), 'email', user_email)

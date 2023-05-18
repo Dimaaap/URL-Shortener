@@ -3,11 +3,12 @@ import pyperclip
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
+from django.contrib import messages
 
 from .forms import UpdatePasswordForm, CreateTokenForm
 from .services import *
 from .models import UserAPITokens
-from passwords.services import get_data_from_model
+from passwords.services import get_data_from_model, filter_data_from_model
 
 logger = logging.getLogger(__name__)
 
@@ -101,22 +102,17 @@ def account_usage_view(request, url_username):
 
 
 def generate_api_key_view(request, url_username):
+    user = try_get_current_user(url_username)
     if request.method == 'POST':
-        form = CreateTokenForm(request.POST)
+        form = CreateTokenForm(user, request.POST)
         if form.is_valid():
-            token_name = form.cleaned_data.get('token_name')
-            can_create = form.cleaned_data.get('can_create')
-            can_update = form.cleaned_data.get('can_update')
-            can_archive = form.cleaned_data.get('can_archive')
-            user = try_get_current_user(url_username)
-            new_token = UserAPITokens.objects.create(user=user)
-            new_token.token_name = token_name
-            new_token.can_create = can_create
-            new_token.can_update = can_update
-            new_token.can_archive = can_archive
+            new_token = UserAPITokens.objects.create(user=user, **form.cleaned_data)
             new_token.save()
+            form = CreateTokenForm(user)
+            messages.success(request, "Token has been successfully created")
         else:
-            print('dasdsad')
+            logger.warning(form.errors)
     else:
-        form = CreateTokenForm()
-    return render(request, 'account_settings/api_key.html', {'form': form})
+        form = CreateTokenForm(user)
+    all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user)
+    return render(request, 'account_settings/api_key.html', {'form': form, 'user_tokens': all_user_tokens})

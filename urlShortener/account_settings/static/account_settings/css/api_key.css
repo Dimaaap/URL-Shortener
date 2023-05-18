@@ -289,3 +289,21 @@ td {
 .under-table-block a {
     margin-left: 0px;
 }
+
+/* FORM ERRORS */
+.errorlist {
+    list-style-type: none;
+    margin-left: -30px;
+    color: red;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+
+/* MESSAGES */
+.messages {
+    list-style-type: none;
+    color: green;
+    font-weight: 500;
+    font-family: 'Rubik';
+    margin-left: 20px;
+}
