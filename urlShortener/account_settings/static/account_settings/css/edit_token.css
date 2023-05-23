@@ -1,0 +1,228 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    padding-left: 20px;
+    background: white;
+    /*background-image: url('../images/main-page5.jpg')*/
+}
+
+/* HEADER */
+.main-header {
+    max-width: 500px;
+    padding: 0px;
+    margin-left: 940px;
+    background: #6C85DC;
+    border-radius: 15px;
+    display: block-inline;
+}
+
+/* LINKS IN HEADER */
+.main-header a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+/* SITE LOGO */
+.site-logo {
+    float: left;
+    padding-top: 5px;
+    font-family: 'Recursive', sans-serif;
+    font-size: 50px;
+    color: white;
+}
+
+/* HELP BUTTON */
+.help-button {
+    float: left;
+    background: #6C85DC;
+    margin-left: 660px;
+    margin-top: 20px;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Rubik';
+}
+.high-header {
+    height: 100%;
+    margin-left: -20px;
+    background-image: url('../images/main-page5.jpg');
+}
+
+..column {
+    float: left;
+    flex-grow: 1;
+}
+
+.row {
+    display: flex;
+}
+
+.left {
+    width: 20%;
+}
+
+.middle {
+    width: 80%;
+    background: #FCF9F9;
+    margin-left: -35px;
+    font-family: 'Rubik';
+}
+
+.right {
+    width: 41%;
+    margin-left: -90px;
+    background: #FCF9F9;
+}
+
+
+nav {
+    background: #F3F3F3;
+    max-width: 250px
+    width: 100%;
+    margin-left: -20px;
+    height: 808px;
+    max-height: calc(105vh - 7rem);
+    overflow-y: auto;
+}
+
+nav ul {
+    margin-left: -20px;
+}
+
+nav ul h4 {
+    font-family: 'Rubik';
+    font-size: 30px;
+    font-weight: 400;
+    margin-left: -10px;
+}
+
+nav ul li {
+    list-style-type: none;
+    margin-left: -10px;
+    padding: 5px;
+
+}
+
+nav ul li img {
+    margin-right: 10px;
+}
+
+nav ul li p {
+    font-family: 'Rubik';
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: -23px;
+    margin-left: 40px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav ul li:hover {
+    background: white;
+}
+
+.settings-element:hover
+{
+    cursor: pointer;
+    background: #FFFFF;
+}
+
+#nav-logout-btn {
+    background: #6C85DC;
+    width: 200px;
+    margin-bottom: 10px;
+    font-family: 'Rubik';
+    font-size: 18px;
+}
+
+.page-header {
+    margin-top: 20px;
+    margin-left: 200px;
+}
+
+.page-header h5 {
+    color: #898787;
+    font-weight: 400;
+}
+
+.page-header h3 {
+    font-weight: 500;
+}
+
+.token-dates {
+    margin-left: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#created_date {
+    flex: 1;
+    margin-right: 10px;
+}
+
+#last_used_date {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.edit-token-form {
+    font-family: 'Rubik';
+    padding: 5px;
+    margin-left: 200px;
+    max-width: 590px;
+}
+
+.logical-select {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.logical-select label {
+    width: 270px;
+}
+
+hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.field-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid red;
+}
+
+#update-token-btn {
+    margin-top: 10px;
+    width: 590px;
+    background-color: #6C85DC;
+    font-weight: 500;
+}
+
+.delete-container {
+    margin-left: 200px;
+    margin-top: 10px;
+    color: #898787;
+    font-weight: bold;
+}
+
+.delete-container #delete-token-btn {
+    width: 590px;
+    font-weight: 500;
+}

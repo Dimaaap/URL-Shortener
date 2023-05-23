@@ -20,20 +20,29 @@ class InputTokenForm(forms.Form):
         return code
 
 
-class CreateTokenForm(forms.Form):
+class CustomAbstractBooleanField(forms.BooleanField):
+
+    def __init__(self, label, initial=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label = label
+        self.initial = initial
+        self.required = False
+        self.widget = forms.CheckboxInput(attrs={'class': 'field-checknox'})
+
+
+class AbstractTokenForm(forms.Form):
+    token_name = forms.CharField(max_length=40, min_length=2, required=True,
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    can_create = CustomAbstractBooleanField(label="Create ShortURL", initial=True)
+    can_update = CustomAbstractBooleanField(label="Update ShortURL")
+    can_archive = CustomAbstractBooleanField(label="Archive ShortURL")
+
+
+class CreateTokenForm(AbstractTokenForm):
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super().__init__(*args, **kwargs)
-
-    token_name = forms.CharField(max_length=40, min_length=2, required=True,
-                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
-    can_create = forms.BooleanField(label="Create ShortURL", initial=True, required=False,
-                                    widget=forms.CheckboxInput(attrs={'class': 'field-checkbox'}))
-    can_update = forms.BooleanField(label="Update ShortURL", required=False,
-                                    widget=forms.CheckboxInput(attrs={'class': 'field-checkbox'}))
-    can_archive = forms.BooleanField(label="Archive ShortURL", required=False,
-                                     widget=forms.CheckboxInput(attrs={'class': 'field-checkbox'}))
 
     def clean_token_name(self):
         token_name = self.cleaned_data['token_name']
@@ -44,5 +53,5 @@ class CreateTokenForm(forms.Form):
         raise forms.ValidationError(f"The token with name {token_name} already exist")
 
 
-
-
+class EditTokenForm(AbstractTokenForm):
+    pass

@@ -20,8 +20,8 @@
         {% for field in form %}
           {% if field.label == 'Create ShortURL' or field.label == 'Update ShortURL' or field.label == 'Archive ShortURL' %}
             <div class="logical-select">
-              <label class="widget-label">{{ field.label }}</label>
               <div class="logical-choice">{{ field }}</div>
+              <label class="widget-label">{{ field.label }}</label>
             </div>
           {% else %}
             {{ field.errors }}
@@ -54,7 +54,7 @@
             {% else %}
               <td>{{ token.last_used|date:_("SHORT_DATETIME_FORMAT") }}</td>
             {% endif %}
-            <td><a href="#" class="action-button">
+            <td><a href="{% url 'edit_token' token.pk %}" class="action-button">
             <img src="   https://cdn-icons-png.flaticon.com/512/2040/2040504.png " width="25" height="25" alt="" title="" class="img-small">
             </a></td>
           </tr>
@@ -62,7 +62,7 @@
       </table>
       <div class="under-table-block">
         <p class="count-tokens">{{ user_tokens|length }} token</p>
-        <a href="#" class="btn btn-success">Developer Documentation</a>
+        <a href="#" id="developer-doc-btn" class="btn btn-success">Developer Documentation</a>
       </div>
     </div>
   </div>

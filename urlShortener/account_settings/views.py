@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import FileResponse
 from django.contrib import messages
 
-from .forms import UpdatePasswordForm, CreateTokenForm
+from .forms import UpdatePasswordForm, CreateTokenForm, EditTokenForm
 from .services import *
 from .models import UserAPITokens
 from passwords.services import get_data_from_model, filter_data_from_model
@@ -115,9 +115,25 @@ def generate_api_key_view(request, url_username):
     else:
         form = CreateTokenForm(user)
     all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user)
-    return render(request, 'account_settings/api_key.html', {'form': form, 'user_tokens': all_user_tokens})
+    return render(request, 'account_settings/api_key.html', {'form': form,
+                                                             'user_tokens': all_user_tokens})
 
 
 def edit_token_page_view(request, token_id):
     token = get_data_from_model(UserAPITokens, 'id', token_id)
-    return render(request, 'account_settings/edit_token.html')
+    initial_values = {'token_name': token.token_name, 'can_create': token.can_create, 'can_update': token.can_update,
+                      'can_archive': token.can_archive}
+    if request.method == 'POST':
+        form = EditTokenForm(request.POST, initial=initial_values)
+        if form.is_valid():
+            update_form_model(form, token)
+        else:
+            logger.warning("The update token form error")
+    else:
+        form = EditTokenForm(initial=initial_values)
+    return render(request, 'account_settings/edit_token.html', {'token': token, 'form': form})
+
+
+def delete_token_page_view(request, token_id):
+    token = get_data_from_model(UserAPITokens, 'id', token_id)
+    return redirect('api-page', url_username=request.user.url_username)

@@ -7,12 +7,39 @@
 
 {% block body %}
     {% include '_includes/login_user_header.html' %}
-    <div class="page-header">
-        <h5>Edit API Token</h5>
-        <h3>Token Name</h3>
-    </div>
-    <div class="token-dates">
-        <p id="created_date">Created May 18, 2023 8:14AM</p>
-        <p id="last_used_date">Last User:Never</p>
+    <div class="row">
+        <div class="column left">
+            {% include '_includes/navbar.html' %}
+        </div>
+        <div class="column middle">
+            <div class="page-header">
+                <h5>Edit API Token</h5>
+                <h3>{{ token.token_name }}</h3>
+            </div>
+            <div class="token-dates">
+                <p id="created_date">Created May 18, 2023 8:14AM</p>
+                <p id="last_used_date">Last Used:Never</p>
+            </div>
+            <form class="edit-token-form" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    {% if field.label == 'Create ShortURL' or field.label == 'Update ShortURL' or field.label == 'Archive ShortURL' %}
+                        <div class="logical-select">
+                            <label class="widget-label">{{ field.label }}</label>
+                            <div class="logical-choice">{{ field }}</div>
+                        </div>
+                    {% else %}
+                        {{ field.errors }}
+                        <label id="token-name">{{ field.label }}</label>
+                        {{ field }}
+                    {% endif %}
+                {% endfor %}
+                <button type="submit" id="update-token-btn" class="btn btn-secondary">Update</button>
+            </form>
+            <div class="delete-container">
+                <h4>Delete</h4>
+                <a href="#" id="delete-token-btn" class="btn btn-danger">Delete API Token</a>
+            </div>
+        </div>
     </div>
 {% endblock %}

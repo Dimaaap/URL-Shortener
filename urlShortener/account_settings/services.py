@@ -102,3 +102,10 @@ def form_code_string_service(codes: list):
     for code in codes:
         final_string += str(code) + "\n"
     return final_string
+
+
+def update_form_model(form, token):
+    for key, value in form.cleaned_data.items():
+        if form.cleaned_data[key] != token.__dict__[key]:
+            token.__dict__[key] = form.cleaned_data[key]
+    token.save()

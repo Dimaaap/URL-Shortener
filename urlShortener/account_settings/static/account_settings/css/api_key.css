@@ -231,12 +231,20 @@ nav ul li:hover {
 
 .logical-select label {
     width: 270px;
+    margin-left: 10px;
+}
+
+.logical-select .logical-choice input{
+    width: 30px;
+    height: 15px;
 }
 
 hr {
     margin-top: 3px;
     margin-bottom: 3px;
 }
+
+
 
 .field-checkbox {
     width: 18px;
@@ -306,4 +314,10 @@ td {
     font-weight: 500;
     font-family: 'Rubik';
     margin-left: 20px;
+}
+
+#developer-doc-btn {
+    margin-bottom: 35px;
+    margin-left: 100px;
+    margin-right: -55px;
 }
