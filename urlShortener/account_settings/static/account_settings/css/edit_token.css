@@ -17,6 +17,8 @@ body {
     background: #6C85DC;
     border-radius: 15px;
     display: block-inline;
+    position: relative;
+    z-index: 2;
 }
 
 /* LINKS IN HEADER */
@@ -56,6 +58,8 @@ body {
 .high-header {
     height: 100%;
     margin-left: -20px;
+    position: relative;
+    z-index: 2;
     background-image: url('../images/main-page5.jpg');
 }
 
@@ -213,6 +217,7 @@ hr {
     width: 590px;
     background-color: #6C85DC;
     font-weight: 500;
+    border: none;
 }
 
 .delete-container {
@@ -225,4 +230,67 @@ hr {
 .delete-container #delete-token-btn {
     width: 590px;
     font-weight: 500;
+    border: none;
 }
+
+.token-modal {
+    position: absolute;
+    inset: 0;
+    /*background-color: rgba(0, 0, 0, 0.5);*/
+    cursor: pointer;
+    display: none;
+    z-index: 1;
+}
+
+.modal__main{
+    position: relative;
+    wax-width: 600px;
+    background: white;
+    margin: 0;
+    margin-left: 870px;
+    width: 550px;
+    color: #000;
+    border-radius: 16px;
+    padding: 30px;
+    cursor: default;
+}
+
+.modal__header {
+    margin-bottom: 30px;
+}
+
+#delete-text {
+    color: #898787;
+    font-weight: 500;
+}
+
+#token-title {
+    font-size: 30px;
+}
+
+.modal__container {
+    margin-top: 20px;
+}
+
+.btn-dangerous {
+    background-color: #DA2121;
+    color: white;
+    font-weight: 400;
+    border: none;
+    width: 220px;
+}
+
+.btn-dangerous:hover {
+    background: #D22E2E;
+    color: white;
+}
+
+#cancel-delete {
+   background-color: white;
+   color: #797979;
+   border: 1px solid #D9D9D9;
+   border-radius: 10px;
+   width: 220px;
+   margin-left: 20px;
+}
+

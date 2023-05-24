@@ -10,6 +10,7 @@ urlpatterns = [
     path('account_settings/', include('account_settings.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('accounts/', include('allauth.urls')),
+    path('dev/', include('developers.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

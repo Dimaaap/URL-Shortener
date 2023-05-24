@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'users',
     'passwords',
     'account_settings.apps.AccountSettingsConfig',
+    'developers',
 
     'crispy_forms',
     'crispy_bootstrap5',
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_framework',
 
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',

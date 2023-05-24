@@ -136,4 +136,5 @@ def edit_token_page_view(request, token_id):
 
 def delete_token_page_view(request, token_id):
     token = get_data_from_model(UserAPITokens, 'id', token_id)
+    token.delete()
     return redirect('api-page', url_username=request.user.url_username)

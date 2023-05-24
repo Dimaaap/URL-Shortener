@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="{% static 'account_settings/css/edit_token.css' %}">
 {% endblock %}
 
+{% block js_additional %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'account_settings/js/delete-token-confirm.js' %}" defer></script>
+{% endblock %}
+
 {% block body %}
     {% include '_includes/login_user_header.html' %}
     <div class="row">
@@ -40,6 +45,7 @@
                 <h4>Delete</h4>
                 <a href="#" id="delete-token-btn" class="btn btn-danger">Delete API Token</a>
             </div>
+            {% include '_includes/token_delete_confirmation.html' %}
         </div>
     </div>
 {% endblock %}
