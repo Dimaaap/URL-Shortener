@@ -114,9 +114,14 @@ def generate_api_key_view(request, url_username):
             logger.warning(form.errors)
     else:
         form = CreateTokenForm(user)
-    all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user)
+    all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user).order_by('-created_at')
     return render(request, 'account_settings/api_key.html', {'form': form,
                                                              'user_tokens': all_user_tokens})
+
+
+def generate_token_view(request, token_id):
+    token = get_data_from_model(UserAPITokens, 'id', token_id)
+    return render(request, 'account_settings/new_api_token.html')
 
 
 def edit_token_page_view(request, token_id):

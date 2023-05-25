@@ -321,3 +321,21 @@ td {
     margin-left: 100px;
     margin-right: -55px;
 }
+
+.action-button {
+    padding: 10px;
+    border: 1px solid #6C85DC;
+    color: #6C85DC;
+    border-radius: 7px;
+}
+
+.action-button a {
+    filter: sepia(100%);
+    -webkit-filter: sepia(100%);
+}
+
+.action-button:hover {
+    background: #6C85DC;
+    border: 1px solid white;
+    color: white
+}

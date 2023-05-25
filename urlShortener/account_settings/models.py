@@ -99,6 +99,7 @@ class UserAPITokens(models.Model):
     can_create = models.BooleanField(default=True)
     can_update = models.BooleanField(default=False)
     can_archive = models.BooleanField(default=False)
+    generate_key = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return self.token_name

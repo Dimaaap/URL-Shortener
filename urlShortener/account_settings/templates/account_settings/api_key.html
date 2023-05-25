@@ -5,6 +5,11 @@
   <link rel="stylesheet" href="{% static 'account_settings/css/api_key.css' %}">
 {% endblock %}
 
+{% block js_additional %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'account_settings/js/redirect-to-token.js' %}" defer></script>
+{% endblock %}
+
 {% block body %}
   {% include '_includes/login_user_header.html' %}
   <div class="row">
@@ -34,31 +39,35 @@
             <hr>
           {% endif %}
         {% endfor %}
-        <button type="submit" class="btn btn-secondary">Create Token</button>
+        <button type="submit" id="redirectLink" class="btn btn-secondary">Create Token</button>
       </form>
     </div>
-    <div class="column right">
+    <div class="column right" id="data-table">
       <table class="user-tokens">
-        <tr class="table-header">
-          <th>Name</th>
-          <th>Created</th>
-          <th>Last Used</th>
-          <th>Action</th>
-        </tr>
-        {% for token in user_tokens %}
-          <tr class="table-body">
-            <td>{{ token.token_name }}</td>
-            <td>{{ token.created_at|date:_("SHORT_DATETIME_FORMAT") }}</td>
-            {% if token.compare_created_and_used_time %}
-              <td>None</td>
-            {% else %}
-              <td>{{ token.last_used|date:_("SHORT_DATETIME_FORMAT") }}</td>
-            {% endif %}
-            <td><a href="{% url 'edit_token' token.pk %}" class="action-button">
-            <img src="   https://cdn-icons-png.flaticon.com/512/2040/2040504.png " width="25" height="25" alt="" title="" class="img-small">
-            </a></td>
+        <thead>
+          <tr class="table-header">
+            <th>Name</th>
+            <th>Created</th>
+            <th>Last Used</th>
+            <th>Action</th>
           </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+          {% for token in user_tokens %}
+            <tr class="table-body">
+              <td>{{ token.token_name }}</td>
+              <td>{{ token.created_at|date:_("SHORT_DATETIME_FORMAT") }}</td>
+              {% if token.compare_created_and_used_time %}
+                <td>None</td>
+              {% else %}
+                <td>{{ token.last_used|date:_("SHORT_DATETIME_FORMAT") }}</td>
+              {% endif %}
+              <td><a href="{% url 'edit_token' token.pk %}" class="action-button">
+              <img src="   https://cdn-icons-png.flaticon.com/512/2040/2040504.png " width="25" height="25" alt="" title="" class="img-small">
+              </a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
       </table>
       <div class="under-table-block">
         <p class="count-tokens">{{ user_tokens|length }} token</p>
