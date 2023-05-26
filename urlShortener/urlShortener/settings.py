@@ -3,7 +3,6 @@ import os
 
 from django.core.management.commands.runserver import Command as runserver
 from decouple import config
-from pythonjsonlogger.jsonlogger import JsonFormatter
 
 from .logging_formatters import CustomJsonFormatter
 
@@ -228,3 +227,7 @@ SOCIAL_ACCOUNT_AUTO_SIGNUP = False
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 SECURE_SLL_REDIRECT = True
+
+#CORS_SETTINGS
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True

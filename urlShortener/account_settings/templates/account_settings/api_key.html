@@ -33,7 +33,8 @@
             <label id="token-name">{{ field.label }}<small>*</small></label>
             {{ field }}
             <div class="help-titles">
-              <p>Permission<a href="#" class="select-all-link"><small>(Select All)</small></a></p>
+              <p>Permission<a href="#" id="select-all-points" class="select-all-link"><small>(Select All)</small></a></p>
+              <!--<input type="button" value="Permission(Select All)" id="select-all-points" class="select-all-link">-->
               <p>Allow</p>
             </div>
             <hr>
@@ -72,6 +73,13 @@
       <div class="under-table-block">
         <p class="count-tokens">{{ user_tokens|length }} token</p>
         <a href="#" id="developer-doc-btn" class="btn btn-success">Developer Documentation</a>
+      </div>
+      <div id="modal-window" class="modal-window">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <iframe id="modal-iframe" src=""></iframe>
+        </div>
+      </div>
       </div>
     </div>
   </div>

@@ -26,10 +26,8 @@ def update_password_view(request, url_username):
         handle_tfw_form_service(request, url_username)
     form = UpdatePasswordForm()
     second_form = InputTokenForm()
-    # user_totp_enabled = get_data_from_model(UserCodes, 'user', current_user)
     user_totp_enabled = UserCodes.objects.select_related('user').get(user=current_user)
     img_base64, totp_secret = form_qrcode_service(current_user)
-    # backup_user_codes = get_data_from_model(UsersBackupCodes, "user", current_user)
     backup_user_codes = UsersBackupCodes.objects.select_related('user').get(user=current_user)
     if not backup_user_codes.codes:
         codes_active = False
@@ -110,6 +108,8 @@ def generate_api_key_view(request, url_username):
             new_token.save()
             form = CreateTokenForm(user)
             messages.success(request, "Token has been successfully created")
+            request.session['token_id'] = str(new_token.id)
+            #return redirect('generate_token')
         else:
             logger.warning(form.errors)
     else:
@@ -119,8 +119,7 @@ def generate_api_key_view(request, url_username):
                                                              'user_tokens': all_user_tokens})
 
 
-def generate_token_view(request, token_id):
-    token = get_data_from_model(UserAPITokens, 'id', token_id)
+def generate_token_view(request):
     return render(request, 'account_settings/new_api_token.html')
 
 

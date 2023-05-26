@@ -15,5 +15,5 @@ urlpatterns = [
     path('api/<str:url_username>/', generate_api_key_view, name='api-page'),
     path('api/edit/<str:token_id>/', edit_token_page_view, name='edit_token'),
     path('api/delete/<str:token_id>/', delete_token_page_view, name='delete-token'),
-    path('api/new/<str:token_id>/', generate_token_view, name='generate_token')
+    path('api/new/', generate_token_view, name='generate_token')
 ]

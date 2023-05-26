@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'index/layout.html' %}
 
-</body>
-</html>
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'account_settings/css/new_api_token.css' %}">
+{% endblock %}
+
+{% block js_additional %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'account_settings/js/new-api-key.js' %}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div id="modal-window" class="modal-window">
+        <div class="modal-content">
+            <div id="modal-content-inner" src=""></div>
+        </div>
+    </div>
+{% endblock %}
