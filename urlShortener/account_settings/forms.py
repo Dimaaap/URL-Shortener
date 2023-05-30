@@ -31,7 +31,7 @@ class CustomAbstractBooleanField(forms.BooleanField):
 
 
 class AbstractTokenForm(forms.Form):
-    token_name = forms.CharField(max_length=40, min_length=2, required=True,
+    token_name = forms.CharField(max_length=12, min_length=2, required=True,
                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
     can_create = CustomAbstractBooleanField(label="Create ShortURL", initial=True)
     can_update = CustomAbstractBooleanField(label="Update ShortURL")

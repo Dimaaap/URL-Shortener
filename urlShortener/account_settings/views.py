@@ -109,7 +109,6 @@ def generate_api_key_view(request, url_username):
             form = CreateTokenForm(user)
             messages.success(request, "Token has been successfully created")
             request.session['token_id'] = str(new_token.id)
-            #return redirect('generate_token')
         else:
             logger.warning(form.errors)
     else:

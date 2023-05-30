@@ -70,10 +70,9 @@ class UsersBackupCodes(models.Model):
         self.codes_file.save(f'{self.user.url_username}_codes.txt', file)
 
     def write_codes_into_file(self):
-        if not self.codes_file.path:
+        if not self.codes_file:
             self.create_file()
         path = Path(self.codes_file.path)
-        print(path)
         with path.open(mode='a+') as file:
             codes_file = File(file)
             codes_file.truncate(0)

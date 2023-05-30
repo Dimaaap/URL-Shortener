@@ -6,7 +6,15 @@ html, body {
 body {
     padding-left: 20px;
     background: white;
+    overflow-y: hidden;
+    height: 100%;
     /*background-image: url('../images/main-page5.jpg')*/
+}
+
+body.modal-open {
+    overflow-y: hidden;
+    height: 100%;
+    background: red;
 }
 
 /* HEADER */
@@ -56,6 +64,8 @@ body {
 .high-header {
     height: 100%;
     margin-left: -20px;
+    position: relative;
+    z-index: 9999;
     background-image: url('../images/main-page5.jpg');
 }
 
@@ -340,26 +350,30 @@ td {
     color: white
 }
 
-.modal-window {
-    display: none;
+#modal-token {
+    /*display: none;*/
     position: fixed;
-    z-index: 1;
-    left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    right: 0;
+    bottom: 0;
+    width: 37.5%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
+#modal-token-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    height: 80%;
-    overflow: hidden;
+}
+
+#modal-token-content .token-title {
+    margin-top: 50px;
 }
 
 .close {

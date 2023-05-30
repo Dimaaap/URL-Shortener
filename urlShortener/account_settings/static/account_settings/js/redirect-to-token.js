@@ -11,19 +11,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoader", function(){
-    var createTokenBtn = document.getElementById("redirectLink");
-    var modal = document.getElementById("modal-window");
-    var modalIFrame = document.getElementById("modal-iframe");
-    var closeBtn = document.querySelector(".close");
-
-    createTokenBtn.addEventListener("click", function(){
-        var newPageURL = "http://127.0.0.1:8080/account_settings/api/new/";
-        modalIFrame.src = newPageURL;
-        modal.style.display = "block";
-    });
-    closeBtn.addEventListener("click", function(){
-        modal.style.display = "none";
-        modalIFrame.src = ""
-    });
+document.getElementById('create-token-form').addEventListener('submit', function(event){
+    event.preventDefault();
+    var formData = new FormData(this);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', this.action);
+    xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
+    xhr.onload = function(){
+        if (xhr.status === 200){
+            var modal = document.getElementById('modal-token');
+            modal.style.display = 'block';
+        }
+    };
+    xhr.send(formData);
 });
+
+var modal = document.getElementById('modal-token');
+modal.style.display = 'block';
+document.body.classList.add('modal-open');
