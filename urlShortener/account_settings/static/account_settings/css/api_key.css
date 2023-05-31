@@ -1,20 +1,20 @@
 html, body {
     max-width: 100%;
+    /*overflow: hidden;*/
     overflow-x: hidden;
+    margin: 0;
+    /*height: 100%*/;
 }
 
 body {
     padding-left: 20px;
     background: white;
-    overflow-y: hidden;
     height: 100%;
     /*background-image: url('../images/main-page5.jpg')*/
 }
 
 body.modal-open {
     overflow-y: hidden;
-    height: 100%;
-    background: red;
 }
 
 /* HEADER */
@@ -62,6 +62,8 @@ body.modal-open {
     font-family: 'Rubik';
 }
 .high-header {
+
+    /* TODO ЗМІНИТИ СКРОЛІНГ */
     height: 100%;
     margin-left: -20px;
     position: relative;
@@ -374,6 +376,55 @@ td {
 
 #modal-token-content .token-title {
     margin-top: 50px;
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 35px;
+    padding: 10px;
+}
+
+#modal-token-content .warning-messagebox {
+    font-family: 'Rubik';
+    padding: 10px;
+    width: 450px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: 1px solid #DE6F00;
+    background-color: #FFD27B;
+}
+
+#modal-token-content .token-textbox {
+    font-family: 'Rubik';
+    background: white;
+    width: 450px;
+    margin-left: 10px;
+    height: 200px;
+    overflow: auto;
+    border-radius: 10px;
+    border: 1px solid #BEBABA;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#modal-token-content #copy-button {
+    background: #6C85DC;
+    font-family: 'Rubik';
+    margin-top: 30px;
+}
+
+#modal-token-content .btn-secondary {
+    width: 450px;
+    margin-left: 10px;
+    height: 35px;
+    font-weight: 400;
+}
+
+#modal-token-content #close-modal {
+    font-family: 'Rubik';
+    border: 1px solid #B1B1B1;
+    background-color: white;
+    color: #7A7A7A;
+    font-weight: 400;
+    margin-top: 10px;
 }
 
 .close {

@@ -1,3 +1,5 @@
+var modalOpen = false;
+
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("select-all-points");
     button.addEventListener("click", function(){
@@ -21,11 +23,19 @@ document.getElementById('create-token-form').addEventListener('submit', function
         if (xhr.status === 200){
             var modal = document.getElementById('modal-token');
             modal.style.display = 'block';
+            modalOpen = true;
         }
     };
     xhr.send(formData);
 });
 
-var modal = document.getElementById('modal-token');
-modal.style.display = 'block';
-document.body.classList.add('modal-open');
+
+var closeBtn = document.getElementById("close-modal");
+var modal = document.getElementById("modal-token");
+function closeModal(){
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+    modalOpen = false;
+}
+
+closeBtn.addEventListener('click', closeModal)
