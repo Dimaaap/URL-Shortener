@@ -21,14 +21,29 @@ document.getElementById('create-token-form').addEventListener('submit', function
     xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
     xhr.onload = function(){
         if (xhr.status === 200){
-            var modal = document.getElementById('modal-token');
-            modal.style.display = 'block';
-            modalOpen = true;
+            localStorage.setItem("showModal", "true");
+            window.location.reload();
         }
     };
     xhr.send(formData);
 });
 
+window.addEventListener('load', function(){
+    if(localStorage.getItem("showModal")){
+        localStorage.removeItem("showModal");
+        var modal = document.getElementById('modal-token');
+        modal.style.display = 'block';
+        modalOpen = true;
+        modal.style.display = 'flex';
+        modal.addEventListener('touchmove', preventScroll, {passive: false});
+        modal.addEventListener('wheel', preventScroll, {passive: false});
+    }
+});
+
+
+function preventScroll(event){
+    event.stopPropagation();
+}
 
 var closeBtn = document.getElementById("close-modal");
 var modal = document.getElementById("modal-token");
@@ -36,6 +51,8 @@ function closeModal(){
     modal.style.display = 'none';
     document.body.classList.remove('modal-open');
     modalOpen = false;
+    modal.removeEventListener('touchmove', preventScroll);
+    modal.removeEventListener('wheel', preventScroll);
 }
 
 closeBtn.addEventListener('click', closeModal)
