@@ -27,16 +27,17 @@ document.getElementById('create-token-form').addEventListener('submit', function
     };
     xhr.send(formData);
 });
+var overlay = document.getElementById('overlay');
 
 window.addEventListener('load', function(){
     if(localStorage.getItem("showModal")){
         localStorage.removeItem("showModal");
         var modal = document.getElementById('modal-token');
         modal.style.display = 'block';
+        overlay.style.display = 'block';
         modalOpen = true;
         modal.style.display = 'flex';
-        modal.addEventListener('touchmove', preventScroll, {passive: false});
-        modal.addEventListener('wheel', preventScroll, {passive: false});
+        document.body.style.overflow = 'hidden';
     }
 });
 
@@ -49,10 +50,11 @@ var closeBtn = document.getElementById("close-modal");
 var modal = document.getElementById("modal-token");
 function closeModal(){
     modal.style.display = 'none';
+    overlay.style.display = 'none';
     document.body.classList.remove('modal-open');
     modalOpen = false;
-    modal.removeEventListener('touchmove', preventScroll);
-    modal.removeEventListener('wheel', preventScroll);
+    document.body.style.overflow = 'auto';
 }
 
 closeBtn.addEventListener('click', closeModal)
+

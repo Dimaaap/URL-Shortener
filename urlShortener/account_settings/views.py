@@ -104,18 +104,22 @@ def generate_api_key_view(request, url_username):
     if request.method == 'POST':
         form = CreateTokenForm(user, request.POST)
         if form.is_valid():
+            print('dsadsaas')
             new_token = UserAPITokens.objects.create(user=user, **form.cleaned_data)
             new_token.save()
             form = CreateTokenForm(user)
             messages.success(request, "Token has been successfully created")
-            request.session['token_id'] = str(new_token.id)
+            new_token.generate_secret_key()
+            request.session['key_value'] = str(new_token.generate_key)
         else:
-            logger.warning(form.errors)
+            messages.error(request, 'The token with such name already exist')
     else:
         form = CreateTokenForm(user)
     all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user).order_by('-created_at')
+    key_value = request.session.get('key_value')
     return render(request, 'account_settings/api_key.html', {'form': form,
-                                                             'user_tokens': all_user_tokens})
+                                                             'user_tokens': all_user_tokens,
+                                                             'key_value': key_value})
 
 
 def generate_token_view(request):

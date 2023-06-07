@@ -1,5 +1,6 @@
 from pathlib import Path
-from datetime import datetime
+import string
+import secrets
 import uuid
 
 import pyotp
@@ -88,6 +89,8 @@ class UsersBackupCodes(models.Model):
 
 
 class UserAPITokens(models.Model):
+    SECRET_KEY_LEN = 60
+
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
                           editable=False)
@@ -98,7 +101,7 @@ class UserAPITokens(models.Model):
     can_create = models.BooleanField(default=True)
     can_update = models.BooleanField(default=False)
     can_archive = models.BooleanField(default=False)
-    generate_key = models.CharField(max_length=255, null=True)
+    generate_key = models.CharField(max_length=61, null=True)
 
     def __str__(self):
         return self.token_name
@@ -111,4 +114,11 @@ class UserAPITokens(models.Model):
         if formatted_used == formatted_created:
             return True
         return False
+
+    def generate_secret_key(self):
+        characters = string.ascii_letters
+        random_string = ''.join(secrets.choice(characters) for _ in range(self.SECRET_KEY_LEN))
+        self.generate_key = random_string
+        self.save()
+        return random_string
 

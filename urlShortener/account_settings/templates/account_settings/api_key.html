@@ -34,7 +34,6 @@
             {{ field }}
             <div class="help-titles">
               <p>Permission<a href="#" id="select-all-points" class="select-all-link"><small>(Select All)</small></a></p>
-              <!--<input type="button" value="Permission(Select All)" id="select-all-points" class="select-all-link">-->
               <p>Allow</p>
             </div>
             <hr>
@@ -74,6 +73,7 @@
         <p class="count-tokens">{{ user_tokens|length }} token</p>
         <a href="#" id="developer-doc-btn" class="btn btn-success">Developer Documentation</a>
       </div>
+      <div id="overlay"></div>
       <div id="modal-token">
         <div id="modal-token-content">
           <h3 class="token-title">API Token</h3>
@@ -86,7 +86,7 @@
             <br>
             <br>
             <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit nec quam at tempus. Phasellus rutrum rutrum dui efficitur accumsan. Lorem ipsum dolor sit amet</p>
+            <p>{{ key_value }}</p>
             <br>
             <br>
             <br>

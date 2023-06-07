@@ -45,6 +45,7 @@ class CreateTokenForm(AbstractTokenForm):
         super().__init__(*args, **kwargs)
 
     def clean_token_name(self):
+        print("I`m here")
         token_name = self.cleaned_data['token_name']
         try:
             UserAPITokens.objects.get(user=self.user, token_name=token_name)
