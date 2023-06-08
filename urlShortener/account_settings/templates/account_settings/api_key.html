@@ -7,7 +7,7 @@
 
 {% block js_additional %}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{% static 'account_settings/js/redirect-to-token.js' %}" defer></script>
+  <script src="{% static 'account_settings/js/redirect-to-token.js' %}" data-is-valid="{{ is_valid|lower }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -25,6 +25,7 @@
         {% for field in form %}
           {% if field.label == 'Create ShortURL' or field.label == 'Update ShortURL' or field.label == 'Archive ShortURL' %}
             <div class="logical-select">
+              {{ field.errors }}
               <div class="logical-choice">{{ field }}</div>
               <label class="widget-label">{{ field.label }}</label>
             </div>
@@ -86,7 +87,7 @@
             <br>
             <br>
             <br>
-            <p>{{ key_value }}</p>
+            <p>{{ new_token.generated_key }}</p>
             <br>
             <br>
             <br>

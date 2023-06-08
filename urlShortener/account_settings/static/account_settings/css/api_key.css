@@ -1,20 +1,19 @@
 html, body {
     max-width: 100%;
-    /*overflow: hidden;*/
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     margin: 0;
-    /*height: 100%*/;
+    padding: 0;
 }
 
 body {
     padding-left: 20px;
     background: white;
     height: 100%;
-    /*background-image: url('../images/main-page5.jpg')*/
+    overflow-x: hidden !important;
 }
 
 .modal-open {
-    overflow-y: hidden;
+    overflow-x: hidden !important;
 }
 
 /* HEADER */
@@ -85,13 +84,13 @@ body {
 }
 
 .middle {
-    width: 41%;
+    width: 40%;
     background: #FCF9F9;
     margin-left: -35px;
 }
 
 .right {
-    width: 41%;
+    width: 48%;
     margin-left: -90px;
     background: #FCF9F9;
 }
@@ -212,10 +211,13 @@ nav ul li:hover {
     gap: 105px;
     margin-bottom: -40px;
     margin-top: 5px;
+    position: relative;
 }
 
 #allow-title {
     margin-right: 20px;
+    position: absolute;
+    right: 0;
 }
 
 .select-box {
@@ -224,6 +226,10 @@ nav ul li:hover {
 
 .select-all-link {
     color: blue;
+}
+
+#select-all-points{
+    font-size: 14px;
 }
 
 .btn-secondary {
@@ -265,10 +271,15 @@ hr {
 }
 
 .user-tokens {
+    width: 550px;
     margin-top: 120px;
     font-family: 'Rubik';
 }
 
+.user-tokens ht,
+.user-tokens td{
+    width: 150px;
+}
 .user-tokens .table-header {
     background: #00395F;
     border: 1px solid #003A61;
@@ -321,8 +332,7 @@ td {
 
 /* MESSAGES */
 .messages {
-    list-style-type: none;
-    /*color: green;*/
+    color: green;
     font-weight: 500;
     font-family: 'Rubik';
     margin-left: 20px;
@@ -340,20 +350,22 @@ td {
 
 .action-button {
     padding: 10px;
-    border: 1px solid #6C85DC;
+    border: none;
     color: #6C85DC;
-    border-radius: 7px;
 }
+
 
 .action-button a {
     filter: sepia(100%);
     -webkit-filter: sepia(100%);
 }
 
-.action-button:hover {
-    background: #6C85DC;
-    border: 1px solid white;
-    color: white
+.action-button img {
+    transition: transform 0.3s ease;
+}
+
+.action-button:hover img {
+    transform: rotate(45deg);
 }
 
 #modal-token {
@@ -371,11 +383,12 @@ td {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9998;
     display: none;
+    overflow-x: hidden;
 }
 
 #modal-token-content {
@@ -390,6 +403,7 @@ td {
     z-index:9999;
     max-height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #modal-token-content .token-title {

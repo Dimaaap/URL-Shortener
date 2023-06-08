@@ -44,9 +44,17 @@ class CreateTokenForm(AbstractTokenForm):
         self.user = user
         super().__init__(*args, **kwargs)
 
-    def clean_token_name(self):
-        print("I`m here")
+    def check_token_name_correctness(self):
         token_name = self.cleaned_data['token_name']
+        prohibited_symbols = {'[', ']', '/', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '{', '}', '|', '\\'}
+        for char in token_name:
+            if char in prohibited_symbols:
+                raise forms.ValidationError(f"Token title must consist only of letters, numbers and '_', ',', '.' "
+                                            f"symbols")
+        return token_name
+
+    def clean_token_name(self):
+        token_name = self.check_token_name_correctness()
         try:
             UserAPITokens.objects.get(user=self.user, token_name=token_name)
         except ObjectDoesNotExist:

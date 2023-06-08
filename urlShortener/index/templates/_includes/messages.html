@@ -2,7 +2,7 @@
     <ul class="messages">
         {% for message in messages %}
             {% if message.tags  == 'error' %}
-                <li class="message-text">{{ message|truncatewords:4 }}</li>
+                <li class="message-danger">{{ message|truncatewords:4 }}</li>
             {% else %}
                 <li class="message-success">{{ message }}</li>
             {% endif %}

@@ -1,18 +1,33 @@
 var modalOpen = false;
 
+
+// Реалізація роботи кнопки Select All та Unselect All
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("select-all-points");
+    var isAllSelected = false;
     button.addEventListener("click", function(){
         var form = document.getElementById("create-token-form");
         var canCreateField = document.getElementById('id_can_create');
         var canUpdateField = document.getElementById('id_can_update');
         var canArchiveField = document.getElementById('id_can_archive');
-        canCreateField.checked = true;
-        canArchiveField.checked = true;
-        canUpdateField.checked = true;
+        if (!isAllSelected){
+            canCreateField.checked = true;
+            canArchiveField.checked = true;
+            canUpdateField.checked = true;
+            button.innerText = '(Unselect All)';
+            isAllSelected = true;
+        }
+        else{
+            canCreateField.checked = false;
+            canArchiveField.checked = false;
+            canUpdateField.checked = false;
+            button.innerText = '(Select All)';
+            isAllSelected = false;
+        }
     });
 });
 
+//Перезавантаження сторінки після створення API-ключа
 document.getElementById('create-token-form').addEventListener('submit', function(event){
     event.preventDefault();
     var formData = new FormData(this);
@@ -29,22 +44,22 @@ document.getElementById('create-token-form').addEventListener('submit', function
 });
 var overlay = document.getElementById('overlay');
 
+//Відкриття модального вікна
 window.addEventListener('load', function(){
-    if(localStorage.getItem("showModal")){
-        localStorage.removeItem("showModal");
-        var modal = document.getElementById('modal-token');
-        modal.style.display = 'block';
-        overlay.style.display = 'block';
-        modalOpen = true;
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+    var isModalValid = document.querySelector('script[data-is-valid]').getAttribute('data-is-valid');
+    console.log(isModalValid);
+    if (isModalValid === true){
+        if(localStorage.getItem("showModal")){
+            localStorage.removeItem("showModal");
+            var modal = document.getElementById('modal-token');
+            overlay.style.display = 'block';
+            modalOpen = true;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
     }
 });
 
-
-function preventScroll(event){
-    event.stopPropagation();
-}
 
 var closeBtn = document.getElementById("close-modal");
 var modal = document.getElementById("modal-token");

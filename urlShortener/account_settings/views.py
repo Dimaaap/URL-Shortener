@@ -101,25 +101,26 @@ def account_usage_view(request, url_username):
 
 def generate_api_key_view(request, url_username):
     user = try_get_current_user(url_username)
+    form_is_valid = False
     if request.method == 'POST':
         form = CreateTokenForm(user, request.POST)
         if form.is_valid():
-            print('dsadsaas')
+            form_is_valid = True
             new_token = UserAPITokens.objects.create(user=user, **form.cleaned_data)
             new_token.save()
             form = CreateTokenForm(user)
             messages.success(request, "Token has been successfully created")
             new_token.generate_secret_key()
-            request.session['key_value'] = str(new_token.generate_key)
         else:
             messages.error(request, 'The token with such name already exist')
     else:
         form = CreateTokenForm(user)
     all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user).order_by('-created_at')
-    key_value = request.session.get('key_value')
+    new_token = all_user_tokens.first()
     return render(request, 'account_settings/api_key.html', {'form': form,
                                                              'user_tokens': all_user_tokens,
-                                                             'key_value': key_value})
+                                                             'form_valid': form_is_valid
+                                                             })
 
 
 def generate_token_view(request):
