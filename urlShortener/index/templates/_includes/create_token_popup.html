@@ -1,0 +1,22 @@
+<div id="modal-token">
+  <div id="modal-token-content">
+    <h3 class="token-title">API Token</h3>
+    <div class="warning-messagebox">
+      <p>Here is your new API Token.<strong>This is only time the token will ever be displayed
+        ,so be sure not to lose it!</strong> You may revoke token at
+        any time from you API settings.
+      </p>
+    </div>
+    <div class="token-textbox">
+      <br>
+      <br>
+      <br>
+      <p>{{ request.session.generated_key }}</p>
+      <br>
+      <br>
+      <br>
+    </div>
+    <a href="{% url 'copy-token' request.session.token_id %}" class="btn btn-secondary" id="copy-button">Copy to Clipboard</a>
+    <a href="#" class="btn btn-secondary" id="close-modal">Close</a>
+  </div>
+</div>

@@ -46,17 +46,13 @@ var overlay = document.getElementById('overlay');
 
 //Відкриття модального вікна
 window.addEventListener('load', function(){
-    var isModalValid = document.querySelector('script[data-is-valid]').getAttribute('data-is-valid');
-    console.log(isModalValid);
-    if (isModalValid === true){
-        if(localStorage.getItem("showModal")){
-            localStorage.removeItem("showModal");
-            var modal = document.getElementById('modal-token');
-            overlay.style.display = 'block';
-            modalOpen = true;
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+    if(localStorage.getItem("showModal")){
+        localStorage.removeItem("showModal");
+        var modal = document.getElementById('modal-token');
+        overlay.style.display = 'block';
+        modalOpen = true;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 });
 

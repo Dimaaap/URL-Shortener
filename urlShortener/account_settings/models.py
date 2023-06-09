@@ -118,7 +118,7 @@ class UserAPITokens(models.Model):
     def generate_secret_key(self):
         characters = string.ascii_letters
         random_string = ''.join(secrets.choice(characters) for _ in range(self.SECRET_KEY_LEN))
-        self.generate_key = random_string
+        self.generated_key = random_string
         self.save()
-        return random_string
+
 

@@ -101,25 +101,24 @@ def account_usage_view(request, url_username):
 
 def generate_api_key_view(request, url_username):
     user = try_get_current_user(url_username)
-    form_is_valid = False
     if request.method == 'POST':
         form = CreateTokenForm(user, request.POST)
         if form.is_valid():
-            form_is_valid = True
             new_token = UserAPITokens.objects.create(user=user, **form.cleaned_data)
             new_token.save()
             form = CreateTokenForm(user)
             messages.success(request, "Token has been successfully created")
             new_token.generate_secret_key()
+            request.session['generated_key'] = new_token.generated_key
+            request.session['token_id'] = str(new_token.id)
         else:
-            messages.error(request, 'The token with such name already exist')
+            return messages.error(request, "The token wasn`t be created")
     else:
         form = CreateTokenForm(user)
     all_user_tokens = filter_data_from_model(UserAPITokens, 'user', user).order_by('-created_at')
-    new_token = all_user_tokens.first()
     return render(request, 'account_settings/api_key.html', {'form': form,
                                                              'user_tokens': all_user_tokens,
-                                                             'form_valid': form_is_valid
+                                                             'request': request
                                                              })
 
 
@@ -146,3 +145,12 @@ def delete_token_page_view(request, token_id):
     token = get_data_from_model(UserAPITokens, 'id', token_id)
     token.delete()
     return redirect('api-page', url_username=request.user.url_username)
+
+
+def copy_token_to_clipboard_view(request, token_id):
+    token = get_data_from_model(UserAPITokens, 'id', token_id)
+    token_generated_key = token.generated_key
+    pyperclip.copy(token_generated_key)
+    return messages.success(request, "Your token was copied")
+
+
