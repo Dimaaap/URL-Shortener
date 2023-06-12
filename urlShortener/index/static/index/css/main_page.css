@@ -1,0 +1,159 @@
+body{
+    padding-left: 20px;
+    background: #F5F5F5;
+    background-image: url('../images/main-page5.jpg');
+    font-family: 'Rubik';
+}
+
+.main-content {
+    display: flex;
+}
+
+.main-form {
+    margin-right: -300px;
+    float: left;
+    width: 60%;
+}
+
+.info-title {
+    float: right;
+    width: 35%;
+    padding-top: 40px;
+    color: white;
+}
+
+/* HEADER */
+.main-header {
+    max-width: 500px;
+    padding: 0px;
+    margin-left: 940px;
+    background: #6C85DC;
+    border-radius: 15px;
+    display: block-inline;
+}
+
+.main-header a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Rubik';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+/* SITE`S LOGO */
+.site-logo {
+    float: left;
+    padding-top: 5px;
+    font-family: 'Recursive', sans-serif;
+    font-size: 50px;
+    color: white;
+}
+
+.help-button {
+    float: left;
+    background: #6C85DC;
+    margin-left: 660px;
+    margin-top: 20px;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Rubik';
+}
+
+/* FORM FOR URL */
+.input-url-form {
+    margin-top: 40px;
+    max-width: 500px;
+    background: white;
+    border-radius: 30px;
+    padding: 20px;
+    height: 300px;
+}
+
+.input-url-form .form-group {
+    margin-bottom: 20px;
+}
+
+.input-url-form input {
+    margin-top: 6px;
+}
+
+.input-url-form .form-group label {
+    display: block;
+    /*margin-bottom: 6px;*/
+}
+
+.input-url-form .form-group input {
+    display: block;
+    width: 100%;
+    min-height: 35px;
+    border: 1px solid #D7D7D7;
+    border-radius: 7px;
+    padding: 7px;
+    font-size: 18px;
+    outline: none;
+}
+
+#long_url_field {
+    color: green;
+    font-weight: 400;
+}
+
+.form-group img{
+    display: inline;
+    float: left;
+    margin-top: 1px;
+    margin-right: 5px;
+}
+
+.form-group .domain-alias-fields #domain-input-field{
+    max-width: 65%;
+    float: left;
+}
+
+.form-group .domain-alias-fields #alias-input-field{
+    max-width: 30%;
+    float: right;
+    margin-top: -13px;
+}
+
+#short-url-button {
+    margin-top: 25px;
+}
+
+.input-url-form .help-tittle
+{
+    margin-top: 50px;
+    margin-left: 169px;
+    justify-content: left;
+    font-size: 14px;
+    font-weight: 400;
+    color: #A4A4A4;
+}
+
+#short-url-button
+{
+    width: 100%;
+    margin-top: 9px;
+    height: 23%;
+    font-size: 18px;
+}
+
+#select-arrow {
+    position: absolute;
+    left: 310px;
+    top: 40%;
+    color: #ccc;
+    transform: translateY(-20%);
+    cursor: pointer;
+}
+
+#select-arrow.active::before {
+    content: "\f070";
+    color: #333;
+}

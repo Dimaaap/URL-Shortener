@@ -4,34 +4,17 @@ from .models import URLDomains
 
 
 class URLShortenForm(forms.Form):
-    user_email = forms.URLField(label="Your long URL",
-                                widget=forms.URLInput(attrs={"class": "form-control"}))
-    shorten_email = forms.URLField(label="Shorten URL",
-                                   required=False,
-                                   widget=forms.URLInput(attrs={"class": "form-control"}))
-
-
-class URLReadyForm(forms.Form):
-    domains = URLDomains.objects.all()
-    try:
-        tinuyrl_com = URLDomains.objects.get(pk=1)
-    except Exception:
-        tinuyrl_com = None
-
-    def __init__(self, *args, **kwargs):
-        super(URLReadyForm, self).__init__(*args, **kwargs)
-        self.initial['domain'] = self.tinuyrl_com
-
-    long_email = forms.URLField(label="Enter a URL to make a ShortURL",
-                                required=True,
-                                widget=forms.URLInput(attrs={'class': 'form-control'}))
-    domain = forms.ModelChoiceField(queryset=domains, required=False,
-                                    empty_label=None,
-                                    label='Customize your link',
-                                    widget=forms.Select(attrs={'class': 'form-control left-field',
-                                                               'id': 'domain'}))
-    alias = forms.CharField(min_length=5, required=False,
-                            label='Alias',
-                            widget=forms.TextInput(attrs={'class': 'form-control right-field',
-                                                          'placeholder': 'alias',
-                                                          'id': 'alias'}))
+    long_url_field = forms.URLField(label="Input a long URL:",
+                                    required=True,
+                                    widget=forms.URLInput(attrs={"class": "url-input",
+                                                                 "id": "long_url_field",
+                                                                 "placeholder": "Enter a long link here"
+                                                                 }))
+    domain_name = forms.CharField(label="Customize your link:",
+                                  widget=forms.TextInput(attrs={"class": "domain-input",
+                                                                "id": "domain-input-field"}))
+    alias = forms.CharField(label="",
+                            widget=forms.TextInput(attrs={"class": "alias-field",
+                                                          "placeholder": "Enter alias",
+                                                          "id": "alias-input-field"
+                                                          }))

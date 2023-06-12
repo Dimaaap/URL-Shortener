@@ -1,16 +1,13 @@
 from django.shortcuts import render
 
-from .forms import URLShortenForm, URLReadyForm
+from .forms import URLShortenForm
 
 
 def index_page_view(request):
-    if request.method == 'POST':
-        # form = URLShortenForm(request.POST)
-        form = URLReadyForm(request.POST)
+    if request.method == "POST":
+        form = URLShortenForm(request.POST)
     else:
-        # form = URLShortenForm()
-        form = URLReadyForm()
-    return render(request, template_name='index/index_page.html', context={'form': form})
-
+        form = URLShortenForm()
+    return render(request, 'index/main_page.html', context={'form': form})
 
 

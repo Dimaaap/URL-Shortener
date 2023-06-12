@@ -1,0 +1,76 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{%  static 'index/css/main_page.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+{% endblock %}
+
+{% block js_additional %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'index/js/show-hide-select-field.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    {% include '_includes/header.html' %}
+    <div class="main-content">
+        <section class="main-form">
+            <form class="input-url-form" method="post">
+                {% for field in form %}
+                    <div class="form-group">
+                        {% if field.label == 'Input a long URL:'%}
+                            <img src="   https://cdn-icons-png.flaticon.com/512/4906/4906292.png "
+                                 width="20" height="20" alt="" title="" class="img-small">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                        {% else %}
+                            {% if field.label == "Customize your link:" %}
+                                <img src="   https://cdn-icons-png.flaticon.com/512/2089/2089189.png "
+                                     width="20" height="20" alt="" title="" class="img-small">
+                            {% endif %}
+                            <div class="domain-alias-fields">
+                                {{ field.label }}
+                                {{ field }}
+                                {% if field.label == "Customize your link:" %}
+                                    <img id="select-arrow" src="   https://cdn-icons-png.flaticon.com/512/2985/2985150.png "
+                                     width="20" height="20" alt="" title="" class="img-small">
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="help-tittle">
+                    <small>Alias must be at least 5 alphanumerical characters.</small>
+                </div>
+                <button type="submit" class="btn btn-success" id="short-url-button">Shorten URL</button>
+            </form>
+        </section>
+        <section class="info-title">
+            <div class="info-text">
+                <h2>The Original URL Shortener</h2>
+                <br>
+                <p class="subtitle">Create shorter URLs with URLShort</p>
+                <br>
+                <p>
+                    Want more out of your link shortener?
+                    Track link analytics, use branded domains
+                    for fully-custom link, and manage your
+                    links with our paid plans
+                </p>
+            </div>
+            <div class="row-buttons">
+                <a href="#" class="btn btn-secondary-outline">View Plans</a>
+                <a href="#" class="btn btn-secondary-outline">Create Free Account</a>
+            </div>
+            <div class="advantages-list">
+                <p>URLShort plans include:</p>
+                <ul class="list">
+                    <li>Expert Link Analysis</li>
+                    <li>Fully Branded Domains</li>
+                    <li>Bulk Short URL</li>
+                    <li>Expert Support Options</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+{% endblock %}
