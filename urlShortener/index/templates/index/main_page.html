@@ -16,6 +16,7 @@
     <div class="main-content">
         <section class="main-form">
             <form class="input-url-form" method="post">
+                {% csrf_token %}
                 {% for field in form %}
                     <div class="form-group">
                         {% if field.label == 'Input a long URL:'%}
@@ -32,8 +33,24 @@
                                 {{ field.label }}
                                 {{ field }}
                                 {% if field.label == "Customize your link:" %}
-                                    <img id="select-arrow" src="   https://cdn-icons-png.flaticon.com/512/2985/2985150.png "
-                                     width="20" height="20" alt="" title="" class="img-small">
+                                    <i>
+                                        <img id="select-arrow" src="   https://cdn-icons-png.flaticon.com/512/2985/2985150.png "
+                                            width="20" height="20" alt="" title="" class="img-small">
+                                    </i>
+                                <div id="select-popup">
+                                    <p class="title short">shorten.one</p>
+                                    {% if not user.is_authenticated %}
+                                        <img id="lock-image" src="   https://cdn-icons-png.flaticon.com/512/2549/2549910.png "
+                                             width="16" height="16" alt="" title="" class="img-small">
+                                    {% endif %}
+                                    <p class="title short less" id="default_choice">shortenurl.com</p>
+                                    <hr>
+                                    <a href="#" class="add-domain-button">Add Domain</a>
+                                    {% if not user.is_authenticated %}
+                                        <img id="lock-image-button" src="   https://cdn-icons-png.flaticon.com/512/2549/2549910.png "
+                                        width="20" height="20" alt="" title="" class="img-small">
+                                    {% endif %}
+                                </div>
                                 {% endif %}
                             </div>
                         {% endif %}
@@ -60,7 +77,7 @@
             </div>
             <div class="row-buttons">
                 <a href="#" class="btn btn-outline-secondary">View Plans</a>
-                <a href="#" class="btn btn-outline-secondary" id="create-btn">Create Free Account</a>
+                <a href="{% url 'signin' %}" class="btn btn-outline-secondary" id="create-btn">Create Free Account</a>
             </div>
             <div class="advantages-list">
                 <p>URLShort plans include:</p>

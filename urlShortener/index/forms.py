@@ -14,6 +14,7 @@ class URLShortenForm(forms.Form):
                                   widget=forms.TextInput(attrs={"class": "domain-input",
                                                                 "id": "domain-input-field"}))
     alias = forms.CharField(label="",
+                            required=False,
                             widget=forms.TextInput(attrs={"class": "alias-field",
                                                           "placeholder": "Enter alias",
                                                           "id": "alias-input-field"

@@ -196,12 +196,20 @@ body{
     color: #A4A4A4;
 }
 
+#domain-input-field{
+    color: #959595;
+}
+
 #short-url-button
 {
     width: 100%;
     margin-top: 9px;
     height: 23%;
     font-size: 18px;
+}
+
+#select-popup {
+    display: none;
 }
 
 #select-arrow {
@@ -216,5 +224,74 @@ body{
 #select-arrow.active::before {
     content: "\f070";
     color: #333;
+}
+
+.domain-alias-fields #select-popup{
+    position: absolute;
+    top: 45%;
+    border: 1px solid #AFADAD;
+    border-radius: 7px;
+    background: white;
+    padding: 10px;
+    width: 21%;
+}
+
+#select-popup .short {
+    display: block;
+    width: 298px;
+    padding: 3px 10px;
+    color: #989898;
+    margin-left: -10px;
+    background: #D0CDCD;
+    cursor: pointer;
+}
+
+#select-popup .less {
+    background: #6C85DC;
+    color: white;
+    width: 400;
+    margin-top: -17px;
+}
+
+#select-popup #default_choice:hover{
+    background: #6C85DC;
+}
+
+#select-popup .short:hover{
+    background: #BDBDBD;
+}
+
+#select-popup #default-choice:hover{
+    background: red;
+}
+.domain-alias-fields #lock-image{
+    float: right;
+    margin-top: -39px;
+}
+
+#select-popup .add-domain-button {
+    background: #4141FF;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-weight: 400;
+    width: 280px;
+    display: block;
+    border-radius: 7px;
+}
+
+#select-popup hr {
+    width: 297px;
+    margin-left: -10px;
+    margin-top: -10px;
+    margin-bottom: 7px;
+}
+
+#lock-image-button {
+    float: left;
+    position: absolute;
+    top: 68%;
+    right: 2%;
 }
 
