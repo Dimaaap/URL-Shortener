@@ -12,3 +12,26 @@ toggleBtn.onclick = ()=>{
         toggleBtn.src = "   https://cdn-icons-png.flaticon.com/512/2985/2985150.png ";
      }
 }
+
+const urlshortener = document.getElementById("default-choice");
+
+urlshortener.onclick = () => {
+    const form = document.getElementById('input-url-form');
+    let inputDomainField = document.getElementById('domain-input-field')
+    let textToInsert = "shortenurl.com"
+    inputDomainField.value = textToInsert;
+}
+
+document.getElementById("input-url-form").addEventListener("submit", function(event){
+    event.preventDefault();
+    let formData = new FormData(this);
+    axios.post(window.location.href, formData)
+        .then(function(response){
+            let newFormHtml = response.data.new_form_context;
+            var newFormContainer = document.getElementById("newFormContainer");
+            newFormContainer.innerHTML =newFormHtml
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+});

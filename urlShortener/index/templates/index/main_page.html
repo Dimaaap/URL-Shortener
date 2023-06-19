@@ -9,13 +9,14 @@
 {% block js_additional %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'index/js/show-hide-select-field.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
 
 {% block body %}
     {% include '_includes/header.html' %}
     <div class="main-content">
         <section class="main-form">
-            <form class="input-url-form" method="post">
+            <form class="input-url-form" method="post" id="input-url-form">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="form-group">
@@ -24,6 +25,15 @@
                                  width="20" height="20" alt="" title="" class="img-small">
                             <label>{{ field.label }}</label>
                             {{ field }}
+                            {% if form_errors %}
+                                <div class="form-error">
+                                    <span class="error-image">
+                                        <img src="   https://cdn-icons-png.flaticon.com/512/7068/7068033.png "
+                                             width="15" height="15" alt="" title="" class="img-small">
+                                    </span>
+                                    {{ form_errors }}
+                                </div>
+                            {% endif %}
                         {% else %}
                             {% if field.label == "Customize your link:" %}
                                 <img src="   https://cdn-icons-png.flaticon.com/512/2089/2089189.png "
@@ -43,7 +53,7 @@
                                         <img id="lock-image" src="   https://cdn-icons-png.flaticon.com/512/2549/2549910.png "
                                              width="16" height="16" alt="" title="" class="img-small">
                                     {% endif %}
-                                    <p class="title short less" id="default_choice">shortenurl.com</p>
+                                    <a id="default-choice"><p class="title short less">shortenurl.com</p></a>
                                     <hr>
                                     <a href="#" class="add-domain-button">Add Domain</a>
                                     {% if not user.is_authenticated %}
@@ -61,6 +71,8 @@
                 </div>
                 <button type="submit" class="btn btn-success" id="short-url-button">Shorten URL</button>
             </form>
+        </section>
+        <section id="newFormContainer">
         </section>
         <section class="info-title">
             <div class="info-text">

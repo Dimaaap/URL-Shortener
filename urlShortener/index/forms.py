@@ -19,3 +19,19 @@ class URLShortenForm(forms.Form):
                                                           "placeholder": "Enter alias",
                                                           "id": "alias-input-field"
                                                           }))
+
+    def clean_domain_name(self):
+        domain_name = self.cleaned_data['domain_name']
+        if domain_name.strip() != "shortenurl.com":
+            raise forms.ValidationError("Incorrect domain name")
+        return domain_name
+
+    def clean_alias(self):
+        alias = self.cleaned_data['alias']
+        if not alias:
+            return alias
+        forbid_chars = '-.,!@#%$^&*();"\\/'
+        filter_list = filter(lambda char: char in forbid_chars, list(alias))
+        if filter_list:
+            raise forms.ValidationError("Incorrect alias name")
+        return alias

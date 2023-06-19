@@ -1,0 +1,21 @@
+{% extends 'index/layout.html' %}
+
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'index/css/main_page.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cliudframe.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+{% endblock %}
+
+{% block js_additional %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'index/js/show-hide-select-field.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    {% include '_includes/header.html' %}
+    <form id="newForm" method="POST">
+        {% csrf_token %}
+        <h1>dasdsadasdsadas</h1>
+    </form>
+{% endblock %}
