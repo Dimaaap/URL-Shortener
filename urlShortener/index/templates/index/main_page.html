@@ -8,14 +8,14 @@
 
 {% block js_additional %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'index/js/show-hide-select-field.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'index/js/show-hide-select-field.js' %}"></script>
 {% endblock %}
 
 {% block body %}
     {% include '_includes/header.html' %}
     <div class="main-content">
-        <section class="main-form">
+        <section class="main-form" id="main-form">
             <form class="input-url-form" method="post" id="input-url-form">
                 {% csrf_token %}
                 {% for field in form %}

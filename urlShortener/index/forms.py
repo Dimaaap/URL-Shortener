@@ -35,3 +35,14 @@ class URLShortenForm(forms.Form):
         if filter_list:
             raise forms.ValidationError("Incorrect alias name")
         return alias
+
+
+class ShortenedURLForm(forms.Form):
+
+    user_url = forms.URLField(required=False,
+                              label='Your long URL ',
+                              widget=forms.URLInput(attrs={"class": "form-control"}))
+    shorten_url = forms.URLField(required=False,
+                                 label='Shortener URL ',
+                                 widget=forms.URLInput(attrs={'class': 'form-control'}))
+

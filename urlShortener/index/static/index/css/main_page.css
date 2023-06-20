@@ -301,3 +301,84 @@ body{
     margin-bottom: -20px;
 }
 
+.shortened-url-form {
+    background: white;
+    margin-left: 20px;
+    max-width: 45%;
+    border-radius: 7px;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+.shortened-url-form input {
+    padding: 5px;
+    color: red;
+    font-weight: 450;
+    font-size: 18px;
+}
+
+.shortener-url-form .form-control:focus {
+    outline: none;
+}
+
+.user-field:last-child {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.label-image {
+    margin-left: 5px;
+    font-weight: 400;
+}
+
+.shortener-url-form label {
+    margin-bottom: 7px;
+}
+
+.row-buttons #visit-url{
+    background-color: white;
+    border: 1px solid #6C85DC;
+    border-radius: 7px;
+    padding: 5px;
+    max-width: 11%;
+    min-height: 40px;
+    max-height: 40px;
+}
+
+.row-buttons #visit-url::hover{
+    background: #fffff;
+    color: #6C85DC;
+}
+
+
+.row-buttons #qr-code,
+.row-buttons #share {
+    background-color: #6C85DC;
+    border: none;
+    max-height: 40px;
+}
+
+.row-buttons #qr-code h6,
+.row-buttons #share h6{
+    float: right;
+    font-weight: 400;
+    margin-top: 4px;
+    margin-left: 7px;
+}
+
+.row-buttons #qr-code:hover,
+.row-buttons #share:hover {
+    background: #5E72C3;
+}
+
+.row-buttons #copy {
+    border: none;
+    max-height: 40px;
+}
+
+.row-buttons #copy h6 {
+    float: right;
+    font-weight: 400;
+    margin-top: 4px;
+    margin-left: 7px;
+}

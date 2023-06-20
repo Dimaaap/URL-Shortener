@@ -1,21 +1,55 @@
-{% extends 'index/layout.html' %}
-
 {% load static %}
-{% block css_additional %}
-    <link rel="stylesheet" href="{% static 'index/css/main_page.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cliudframe.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-{% endblock %}
 
-{% block js_additional %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'index/js/show-hide-select-field.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-{% endblock %}
+<form method="post" class="shortened-url-form">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="user-field">
+            {% if forloop.first %}
+                <div class="label-image">
+                    <img src="   https://cdn-icons-png.flaticon.com/512/4906/4906566.png "
+                         width="20" height="20" alt="" title="" class="img-small">
+                    {{ field.label }}
+                </div>
+                {{ field }}
+        </div>
+        {% else %}
+            <div class="label-image">
+                <img src="   https://cdn-icons-png.flaticon.com/512/2089/2089189.png "
+                     width="20" height="20" alt="" title="" class="img-small">
+                {{ field.label }}
+            </div>
+            {{ field }}
+        {% endif %}
+    {% endfor %}
+    <div class="row-buttons">
+        <!--<a href="#" class="btn btn-primary" id="visit-url"><button title="Visit URL">
+            <img src="   https://cdn-icons-png.flaticon.com/512/2990/2990295.png "
+                 width="17" height="17" alt="" title="" class="img-small">
+        </button></a>-->
+        <a href="#" type="button" class="btn btn-primary" title="Visit URL" id="visit-url">
+            <img src="   https://cdn-icons-png.flaticon.com/512/2990/2990295.png "
+                 width="17" height="17" alt="" title="" class="img-small">
+        </a>
+        <a href="#" type="button" class="btn btn-primary" title="QR Code" id="qr-code">
+            <img src="   https://cdn-icons-png.flaticon.com/512/714/714390.png "
+                 width="17" height="17" alt="" title="" class="img-small">
+            <h6>QR Code</h6>
+        </a>
+        <a href="#" type="button" title="Share your URL on social media" class="btn btn-primary" id="share">
+            <img src="   https://cdn-icons-png.flaticon.com/512/929/929610.png "
+                 width="17" height="17" alt="" title="" class="img-small">
+            <h6>Share</h6>
+        </a>
+        <a href="#" type="button" title="Copy to clipboard" class="btn btn-success" id="copy">
+            <img src="   https://cdn-icons-png.flaticon.com/512/1621/1621635.png "
+                 width="17" height="17" alt="" title="" class="img-small">
+            <h6>Copy</h6>
+        </a>
+    </div>
+    <div class="row-buttons-below">
+        <a href="#" class="btn btn-success-outline">My URLs</a>
+        <a href="#" class="btn btn-success">Shorten Another</a>
+    </div>
+</form>
 
-{% block body %}
-    {% include '_includes/header.html' %}
-    <form id="newForm" method="POST">
-        {% csrf_token %}
-        <h1>dasdsadasdsadas</h1>
-    </form>
-{% endblock %}
+<script src="{% static 'index/js/show-hide-select-field.js' %}"></script>

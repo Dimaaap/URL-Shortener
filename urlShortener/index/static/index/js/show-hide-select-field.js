@@ -27,9 +27,12 @@ document.getElementById("input-url-form").addEventListener("submit", function(ev
     let formData = new FormData(this);
     axios.post(window.location.href, formData)
         .then(function(response){
-            let newFormHtml = response.data.new_form_context;
-            var newFormContainer = document.getElementById("newFormContainer");
-            newFormContainer.innerHTML =newFormHtml
+            let newFormHtml = response.data.new_form_html;
+            console.log(newFormHtml)
+            //var newFormContainer = document.getElementById("newFormContainer");
+            var oldFormContainer = document.getElementById('main-form');
+            oldFormContainer.innerHTML = newFormHtml;
+            //newFormContainer.innerHTML =newFormHtml
         })
         .catch(function(error){
             console.log(error);

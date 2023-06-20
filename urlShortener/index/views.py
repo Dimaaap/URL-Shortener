@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
-from .forms import URLShortenForm
+from .forms import URLShortenForm, ShortenedURLForm
 from .models import UserUrls
 
 
@@ -23,16 +23,16 @@ def index_page_view(request):
             new_user_url.save()
             new_form_context = {
                 "original_url": long_url,
-                "shorten_url": shorten_url
+                "shorten_url": shorten_url,
+                "form": ShortenedURLForm(),
             }
-            new_form_html = render_to_string("new_form_template.html", new_form_context)
+            new_form_html = render_to_string("index/new_form_template.html", new_form_context)
             return JsonResponse({"new_form_html": new_form_html})
         else:
             # handle_form_errors = form.errors.as_text().split("*")[-1]
             messages.error(request, "Error")
-            print(form.errors)
     else:
-        form = URLShortenForm(initial={'domain_name': 'urlshort.com'})
+        form = URLShortenForm(initial={'domain_name': 'shortenurl.com'})
         handle_form_errors = form.errors
     return render(request, 'index/main_page.html', context={'form': form
                                                             # 'form_errors': handle_form_errors
