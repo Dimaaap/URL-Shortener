@@ -2,11 +2,10 @@ from django.shortcuts import render
 from pyshorteners import Shortener
 
 from django.contrib import messages
-from django.http import JsonResponse
-from django.template.loader import render_to_string
 
 from .forms import URLShortenForm, ShortenedURLForm
 from .models import UserUrls
+from .services import form_new_page_service
 
 
 def index_page_view(request):
@@ -24,10 +23,9 @@ def index_page_view(request):
             new_form_context = {
                 "original_url": long_url,
                 "shorten_url": shorten_url,
-                "form": ShortenedURLForm(),
+                "form": ShortenedURLForm(initial={"user_url": long_url, "shorten_url": shorten_url}),
             }
-            new_form_html = render_to_string("index/new_form_template.html", new_form_context)
-            return JsonResponse({"new_form_html": new_form_html})
+            return form_new_page_service('index/new_form_template.html', new_form_context)
         else:
             # handle_form_errors = form.errors.as_text().split("*")[-1]
             messages.error(request, "Error")
@@ -37,3 +35,5 @@ def index_page_view(request):
     return render(request, 'index/main_page.html', context={'form': form
                                                             # 'form_errors': handle_form_errors
                                                             })
+
+

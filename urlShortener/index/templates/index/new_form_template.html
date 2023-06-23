@@ -22,32 +22,32 @@
         {% endif %}
     {% endfor %}
     <div class="row-buttons">
-        <!--<a href="#" class="btn btn-primary" id="visit-url"><button title="Visit URL">
-            <img src="   https://cdn-icons-png.flaticon.com/512/2990/2990295.png "
-                 width="17" height="17" alt="" title="" class="img-small">
-        </button></a>-->
-        <a href="#" type="button" class="btn btn-primary" title="Visit URL" id="visit-url">
-            <img src="   https://cdn-icons-png.flaticon.com/512/2990/2990295.png "
-                 width="17" height="17" alt="" title="" class="img-small">
-        </a>
-        <a href="#" type="button" class="btn btn-primary" title="QR Code" id="qr-code">
-            <img src="   https://cdn-icons-png.flaticon.com/512/714/714390.png "
-                 width="17" height="17" alt="" title="" class="img-small">
-            <h6>QR Code</h6>
-        </a>
-        <a href="#" type="button" title="Share your URL on social media" class="btn btn-primary" id="share">
-            <img src="   https://cdn-icons-png.flaticon.com/512/929/929610.png "
-                 width="17" height="17" alt="" title="" class="img-small">
-            <h6>Share</h6>
-        </a>
-        <a href="#" type="button" title="Copy to clipboard" class="btn btn-success" id="copy">
-            <img src="   https://cdn-icons-png.flaticon.com/512/1621/1621635.png "
-                 width="17" height="17" alt="" title="" class="img-small">
-            <h6>Copy</h6>
-        </a>
+            <a href="#" type="button" class="btn btn-primary" title="Visit URL" id="visit-url">
+                <img src="   https://cdn-icons-png.flaticon.com/512/2990/2990295.png "
+                     width="17" height="17" alt="" title="" class="img-small">
+            </a>
+            <div id="visit-tooltip" class="tooltip">Visit this URL</div>
+            <a href="#" type="button" class="btn btn-primary" title="QR Code" id="qr-code">
+                <img src="   https://cdn-icons-png.flaticon.com/512/714/714390.png "
+                     width="17" height="17" alt="" title="" class="img-small">
+                <h6>QR Code</h6>
+            </a>
+            <div id="qr-code-tooltip" class="tooltip">QR Code</div>
+            <a href="#" type="button" class="btn btn-primary" id="share">
+                <img src="   https://cdn-icons-png.flaticon.com/512/929/929610.png "
+                     width="17" height="17" alt="" title="" class="img-small">
+                <h6>Share</h6>
+            </a>
+            <div id="share-tooltip" class="tooltip">Share URL on your social media</div>
+            <a href="#" type="button" title="Copy to clipboard" class="btn btn-success" id="copy">
+                <img src="   https://cdn-icons-png.flaticon.com/512/1621/1621635.png "
+                     width="17" height="17" alt="" title="" class="img-small">
+                <h6>Copy</h6>
+            </a>
+        <div id="copy-tooltip" class="tooltip">Copy to clipboard</div>
     </div>
     <div class="row-buttons-below">
-        <a href="#" class="btn btn-success-outline">My URLs</a>
+        <a href="#" class="btn btn-light">My URLs</a>
         <a href="#" class="btn btn-success">Shorten Another</a>
     </div>
 </form>
