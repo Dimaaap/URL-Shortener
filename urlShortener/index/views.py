@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pyshorteners import Shortener
 
 from django.contrib import messages
@@ -36,4 +36,8 @@ def index_page_view(request):
                                                             # 'form_errors': handle_form_errors
                                                             })
 
+
+def redirect_into_url_view(request):
+    redirect_url = request.session.get("shorten_url")
+    return redirect(redirect_url)
 

@@ -1,6 +1,10 @@
 {% load static %}
 
-<form method="post" class="shortened-url-form">
+{% block js_additional %}
+    <script src="{% static 'index/js/buttons-backend.js' %}"></script>
+{% endblock %}
+
+<form method="post" class="shortened-url-form" id="shortened-url-form">
     {% csrf_token %}
     {% for field in form %}
         <div class="user-field">
@@ -22,16 +26,29 @@
         {% endif %}
     {% endfor %}
     <div class="row-buttons">
-            <a href="#" type="button" class="btn btn-primary" title="Visit URL" id="visit-url">
+            <a href="{% url 'redirect_view' %}" type="button" class="btn btn-primary" title="Visit URL" id="visit-url">
                 <img src="   https://cdn-icons-png.flaticon.com/512/2990/2990295.png "
                      width="17" height="17" alt="" title="" class="img-small">
             </a>
             <div id="visit-tooltip" class="tooltip">Visit this URL</div>
-            <a href="#" type="button" class="btn btn-primary" title="QR Code" id="qr-code">
+            <a href="#" type="button" class="btn btn-primary" title="QR Code" id="qr-code" onclick="openQRModal()">
                 <img src="   https://cdn-icons-png.flaticon.com/512/714/714390.png "
                      width="17" height="17" alt="" title="" class="img-small">
                 <h6>QR Code</h6>
             </a>
+            <div class="modal" id="modal">
+                <div class="modal-content">
+                    <div class="qr-area">
+                        <img src="https://cdn-icons-png.flaticon.com/512/714/714390.png"
+                             width="120" height="120" alt="" title="">
+                    </div>
+                    <div class="buttons-area">
+                        <a href="#" class="btn btn-row" id="svg-btn">SVG</a>
+                        <a href="#" class="btn btn-success" id="png-simple-btn">PNG</a>
+                        <a href="#" class="btn btn-success" id="png-1200-btn">PNG 1200</a>
+                    </div>
+                </div>
+            </div>
             <div id="qr-code-tooltip" class="tooltip">QR Code</div>
             <a href="#" type="button" class="btn btn-primary" id="share">
                 <img src="   https://cdn-icons-png.flaticon.com/512/929/929610.png "
