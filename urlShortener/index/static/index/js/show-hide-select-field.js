@@ -43,6 +43,7 @@ document.getElementById("input-url-form").addEventListener("submit", function(ev
 
 function openQRModal(){
         var modal = document.getElementById("modal");
+        console.log(modal)
         modal.style.display = "block";
         console.log("Open a modal window");
 }
@@ -52,3 +53,10 @@ window.addEventListener('click', function(event){
         modal.style.display = 'none';
     }
 });
+
+function generateQRCode(){
+    var qrcode = new QRCode("qrcode");
+    var data = document.getElementById("id_user_url").value;
+    qrcode.makeCode(data);
+    console.log(qrcode);
+}

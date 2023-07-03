@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from pyshorteners import Shortener
+import qrcode
+
 
 from django.contrib import messages
+from django.http import HttpResponse
 
 from .forms import URLShortenForm, ShortenedURLForm
 from .models import UserUrls
@@ -40,4 +43,41 @@ def index_page_view(request):
 def redirect_into_url_view(request):
     redirect_url = request.session.get("shorten_url")
     return redirect(redirect_url)
+
+
+def create_url_qr_png(request):
+    shorten_url = request.session.get('shorten_url', None)
+    if not shorten_url:
+        return redirect(index_page_view)
+    img = qrcode.make(shorten_url)
+    response = HttpResponse(content_type='image/png')
+    response['Content-Disposition'] = 'attachment; filename=14213.png'
+    img.save(response, "PNG")
+    return response
+
+
+def create_url_qr_png_1200(request):
+    shorten_url = request.session.get('shorten_url', None)
+    if not shorten_url:
+        return redirect(index_page_view)
+    img = qrcode.make(shorten_url, box_size=30, border=0)
+    response = HttpResponse(content_type='image/png')
+    response['Content-Disposition'] = 'attachment; filename=14213-1200.png'
+    img.save(response, 'PNG')
+    return response
+
+
+def create_url_qr_svg(request):
+    shorten_url = request.session.get('shorten_url', None)
+    if not shorten_url:
+        return redirect(index_page_view)
+    qr = qrcode.QRCode(version=None, error_correction=qrcode.constants.ERROR_CORRECT_L,
+                       box_size=10, border=4)
+    qr.add_data(shorten_url)
+    qr.make(fit=True)
+    img = qr.make_image()
+    response = HttpResponse(content_type='image/svg+xml')
+    response['Content-Disposition'] = 'attachment; filename=qr_code.svg'
+    img.save(response)
+    return response
 

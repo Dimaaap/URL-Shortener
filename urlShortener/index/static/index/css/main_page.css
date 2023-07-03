@@ -451,7 +451,7 @@ body{
 
 #copy-tooltip {
     top: 278px;
-    left: 29%;
+    left: 28%;
 }
 
 .tooltip::before {
@@ -491,7 +491,7 @@ body{
     z-index: 9999;
     left: 4%;
     top: 53%;
-    width: 250px;
+    width: 270px;
     height: 200px;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 7px;
@@ -518,7 +518,28 @@ body{
     margin-bottom: 5px;
 }
 
-.modal-content .buttons-area #svg-btn {
-    width: 100px;
-    background: green;
+.modal-content .btn-scs {
+    width: 120px;
+    color: white;
+    font-size: 16px;
+    background: #0C832B;
+}
+
+
+.btn-scs:hover {
+    background: #0A7226;
+    color: white;
+    animation: none !important
+}
+
+#svg-btn {
+    padding: 7px;
+    animation: none !important;
+}
+
+
+#svg-btn:hover {
+    background: #0A7226;
+    color: white;
+    animation: none !important;
 }
