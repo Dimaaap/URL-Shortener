@@ -485,6 +485,58 @@ body{
     opacity: 1;
 }
 
+#share-modal {
+    display: none;
+    position: fixed:
+    z-index: 9999;
+    left: 15%;
+    top: 53%;
+    width: 170px;
+    height: 250px;
+    border-radius: 7px;
+}
+
+#share-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-explain {
+    margin-left: 20px;
+    /*margin-top: 13px;*/
+}
+
+.row-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer
+    padding: 7px;
+    width: 100%;
+}
+
+.row-container a {
+    text-decoration: none;
+    margin: 0;
+    color: black;
+}
+
+.row-container:not(:first-child):hover {
+    border: 2px solid #00C9C9;
+    border-radius: 10px;
+}
+
+
+.row-container img {
+    margin-right: 10px;
+    display: inline-block;
+    float: left;
+}
+
+.row-container p {
+    margin: 0;
+    float: right;
+}
+
 .modal {
     display: none;
     position: fixed;

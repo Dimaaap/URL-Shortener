@@ -50,11 +50,57 @@
                 </div>
             </div>
             <div id="qr-code-tooltip" class="tooltip">QR Code</div>
-            <a href="#" type="button" class="btn btn-primary" id="share">
+            <a href="#" type="button" class="btn btn-primary" id="share" onclick="openShareModal()">
                 <img src="   https://cdn-icons-png.flaticon.com/512/929/929610.png "
                      width="17" height="17" alt="" title="" class="img-small">
                 <h6>Share</h6>
             </a>
+            <div class="modal" id="share-modal">
+                <div class="modal-content">
+                    <div class="row-container">
+                        <div class="img-wrapper">
+                            <img src="   https://cdn-icons-png.flaticon.com/512/3094/3094429.png "
+                                 width="25" height="25" alt="" title="" class="img-small" id="share-img">
+                        </div>
+                        <p class="title-explain">Share it</p>
+                    </div>
+                    <div class="row-container">
+                        <div class="img-wrapper">
+                            <img src="   https://cdn-icons-png.flaticon.com/512/1051/1051309.png "
+                                 width="25" height="25" alt="" title="" class="img-small" id="facebook-img">
+                        </div>
+                        <a class="link"><p class="title-explain facebook">Facebook</p></a>
+                    </div>
+                    <div class="row-container">
+                        <div class="img-wrapper">
+                            <img src="   https://cdn-icons-png.flaticon.com/512/25/25347.png "
+                            width="25" height="25" alt="" title="" class="img-small" id="twitter-img">
+                        </div>
+                        <a class="link"><p class="title-explain twitter">Twitter</p></a>
+                    </div>
+                    <div class="row-container">
+                        <div class="img-wrapper">
+                            <img src="   https://cdn-icons-png.flaticon.com/512/254/254409.png "
+                                 width="25" height="25" alt="" title="" class="img-small" id="whatsapp-img">
+                        </div>
+                        <a class="link"><p class="title-explain whatsapp">WhatsApp</p></a>
+                    </div>
+                    <div class="row-container">
+                        <div class="img-wrapper">
+                            <img src="   https://cdn-icons-png.flaticon.com/512/3536/3536569.png "
+                                 width="25" height="25" alt="" title="" class="img-small" id="linkedin-img">
+                        </div>
+                        <a class="link"><p class="title-explain linkedin">LinkedIn</p></a>
+                    </div>
+                    <div class="row-container">
+                        <div class="img-wrapper">
+                                <img src="   https://cdn-icons-png.flaticon.com/512/542/542689.png "
+                                     width="25" height="25" alt="" title="" class="img-small">
+                        </div>
+                        <a class="link"><p class="title-explain email">Email</p></a>
+                    </div>
+                </div>
+            </div>
             <div id="share-tooltip" class="tooltip">Share URL on your social media</div>
             <a href="#" type="button" title="Copy to clipboard" class="btn btn-success" id="copy">
                 <img src="   https://cdn-icons-png.flaticon.com/512/1621/1621635.png "

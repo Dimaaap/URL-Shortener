@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 from .forms import URLShortenForm, ShortenedURLForm
 from .models import UserUrls
-from .services import form_new_page_service
+from .services import form_new_page_service, get_file_random_name
 
 
 def index_page_view(request):
@@ -51,7 +51,7 @@ def create_url_qr_png(request):
         return redirect(index_page_view)
     img = qrcode.make(shorten_url)
     response = HttpResponse(content_type='image/png')
-    response['Content-Disposition'] = 'attachment; filename=14213.png'
+    response['Content-Disposition'] = f'attachment; filename={get_file_random_name(1)}.png'
     img.save(response, "PNG")
     return response
 
@@ -62,7 +62,7 @@ def create_url_qr_png_1200(request):
         return redirect(index_page_view)
     img = qrcode.make(shorten_url, box_size=30, border=0)
     response = HttpResponse(content_type='image/png')
-    response['Content-Disposition'] = 'attachment; filename=14213-1200.png'
+    response['Content-Disposition'] = f'attachment; filename={get_file_random_name(2)}-1200.png'
     img.save(response, 'PNG')
     return response
 
@@ -77,7 +77,7 @@ def create_url_qr_svg(request):
     qr.make(fit=True)
     img = qr.make_image()
     response = HttpResponse(content_type='image/svg+xml')
-    response['Content-Disposition'] = 'attachment; filename=qr_code.svg'
+    response['Content-Disposition'] = f'attachment; filename={get_file_random_name(3)}.svg'
     img.save(response)
     return response
 

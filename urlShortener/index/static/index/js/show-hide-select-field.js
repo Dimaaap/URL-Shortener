@@ -40,23 +40,34 @@ document.getElementById("input-url-form").addEventListener("submit", function(ev
         });
 });
 
+let QRModalOpen = false;
 
 function openQRModal(){
-        var modal = document.getElementById("modal");
-        console.log(modal)
-        modal.style.display = "block";
-        console.log("Open a modal window");
+    qrModal = document.getElementById("modal");
+    shareModal = document.getElementById("share-modal");
+        if(!QRModalOpen){
+            qrModal.style.display = "block";
+            shareModal.style.display = "none";
+            QRModalOpen = true;
+        } else {
+            qrModal.style.display = 'none';
+            QRModalOpen = false;
+        }
+
 }
 
-window.addEventListener('click', function(event){
-    if(event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
+let modalShareOpen = false;
 
-function generateQRCode(){
-    var qrcode = new QRCode("qrcode");
-    var data = document.getElementById("id_user_url").value;
-    qrcode.makeCode(data);
-    console.log(qrcode);
+function openShareModal(){
+    qrModal = document.getElementById("modal");
+    shareModal = document.getElementById("share-modal");
+    if(!modalShareOpen){
+        shareModal.style.display = 'block';
+        qrModal.style.display = 'none'
+        modalShareOpen = true;
+    }
+    else {
+        shareModal.style.display = 'none';
+        modalShareOpen = false;
+    }
 }
