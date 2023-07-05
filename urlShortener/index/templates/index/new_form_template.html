@@ -1,5 +1,6 @@
 {% load static %}
 
+
 {% block js_additional %}
     <script src="{% static 'index/js/buttons-backend.js' %}"></script>
 {% endblock %}
@@ -65,11 +66,21 @@
                         <p class="title-explain">Share it</p>
                     </div>
                     <div class="row-container">
-                        <div class="img-wrapper">
+                        <!--<div class="img-wrapper">
                             <img src="   https://cdn-icons-png.flaticon.com/512/1051/1051309.png "
                                  width="25" height="25" alt="" title="" class="img-small" id="facebook-img">
                         </div>
-                        <a class="link"><p class="title-explain facebook">Facebook</p></a>
+                        <a class="link"><p class="title-explain facebook">Facebook</p></a>-->
+                        <div class="img-wrapper">
+                            <img src="   https://cdn-icons-png.flaticon.com/512/1051/1051309.png "
+                                 width="25" height="25" alt="" title="" class="img-small" id="facebook-img" />
+                        </div>
+                        <div class="fb-share-button" data-href="{{shorten_url}}" data-layout="button_count"
+                             data-size="small"><a target="_blank"
+                                             href="https://www.facebook.com/sharer/sharer.php?u={{shorten_url}}&amp;src=sdkpreparse&display=popup&width=600&height=400"
+                                             class="fb-xfbml-parse-ignore">Facebook
+                                         </a>
+                        </div>
                     </div>
                     <div class="row-container">
                         <div class="img-wrapper">
