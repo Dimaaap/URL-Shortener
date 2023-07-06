@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from pyshorteners import Shortener
 import qrcode
+import pyperclip
 
 
 from django.contrib import messages
@@ -80,4 +81,17 @@ def create_url_qr_svg(request):
     response['Content-Disposition'] = f'attachment; filename={get_file_random_name(3)}.svg'
     img.save(response)
     return response
+
+
+def copy_url_to_clipboard_view(request):
+    shorten_url = request.session.get("shorten_url", None)
+    if not shorten_url:
+        messages.error(request, "Something was wrong")
+    else:
+        try:
+            pyperclip.copy(shorten_url)
+        except Exception:
+            messages.error(request, "Something was wrong")
+        messages.success(request, "Success Copied to clipboard")
+    return redirect(index_page_view)
 

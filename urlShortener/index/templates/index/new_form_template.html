@@ -5,6 +5,7 @@
     <script src="{% static 'index/js/buttons-backend.js' %}"></script>
 {% endblock %}
 
+
 <form method="post" class="shortened-url-form" id="shortened-url-form">
     {% csrf_token %}
     {% for field in form %}
@@ -66,11 +67,6 @@
                         <p class="title-explain">Share it</p>
                     </div>
                     <div class="row-container">
-                        <!--<div class="img-wrapper">
-                            <img src="   https://cdn-icons-png.flaticon.com/512/1051/1051309.png "
-                                 width="25" height="25" alt="" title="" class="img-small" id="facebook-img">
-                        </div>
-                        <a class="link"><p class="title-explain facebook">Facebook</p></a>-->
                         <div class="img-wrapper">
                             <img src="   https://cdn-icons-png.flaticon.com/512/1051/1051309.png "
                                  width="25" height="25" alt="" title="" class="img-small" id="facebook-img" />
@@ -87,33 +83,38 @@
                             <img src="   https://cdn-icons-png.flaticon.com/512/25/25347.png "
                             width="25" height="25" alt="" title="" class="img-small" id="twitter-img">
                         </div>
-                        <a class="link"><p class="title-explain twitter">Twitter</p></a>
+                        <a href="https://twitter.com/intent/tweet?text=Wow&which&an&amazing&url&url={{ shorten_url }}"
+                           target="_blank">Twitter</a>
                     </div>
                     <div class="row-container">
                         <div class="img-wrapper">
                             <img src="   https://cdn-icons-png.flaticon.com/512/254/254409.png "
                                  width="25" height="25" alt="" title="" class="img-small" id="whatsapp-img">
                         </div>
-                        <a class="link"><p class="title-explain whatsapp">WhatsApp</p></a>
+                        <a href="https://api.whatsapp.com/send?text=Wow!%20{{ shorten_url }}"
+                           target="_blank">WhatsApp</a>
                     </div>
                     <div class="row-container">
                         <div class="img-wrapper">
                             <img src="   https://cdn-icons-png.flaticon.com/512/3536/3536569.png "
                                  width="25" height="25" alt="" title="" class="img-small" id="linkedin-img">
                         </div>
-                        <a class="link"><p class="title-explain linkedin">LinkedIn</p></a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ shorten_url }}"
+                           target="_blank">LinkedIn</a>
+
                     </div>
                     <div class="row-container">
                         <div class="img-wrapper">
                                 <img src="   https://cdn-icons-png.flaticon.com/512/542/542689.png "
                                      width="25" height="25" alt="" title="" class="img-small">
                         </div>
-                        <a class="link"><p class="title-explain email">Email</p></a>
+                        <a href="mailto:?subject=Shorten%20URL&body=Wow!%20{{ shorten_url }}"
+                           target="_blank">Email</a>
                     </div>
                 </div>
             </div>
             <div id="share-tooltip" class="tooltip">Share URL on your social media</div>
-            <a href="#" type="button" title="Copy to clipboard" class="btn btn-success" id="copy">
+            <a href="{% url 'copy' %}" type="button" title="Copy to clipboard" class="btn btn-success" id="copy">
                 <img src="   https://cdn-icons-png.flaticon.com/512/1621/1621635.png "
                      width="17" height="17" alt="" title="" class="img-small">
                 <h6>Copy</h6>
